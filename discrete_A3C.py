@@ -67,6 +67,7 @@ class Net(nn.Module):
 class Worker(mp.Process):
     def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name):
         super(Worker, self).__init__()
+        self.actor_id = name
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.gnet, self.opt = gnet, opt
@@ -86,6 +87,10 @@ class Worker(mp.Process):
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, r, done, _ = self.env.step(a)
                 if done: r = -1
+
+                if self.actor_id in [0, 1, 2, 3]:
+                    r = -r
+                    
                 ep_r += r
                 buffer_a.append(a)
                 buffer_s.append(s)
