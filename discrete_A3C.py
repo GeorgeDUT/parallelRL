@@ -90,7 +90,7 @@ class Worker(mp.Process):
 
                 if self.actor_id in [0, 1, 2, 3]:
                     r = -r
-                    
+
                 ep_r += r
                 buffer_a.append(a)
                 buffer_s.append(s)
@@ -117,6 +117,7 @@ if __name__ == "__main__":
 
     # parallel training
     CPU_NUM = mp.cpu_count()
+    CPU_NUM = 10
     print(CPU_NUM)
     workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
     [w.start() for w in workers]
