@@ -13,11 +13,19 @@ import torch.multiprocessing as mp
 from shared_adam import SharedAdam
 import gym
 import os
+import random
+import numpy as np
+
 os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 100
+MAX_EP = 3000
+
+NUM_Actor = 10
+Good_Actor = 7
+Choose_actors = [1,1,1,1,1,1,1,1,1,1]
+Gloab_credit = np.array([0.0]*NUM_Actor)
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
@@ -55,7 +63,7 @@ class Net(nn.Module):
         logits, values = self.forward(s)
         td = v_t - values
         c_loss = td.pow(2)
-        
+
         probs = F.softmax(logits, dim=1)
         m = self.distribution(probs)
         exp_v = m.log_prob(a) * td.detach().squeeze()
@@ -71,8 +79,13 @@ class Worker(mp.Process):
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.gnet, self.opt = gnet, opt
-        self.lnet = Net(N_S, N_A)           # local network
+        self.lnet = Net(N_S, N_A)  # local network
         self.env = gym.make('CartPole-v0').unwrapped
+
+        # bandit parameters:
+        self.bandit_credit = 0.0
+        self.bandit_learning_rate = 0.01
+        self.bandit_e = 0.5
 
     def run(self):
         total_step = 1
@@ -80,25 +93,35 @@ class Worker(mp.Process):
             s = self.env.reset()
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
+            real_ep_r = 0.
+
             while True:
                 if self.name == 'w00':
                     # self.env.render()
                     pass
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
-                s_, r, done, _ = self.env.step(a)
-                if done: r = -1
+                s_, real_r, done, _ = self.env.step(a)
 
-                if self.actor_id in [0, 1, 2, 3]:
-                    r = r
+                if done: real_r = -1
+
+                if self.actor_id in [0, 1, 2]:
+                    r = -real_r
+                else:
+                    r = real_r
 
                 ep_r += r
+                real_ep_r += real_r
+
                 buffer_a.append(a)
                 buffer_s.append(s)
                 buffer_r.append(r)
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
-                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                    if Choose_actors[self.actor_id] == 1:
+                        push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                    else:
+                        pass
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -106,31 +129,48 @@ class Worker(mp.Process):
                         break
                 s = s_
                 total_step += 1
+
+            # 更新该worker的置信度
+            self.bandit_credit = self.bandit_credit + self.bandit_learning_rate * (real_ep_r - self.bandit_credit)
+
+            # 更新 actor 的选择
+            if random.random() >= (self.bandit_e / self.g_ep.value):
+                topk_action_id = np.argsort(-Gloab_credit)[:Good_Actor]
+            else:
+                topk_action_id = random.sample([i for i in range(NUM_Actor)], Good_Actor)
+
+            # for action in range(NUM_Actor):
+            #     if action in topk_action_id:
+            #         Choose_actors[action] = 0
+            #     else:
+            #         Choose_actors[action] = 0
+
         self.res_queue.put(None)
 
 
 if __name__ == "__main__":
-    gnet = Net(N_S, N_A)        # global network
-    gnet.share_memory()         # share the global parameters in multiprocessing
-    opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))      # global optimizer
+    gnet = Net(N_S, N_A)  # global network
+    gnet.share_memory()  # share the global parameters in multiprocessing
+    opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
     # parallel training
-    CPU_NUM = mp.cpu_count()
-    CPU_NUM = 10
-    print(CPU_NUM)
+    # CPU_NUM = mp.cpu_count()
+    CPU_NUM = NUM_Actor
     workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
     [w.start() for w in workers]
-    res = []                    # record episode reward to plot
+    res = []  # record episode reward to plot
     while True:
         r = res_queue.get()
         if r is not None:
             res.append(r)
         else:
             break
-    # [w.join() for w in workers]
+    [w.join() for w in workers]
+    # [w.close() for w in workers]
 
     import matplotlib.pyplot as plt
+
     plt.plot(res)
     plt.ylabel('Moving average ep reward')
     plt.xlabel('Step')
