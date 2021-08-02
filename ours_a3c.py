@@ -15,6 +15,7 @@ import gym
 import os
 import random
 import numpy as np
+import time
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
@@ -24,7 +25,7 @@ MAX_EP = 3000
 
 NUM_Actor = 10
 Good_Actor = 7
-Choose_actors = [1,1,1,1,1,1,1,1,1,1]
+Choose_actors = [1,1,1,1,1,1,1,0,0,0]
 Gloab_credit = np.array([0.0]*NUM_Actor)
 
 env = gym.make('CartPole-v0')
@@ -104,7 +105,7 @@ class Worker(mp.Process):
 
                 if done: real_r = -1
 
-                if self.actor_id in [0, 1, 2]:
+                if self.actor_id in [7, 8, 9]:
                     r = -real_r
                 else:
                     r = real_r
@@ -116,12 +117,12 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_r.append(r)
 
+                if self.actor_id in [7, 8, 9]:
+                    time.sleep(10)
+
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
-                    if Choose_actors[self.actor_id] == 1:
-                        push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
-                    else:
-                        pass
+                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -166,7 +167,7 @@ if __name__ == "__main__":
             res.append(r)
         else:
             break
-    [w.join() for w in workers]
+    # [w.join() for w in workers]
     # [w.close() for w in workers]
 
     import matplotlib.pyplot as plt
