@@ -31,6 +31,8 @@ env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
 
+# 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
+global_Choose_actors = [mp.Value('i', 0) for i in range(NUM_Actor + 1)]
 
 class Net(nn.Module):
     def __init__(self, s_dim, a_dim):
@@ -139,7 +141,7 @@ class Worker(mp.Process):
             else:
                 topk_action_id = random.sample([i for i in range(NUM_Actor)], Good_Actor)
 
-            topk_action_id = [0,1,2,3,4,5,6]
+            # topk_action_id = [0,1,2,3,4,5,6]
             with global_Choose_actors[NUM_Actor].get_lock():
                 for action in range(NUM_Actor):
                     if action in topk_action_id:
@@ -158,8 +160,6 @@ if __name__ == "__main__":
     opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
-    # 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
-    global_Choose_actors = [mp.Value('i',0) for i in range(NUM_Actor+1)]
 
 
     # parallel training
