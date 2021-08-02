@@ -25,7 +25,6 @@ MAX_EP = 3000
 
 NUM_Actor = 10
 Good_Actor = 7
-Choose_actors = [1,1,1,1,1,1,1,0,0,0]
 Gloab_credit = np.array([0.0]*NUM_Actor)
 
 env = gym.make('CartPole-v0')
@@ -74,7 +73,7 @@ class Net(nn.Module):
 
 
 class Worker(mp.Process):
-    def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name):
+    def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name,global_Choose_actors):
         super(Worker, self).__init__()
         self.actor_id = name
         self.name = 'w%02i' % name
@@ -117,7 +116,7 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_r.append(r)
 
-                if self.actor_id in [7, 8, 9]:
+                if global_Choose_actors[self.actor_id] == 0:
                     time.sleep(10)
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
@@ -140,11 +139,15 @@ class Worker(mp.Process):
             else:
                 topk_action_id = random.sample([i for i in range(NUM_Actor)], Good_Actor)
 
-            # for action in range(NUM_Actor):
-            #     if action in topk_action_id:
-            #         Choose_actors[action] = 0
-            #     else:
-            #         Choose_actors[action] = 0
+            topk_action_id = [0,1,2,3,4,5,6]
+            with global_Choose_actors[NUM_Actor].get_lock():
+                for action in range(NUM_Actor):
+                    if action in topk_action_id:
+                        global_Choose_actors[action] = 1
+                    else:
+                        global_Choose_actors[action] = 0
+            # with global_Choose_actors[NUM_Actor].get_lock():
+
 
         self.res_queue.put(None)
 
@@ -155,10 +158,14 @@ if __name__ == "__main__":
     opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
+    # 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
+    global_Choose_actors = [mp.Value('i',0) for i in range(NUM_Actor+1)]
+
+
     # parallel training
     # CPU_NUM = mp.cpu_count()
     CPU_NUM = NUM_Actor
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i, global_Choose_actors) for i in range(CPU_NUM)]
     [w.start() for w in workers]
     res = []  # record episode reward to plot
     while True:
