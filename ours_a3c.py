@@ -21,11 +21,12 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 3000
+MAX_EP = 1000
 
 NUM_Actor = 10
 Good_Actor = 7
 Gloab_credit = np.array([0.0]*NUM_Actor)
+Global_credit = mp.Array('f', NUM_Actor)
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
@@ -98,14 +99,12 @@ class Worker(mp.Process):
             real_ep_r = 0.
 
             while True:
-                if self.name == 'w00':
-                    # self.env.render()
-                    pass
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
 
                 if done: real_r = -1
 
+                # 有问题的进程，其奖励返回不准确
                 if self.actor_id in [7, 8, 9]:
                     r = -real_r
                 else:
@@ -118,8 +117,8 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_r.append(r)
 
-                if global_Choose_actors[self.actor_id] == 0:
-                    time.sleep(10)
+                # if global_Choose_actors[self.actor_id] == 0:
+                #     time.sleep(10)
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
@@ -137,6 +136,7 @@ class Worker(mp.Process):
 
             # 更新 actor 的选择
             if random.random() >= (self.bandit_e / self.g_ep.value):
+                print('',Gloab_credit)
                 topk_action_id = np.argsort(-Gloab_credit)[:Good_Actor]
             else:
                 topk_action_id = random.sample([i for i in range(NUM_Actor)], Good_Actor)
@@ -150,7 +150,9 @@ class Worker(mp.Process):
                         global_Choose_actors[action] = 0
             # with global_Choose_actors[NUM_Actor].get_lock():
 
-
+        # print(self.name, self.bandit_credit)
+        Global_credit[self.actor_id] = self.bandit_credit
+        # Gloab_credit[self.actor_id] = self.bandit_credit
         self.res_queue.put(None)
 
 
@@ -159,8 +161,6 @@ if __name__ == "__main__":
     gnet.share_memory()  # share the global parameters in multiprocessing
     opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
-
-
 
     # parallel training
     # CPU_NUM = mp.cpu_count()
@@ -174,11 +174,10 @@ if __name__ == "__main__":
             res.append(r)
         else:
             break
-    # [w.join() for w in workers]
-    # [w.close() for w in workers]
+    [w.join() for w in workers]
 
+    print('Global_credit', Global_credit)
     import matplotlib.pyplot as plt
-
     plt.plot(res)
     plt.ylabel('Moving average ep reward')
     plt.xlabel('Step')

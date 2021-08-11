@@ -54,7 +54,7 @@ class Greedy():
         self.e = 0.5
         self.t = 1
         self.good_actor = good_actor
-        self.choosen_times = np.array([1] * actor_num)
+        self.choosen_times = np.array([0] * actor_num)
 
     def update_credit(self,actor_list,reward):
         for i in actor_list:
@@ -83,6 +83,7 @@ class Greedy():
 
 if __name__ == "__main__":
     cucb = Greedy(10,5)
+    cucb = CUCB(10,5)
 
     for i in range(500):
         actor_list = cucb.choose_supper_actors()
@@ -92,7 +93,7 @@ if __name__ == "__main__":
         else:
             reward = 1
 
-        cucb.update_credit(actor_list,reward)
+        cucb.update_credit(actor_list, reward)
 
     print(cucb.get_optimal_actors())
     print(cucb.get_bad_actors())

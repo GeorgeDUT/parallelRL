@@ -17,12 +17,11 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 100
+MAX_EP = 1000
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
-
 
 class Net(nn.Module):
     def __init__(self, s_dim, a_dim):
@@ -73,17 +72,17 @@ class Worker(mp.Process):
         self.gnet, self.opt = gnet, opt
         self.lnet = Net(N_S, N_A)           # local network
         self.env = gym.make('CartPole-v0').unwrapped
+        self.run_times = 0
 
     def run(self):
         total_step = 1
         while self.g_ep.value < MAX_EP:
+            # with self.g_ep.get_lock():
+            #     self.g_ep.value += 1
             s = self.env.reset()
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
             while True:
-                if self.name == 'w00':
-                    # self.env.render()
-                    pass
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, r, done, _ = self.env.step(a)
                 if done: r = -1
@@ -102,10 +101,12 @@ class Worker(mp.Process):
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
+                        self.run_times += 1
                         record(self.g_ep, self.g_ep_r, ep_r, self.res_queue, self.name)
                         break
                 s = s_
                 total_step += 1
+        print(self.name, self.run_times)
         self.res_queue.put(None)
 
 
@@ -118,17 +119,20 @@ if __name__ == "__main__":
     # parallel training
     CPU_NUM = mp.cpu_count()
     CPU_NUM = 10
-    print(CPU_NUM)
     workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
     [w.start() for w in workers]
     res = []                    # record episode reward to plot
+    # [w.join() for w in workers]
+    end_count = 0
     while True:
         r = res_queue.get()
         if r is not None:
             res.append(r)
         else:
-            break
-    # [w.join() for w in workers]
+            end_count+=1
+            if end_count == CPU_NUM:
+                break
+    [w.join() for w in workers]
 
     import matplotlib.pyplot as plt
     plt.plot(res)

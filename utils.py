@@ -32,7 +32,7 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     buffer_v_target.reverse()
 
     loss = lnet.loss_func(
-        v_wrap(np.vstack(bs)),
+        v_wrap(np.stack(bs)),
         v_wrap(np.array(ba), dtype=np.int64) if ba[0].dtype == np.int64 else v_wrap(np.vstack(ba)),
         v_wrap(np.array(buffer_v_target)[:, None]))
 
