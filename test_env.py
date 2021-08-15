@@ -18,14 +18,14 @@ def test_discrete_env(env_name):
 
 if __name__ == '__main__':
     # discrete
-    # env_name = 'CartPole-v0'
-    # test_discrete_env(env_name)
+    env_name = 'Pendulum-v0'
+    test_discrete_env(env_name)
     #
     # env_name = 'CartPole-v1'
     # test_discrete_env(env_name)
     # # continuous
-    # env_name = 'BipedalWalker-v2'
-    # test_discrete_env(env_name)
+    env_name = 'BipedalWalker-v3'
+    test_discrete_env(env_name)
 
     # image input
     # env_name = 'Breakout-v0'

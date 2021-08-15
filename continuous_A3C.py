@@ -20,8 +20,15 @@ GAMMA = 0.9
 MAX_EP = 10000
 MAX_EP_STEP = 200
 
-env = gym.make('Pendulum-v0')
-env = gym.make('BipedalWalker-v3')
+env_name = 'Pendulum-v0'
+# env_name = 'BipedalWalker-v3'
+min_a, max_a = None, None
+if env_name == 'Pendulum-v0':
+    min_a, max_a = -2, 2
+if env_name == 'BipedalWalker-v3':
+    min_a, max_a = -1, 1
+
+env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
 
@@ -75,7 +82,7 @@ class Worker(mp.Process):
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.gnet, self.opt = gnet, opt
         self.lnet = Net(N_S, N_A)           # local network
-        self.env = gym.make('BipedalWalker-v3')#.unwrapped
+        self.env = gym.make(env_name)
 
     def run(self):
         total_step = 1
@@ -87,7 +94,7 @@ class Worker(mp.Process):
                 # if self.name == 'w0':
                 #     self.env.render()
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
-                s_, r, done, _ = self.env.step(a.clip(-1, 1))
+                s_, r, done, _ = self.env.step(a.clip(min_a, max_a))
                 if t == MAX_EP_STEP - 1:
                     done = True
                 ep_r += r
