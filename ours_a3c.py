@@ -127,7 +127,7 @@ class Worker(mp.Process):
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
-                        record(self.g_ep, self.g_ep_r, ep_r, self.res_queue, self.name)
+                        record(self.g_ep, self.g_ep_r, real_ep_r, self.res_queue, self.name)
                         break
                 s = s_
                 total_step += 1
