@@ -82,11 +82,12 @@ class Greedy():
 
 
 if __name__ == "__main__":
-    cucb = Greedy(10,5)
-
-    for i in range(500):
+    cucb = Greedy(10,8)
+    bad_actor = [0,5]
+    for i in range(200):
         actor_list = cucb.choose_supper_actors()
-        if (1 in actor_list) or (3 in actor_list) or (5 in actor_list) or (7 in actor_list) or (9 in actor_list):
+        bad = [x for x in actor_list if x in bad_actor]
+        if len(bad)!=0:
         # if (9 in actor_list):
             reward = -1
         else:
