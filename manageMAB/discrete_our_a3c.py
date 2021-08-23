@@ -17,7 +17,7 @@ GAMMA = 0.9
 MAX_EP = 4000
 
 NUM_Actor = 10
-num_running_actor = 5
+num_running_actor = 7
 bad_worker_id_list = [1, 3, 5]
 Global_credit = [mp.Value('f', 0) for i in range(NUM_Actor + 1)]
 

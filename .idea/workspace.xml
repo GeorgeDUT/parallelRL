@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1ec1f8ec-b599-405c-91a1-ff0c2514e46b" name="Default" comment="code for MAB algorithm">
-      <change afterPath="$PROJECT_DIR$/dev_log.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manageMAB/continuous_our_a3c.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manageMAB/discrete_our_a3c.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reuse_MAB/continuous_our_a3c.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/parallelRL.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/parallelRL.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/continuous_A3C.py" beforeDir="false" afterPath="$PROJECT_DIR$/continuous_A3C.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ours_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/ours_a3c.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testCNN.py" beforeDir="false" afterPath="$PROJECT_DIR$/rerun_MAB/testCNN.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testMABContinuous.py" beforeDir="false" afterPath="$PROJECT_DIR$/rerun_MAB/testMABContinuous.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testMABDiscrete.py" beforeDir="false" afterPath="$PROJECT_DIR$/rerun_MAB/testMABDiscrete.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test_env.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/manageMAB/discrete_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/manageMAB/discrete_our_a3c.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reuse_MAB/continuous_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/reuse_MAB/continuous_our_a3c.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +116,7 @@
       <recent name="$PROJECT_DIR$/rerun_MAB" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.continuous_our_a3c (1)">
+  <component name="RunManager" selected="Python.discrete_our_a3c">
     <configuration name="continuous_A3C" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parallelRL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -242,11 +231,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.continuous_our_a3c (1)" />
-        <item itemvalue="Python.discrete_our_a3c (1)" />
         <item itemvalue="Python.discrete_our_a3c" />
-        <item itemvalue="Python.continuous_A3C" />
         <item itemvalue="Python.continuous_our_a3c" />
+        <item itemvalue="Python.discrete_our_a3c (1)" />
+        <item itemvalue="Python.continuous_our_a3c (1)" />
+        <item itemvalue="Python.continuous_A3C" />
       </list>
     </recent_temporary>
   </component>
@@ -269,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1628671311258</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="code for MAB algorithm">
+      <created>1629043262359</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1629043262359</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
