@@ -20,23 +20,22 @@ MAX_EP = 4000
 NUM_Actor = 10
 Good_Actor = 7
 bad_worker_id = [7, 8, 9]
-Global_credit = [mp.Value('f', 0) for i in range(NUM_Actor + 1)]
+
 
 env_name = 'CartPole-v0'
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
 
-# 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
-global_Choose_actors = [mp.Value('i', 0) for i in range(NUM_Actor + 1)]
-
 
 class Worker(mp.Process):
-    def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name):
+    def __init__(self, gnet, opt, global_ep, global_ep_r, my_Global_credit, my_global_Choose_actors, res_queue, name):
         super(Worker, self).__init__()
         self.actor_id = name
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
+        self.my_Global_credit = my_Global_credit
+        self.my_global_Choose_actors = my_global_Choose_actors
         self.gnet, self.opt = gnet, opt
         self.lnet = DiscreteNet(N_S, N_A)  # local network
         self.env = gym.make(env_name)
@@ -73,7 +72,7 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_r.append(r)
 
-                if global_Choose_actors[self.actor_id] == 0:
+                if self.my_global_Choose_actors[self.actor_id] == 0:
                     with global_ep.get_lock():
                         if global_ep.value >= MAX_EP:
                             break
@@ -92,26 +91,26 @@ class Worker(mp.Process):
 
             # 更新该worker的置信度
             self.bandit_credit = self.bandit_credit + self.bandit_learning_rate * (real_ep_r - self.bandit_credit)
-            with Global_credit[NUM_Actor].get_lock():
-                Global_credit[self.actor_id].value = self.bandit_credit
+            with self.my_Global_credit[NUM_Actor].get_lock():
+                self.my_Global_credit[self.actor_id].value = self.bandit_credit
 
             # 更新 actor 的选择
             if random.random() >= (self.bandit_e / self.g_ep.value):
             #if random.random() >= max(self.bandit_e - self.g_ep.value*0.002, 0.05):
-                t_list = [Global_credit[i].value for i in range(NUM_Actor)]
+                t_list = [self.my_Global_credit[i].value for i in range(NUM_Actor)]
                 # print(t_list)
                 topk_action_id = np.argsort(-np.array(t_list), kind="heapsort")[:Good_Actor]
             else:
                 topk_action_id = random.sample([i for i in range(NUM_Actor)], Good_Actor)
 
             # topk_action_id = [0,1,2,3,4,5,6]
-            with global_Choose_actors[NUM_Actor].get_lock():
+            with self.my_global_Choose_actors[NUM_Actor].get_lock():
                 # print('topk_action_id', topk_action_id)
                 for action in range(NUM_Actor):
                     if action in topk_action_id:
-                        global_Choose_actors[action].value = 1
+                        self.my_global_Choose_actors[action].value = 1
                     else:
-                        global_Choose_actors[action].value = 0
+                        self.my_global_Choose_actors[action].value = 0
 
         self.res_queue.put(None)
 
@@ -123,9 +122,12 @@ if __name__ == "__main__":
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
     # parallel training
+    Global_credit = [mp.Value('f', 0) for i in range(NUM_Actor + 1)]
+    # 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
+    global_Choose_actors = [mp.Value('i', 0) for i in range(NUM_Actor + 1)]
     # CPU_NUM = mp.cpu_count()
     CPU_NUM = NUM_Actor
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, Global_credit, global_Choose_actors, res_queue, i) for i in range(CPU_NUM)]
     [w.start() for w in workers]
     res = []  # record episode reward to plot
     while True:

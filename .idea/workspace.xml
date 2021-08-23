@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1ec1f8ec-b599-405c-91a1-ff0c2514e46b" name="Default" comment="code for MAB algorithm">
+    <list default="true" id="1ec1f8ec-b599-405c-91a1-ff0c2514e46b" name="Default" comment="update reuse mba">
+      <change afterPath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c_win10.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manageMAB/discrete_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/manageMAB/discrete_our_a3c.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reuse_MAB/continuous_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/reuse_MAB/continuous_our_a3c.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c.py" beforeDir="false" afterPath="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,13 +101,13 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/manageMAB" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/reuse_MAB" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/manageMAB" />
       <recent name="$PROJECT_DIR$/reuse_MAB" />
+      <recent name="$PROJECT_DIR$/manageMAB" />
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -116,28 +115,7 @@
       <recent name="$PROJECT_DIR$/rerun_MAB" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.discrete_our_a3c">
-    <configuration name="continuous_A3C" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="parallelRL" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/continuous_A3C.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.discrete_our_a3c_win10">
     <configuration name="continuous_our_a3c (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="parallelRL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -222,20 +200,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="discrete_our_a3c_win10" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="parallelRL" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/reuse_MAB" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/reuse_MAB/discrete_our_a3c_win10.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Python.discrete_our_a3c" />
       <item itemvalue="Python.continuous_our_a3c" />
-      <item itemvalue="Python.continuous_A3C" />
       <item itemvalue="Python.discrete_our_a3c (1)" />
       <item itemvalue="Python.continuous_our_a3c (1)" />
+      <item itemvalue="Python.discrete_our_a3c_win10" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.discrete_our_a3c_win10" />
         <item itemvalue="Python.discrete_our_a3c" />
         <item itemvalue="Python.continuous_our_a3c" />
         <item itemvalue="Python.discrete_our_a3c (1)" />
         <item itemvalue="Python.continuous_our_a3c (1)" />
-        <item itemvalue="Python.continuous_A3C" />
       </list>
     </recent_temporary>
   </component>
@@ -265,7 +264,14 @@
       <option name="project" value="LOCAL" />
       <updated>1629043262359</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update reuse mba">
+      <created>1629721372735</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1629721372735</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -309,7 +315,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="code for MAB algorithm" />
-    <option name="LAST_COMMIT_MESSAGE" value="code for MAB algorithm" />
+    <MESSAGE value="update reuse mba" />
+    <option name="LAST_COMMIT_MESSAGE" value="update reuse mba" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
