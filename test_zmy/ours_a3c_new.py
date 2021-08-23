@@ -24,8 +24,8 @@ GAMMA = 0.9
 MAX_EP = 5000
 
 NUM_Actor = 10
-Good_Actor = 5
-bad_actor_id = [7,8,9]
+Good_Actor = 7
+bad_actor_id = [4,5,6]
 Gloab_credit = np.array([0.0]*NUM_Actor)
 
 env = gym.make('CartPole-v0')
