@@ -21,10 +21,11 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 3000
+MAX_EP = 100
 
 NUM_Actor = 10
 Good_Actor = 7
+bad_actor_id = [7,8,9]
 Gloab_credit = np.array([0.0]*NUM_Actor)
 
 env = gym.make('CartPole-v0')
@@ -106,7 +107,7 @@ class Worker(mp.Process):
 
                 if done: real_r = -1
 
-                if self.actor_id in [7, 8, 9]:
+                if self.actor_id in bad_actor_id:
                     r = -real_r
                 else:
                     r = real_r
@@ -136,6 +137,7 @@ class Worker(mp.Process):
             self.bandit_credit = self.bandit_credit + self.bandit_learning_rate * (real_ep_r - self.bandit_credit)
 
             # 更新 actor 的选择
+            print("credit",Gloab_credit)
             if random.random() >= (self.bandit_e / self.g_ep.value):
                 topk_action_id = np.argsort(-Gloab_credit)[:Good_Actor]
             else:
@@ -175,11 +177,14 @@ if __name__ == "__main__":
         else:
             break
     # [w.join() for w in workers]
-    # [w.close() for w in workers]
+    [w.terminate() for w in workers]
 
-    import matplotlib.pyplot as plt
+    # import matplotlib.pyplot as plt
+    #
+    # plt.plot(res)
+    # plt.ylabel('Moving average ep reward')
+    # plt.xlabel('Step')
+    # plt.show()
 
-    plt.plot(res)
-    plt.ylabel('Moving average ep reward')
-    plt.xlabel('Step')
-    plt.show()
+    # 打印 bandit_credit
+    print(global_Choose_actors[0])
