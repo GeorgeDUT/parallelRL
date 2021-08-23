@@ -93,7 +93,7 @@ class Worker(mp.Process):
                 if done: real_r = -1
 
                 # bad actor return wrong reward
-                if self.actor_id in [0, 1, 2, 3]:
+                if self.actor_id in [0, 2, 5, 6, 7]:
                     r = -real_r
                 else:
                     r = real_r
