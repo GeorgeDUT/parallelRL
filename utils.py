@@ -20,6 +20,7 @@ def set_init(layers):
 
 
 def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+    # print("update net")
     if done:
         v_s_ = 0.               # terminal
     else:
@@ -38,6 +39,7 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
 
     # calculate local gradients and push local parameters to global
     opt.zero_grad()
+    lnet.zero_grad()
     loss.backward()
     for lp, gp in zip(lnet.parameters(), gnet.parameters()):
         gp._grad = lp.grad

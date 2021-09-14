@@ -13,13 +13,13 @@ from a3c.NN import DiscreteNet
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
-UPDATE_GLOBAL_ITER = 5
+UPDATE_GLOBAL_ITER = 32
 GAMMA = 0.9
 MAX_EP = 4000
 
 NUM_Actor = 10
 Good_Actor = 7
-bad_worker_id = [7, 8, 9]
+bad_worker_id = [7,8,9]
 
 
 env_name = 'CartPole-v0'
