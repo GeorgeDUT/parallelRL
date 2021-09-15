@@ -16,14 +16,13 @@ os.environ["OMP_NUM_THREADS"] = "1"
 UPDATE_GLOBAL_ITER = 32
 GAMMA = 0.9
 MAX_EP = 10000
-each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
+each_test_episodes = 70  # 每轮训练，异步跑的共同的episode
 
 NUM_Actor = 10
 Good_Actor_num = 7
-bad_worker_id = [1, 3, 8]#[2, 9, 5]
+bad_worker_id = [2, 9, 5]
 
 env_name = 'CartPole-v0'
-# env_name = 'LunarLander-v2'
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
@@ -45,12 +44,14 @@ class Worker(mp.Process):
         total_step = 1
         real_g_ep = -1
         total_ep = 0
-        while self.g_ep.value < self.stop_episode:
+        global_ep_list = []
+        for i in range(self.stop_episode):
+            time.sleep(0.5)
             with self.g_ep.get_lock():
                 self.g_ep.value += 1
                 real_g_ep = self.g_ep.value
+                global_ep_list.append(real_g_ep)
             total_ep += 1
-            time.sleep(0.5)
             s = self.env.reset()
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
@@ -67,7 +68,7 @@ class Worker(mp.Process):
                 if self.actor_id in bad_worker_id:
                     # r = real_r + (random.random()-0.5)/0.5*20
                     r = -real_r
-                    # print('bad',self.actor_id)
+
                 else:
                     r = real_r
 
@@ -98,7 +99,7 @@ class Worker(mp.Process):
                         break
                 s = s_
                 total_step += 1
-        # print('close',self.name,total_ep)
+        print('close',self.name,total_ep,global_ep_list)
         self.res_queue.put(None)
 
 
@@ -110,8 +111,6 @@ def evaluate_network(g_net, evaluate_num):
         while True:
             a = g_net.choose_action(v_wrap(s[None, :]))
             s, real_r, done, _ = env.step(a)
-            if done:
-                real_r = -1
             sum_r += real_r
             if done:
                 break
@@ -128,23 +127,23 @@ if __name__ == "__main__":
     opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
+    myPool = mp.Pool(NUM_Actor)
     res = []  # record episode reward to plot
-    evaluate_good_value_list = []
     # 初始化置信度
     worker_credit = [0] * NUM_Actor
-    for i in range(int(10 * MAX_EP / each_test_episodes)):
+    for i in range(int(MAX_EP / each_test_episodes)):
+        # if i == 17:
+        #     print()
+        # 按照置信度进行贪心选择
         # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-        if random.random() >= linear_decay(0.2, 1, global_ep.value, MAX_EP):
-            print('greedy credit choice')
+        if random.random() >= linear_decay(0.1, 0.9, global_ep.value, MAX_EP):
             topk_action_id = np.argsort(-np.array(worker_credit[1:]), kind="heapsort")[:Good_Actor_num - 1]
             topk_action_id += 1
-            # print(topk_action_id, worker_credit)
         else:
-            print('random_choice')
             topk_action_id = random.sample([index for index in range(1, NUM_Actor)], Good_Actor_num - 1)
         topk_action_id = np.insert(topk_action_id, 0, 0, axis=0)
         # 选出来的worker进行异步更新
-        workers = [Worker(gnet, opt, global_ep, global_ep_r, (i + 1) * each_test_episodes, res_queue, w_id) for w_id in
+        workers = [Worker(gnet, opt, global_ep, global_ep_r, int(each_test_episodes/Good_Actor_num), res_queue, w_id) for w_id in
                    topk_action_id]
         random.shuffle(workers)
         [w.start() for w in workers]
@@ -167,10 +166,6 @@ if __name__ == "__main__":
         for id in topk_action_id:
             worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
         print(i, topk_action_id, worker_credit)
-        if eval_reward > 150:
-            evaluate_good_value_list.append(eval_reward)
-            if len(evaluate_good_value_list) > 10:
-                break
 
     print('worker_credit', worker_credit)
     topk_action_id = np.argsort(-np.array(worker_credit), kind="heapsort")
@@ -182,3 +177,5 @@ if __name__ == "__main__":
     plt.ylabel('Moving average ep reward')
     plt.xlabel('Step')
     plt.show()
+
+"""该轮中，我们会固定每个进程跑一定轮数，严格限制每个进程的贡献"""

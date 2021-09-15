@@ -13,16 +13,18 @@ from a3c.NN import DiscreteNet
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
-UPDATE_GLOBAL_ITER = 32
+UPDATE_GLOBAL_ITER = 128
 GAMMA = 0.9
-MAX_EP = 4000
+MAX_EP = 400000
 
 NUM_Actor = 10
 Good_Actor = 7
-bad_worker_id = [7,8,9]
+bad_worker_id = []#[7,8,9]
 
 
 env_name = 'CartPole-v0'
+env_name = 'LunarLander-v2'
+# env_name = 'CarRacing-v0'
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
@@ -57,7 +59,7 @@ class Worker(mp.Process):
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
 
-                if done: real_r = -1
+                # if done: real_r = -1
 
                 # 有问题的进程，其奖励返回不准确
                 if self.actor_id in bad_worker_id:
