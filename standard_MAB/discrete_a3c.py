@@ -137,6 +137,7 @@ class Worker(mp.Process):
 
 if __name__ == "__main__":
     for test in range(100):
+        s_time = time.time()
         params = gen_args()
         if not os.path.exists(params.save_path):
             os.makedirs(params.save_path)
@@ -220,6 +221,8 @@ if __name__ == "__main__":
         plt.savefig(os.path.join(params.save_path, 'evaluate_reward.png'))
         plt.close()
 
+        print('test session num {}, end time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
+        print('bad worker list: {}, spend time: {}'.format(params.bad_worker_id, s_time-time.time()))
         # 关闭本次log文件输入
         sys.stdout.close_file_output()
 
