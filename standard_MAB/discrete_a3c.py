@@ -25,10 +25,14 @@ class Logger(object):
 
     def write(self, message):
         self.terminal.write(message)
-        self.log.write(message)
+        if not self.log.closed:
+            self.log.write(message)
 
     def flush(self):
         pass
+
+    def close_file_output(self):
+        self.log.close()
 
 def gen_args():
     args = argparse.ArgumentParser()
@@ -41,13 +45,13 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 50000
+    args.MAX_EP = 200
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = [1, 3, 8]  # [2, 9, 5]
+    args.bad_worker_id = random.sample(range(10), 3)#[1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
     args.base_path = './std_results/'
@@ -132,13 +136,14 @@ class Worker(mp.Process):
         self.res_queue.put(None)
 
 if __name__ == "__main__":
-    for test in range(5):
+    for test in range(10):
         params = gen_args()
         if not os.path.exists(params.save_path):
             os.makedirs(params.save_path)
         save_config(params, params.save_path)
+        import datetime
         sys.stdout = Logger(os.path.join(params.save_path, 'log.txt'), sys.stdout)
-        print('test session num {}'.format(test))
+        print('test session num {}, start time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
         gnet = DiscreteNet(params.N_S, params.N_A)  # global network
         gnet.share_memory()  # share the global parameters in multiprocessing
         opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
@@ -214,5 +219,8 @@ if __name__ == "__main__":
         plt.xlabel('Step*{}'.format(params.each_test_episodes))
         plt.savefig(os.path.join(params.save_path, 'evaluate_reward.png'))
         plt.close()
+
+        # 关闭本次log文件输入
+        sys.stdout.close_file_output()
 
 

@@ -39,7 +39,7 @@ def make_training_save_path(base_path):
     listdir = os.listdir(base_path)
     num = [int(dir.split('run')[-1]) for dir in listdir if "run" in dir]
     if len(num) == 0:
-        return os.path.join(base_path, "run1")
+        return os.path.join(base_path, "run0")
     else:
         return os.path.join(base_path, "run" + str(max(num) + 1))
 
