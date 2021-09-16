@@ -51,7 +51,7 @@ def gen_args():
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = random.sample(range(10), 3)#[1, 3, 8]  # [2, 9, 5]
+    args.bad_worker_id = random.sample(range(1, 10), 3)#[1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
     args.base_path = './std_results/'
