@@ -45,7 +45,7 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 200
+    args.MAX_EP = 50000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
@@ -136,14 +136,14 @@ class Worker(mp.Process):
         self.res_queue.put(None)
 
 if __name__ == "__main__":
-    for test in range(10):
+    for test in range(100):
         params = gen_args()
         if not os.path.exists(params.save_path):
             os.makedirs(params.save_path)
         save_config(params, params.save_path)
-        import datetime
         sys.stdout = Logger(os.path.join(params.save_path, 'log.txt'), sys.stdout)
         print('test session num {}, start time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
+        print('bad worker id list:', params.bad_worker_id)
         gnet = DiscreteNet(params.N_S, params.N_A)  # global network
         gnet.share_memory()  # share the global parameters in multiprocessing
         opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
