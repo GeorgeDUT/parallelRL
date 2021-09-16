@@ -1,45 +1,73 @@
-import torch
-import torch.nn as nn
-from utils import v_wrap, set_init, push_and_pull, record
-import torch.nn.functional as F
-import torch.multiprocessing as mp
-from shared_adam import SharedAdam
-import gym
 import os
+import sys
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(base_dir)
+sys.path.append(r'D:\RL\parallelRL')
+
 import random
-import numpy as np
 import time
+import argparse
+import torch.multiprocessing as mp
+import numpy as np
+from shared_adam import SharedAdam
 from a3c.NN import DiscreteNet
+from standard_MAB.my_utils import *
+from utils import push_and_pull
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
-UPDATE_GLOBAL_ITER = 32
-GAMMA = 0.9
-MAX_EP = 10000
-each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
 
-NUM_Actor = 10
-Good_Actor_num = 7
-bad_worker_id = [1, 3, 8]#[2, 9, 5]
+class Logger(object):
+    def __init__(self, filename='default.log', stream=sys.stdout):
+        self.terminal = stream
+        self.log = open(filename, 'a')
 
-env_name = 'CartPole-v0'
-# env_name = 'LunarLander-v2'
-env = gym.make(env_name)
-N_S = env.observation_space.shape[0]
-N_A = env.action_space.n
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+
+    def flush(self):
+        pass
+
+def gen_args():
+    args = argparse.ArgumentParser()
+    args = args.parse_args()
+
+    args.env_name = 'CartPole-v0'
+    env = gym.make(args.env_name)
+    args.N_S = env.observation_space.shape[0]
+    args.N_A = env.action_space.n
+
+    args.UPDATE_GLOBAL_ITER = 32
+    args.GAMMA = 0.9
+    args.MAX_EP = 50000
+    args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
+    args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
+
+    args.NUM_Actor = 10
+    args.Good_Actor_num = 7
+    args.bad_worker_id = [1, 3, 8]  # [2, 9, 5]
+    args.evaluate_epoch = 5
+
+    args.base_path = './std_results/'
+    args.save_path = make_training_save_path(args.base_path)
+
+    return args
 
 
 class Worker(mp.Process):
-    def __init__(self, gnet, opt, global_ep, global_ep_r, stop_episode, res_queue, name):
+    def __init__(self, params, gnet, opt, global_ep, global_ep_r, stop_episode, res_queue, name):
         super(Worker, self).__init__()
+        self.params = params
         self.actor_id = name
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.stop_episode = stop_episode
         self.gnet, self.opt = gnet, opt
-        self.lnet = DiscreteNet(N_S, N_A)  # local network
+        self.lnet = DiscreteNet(params.N_S, params.N_A)  # local network
         self.lnet.load_state_dict(self.gnet.state_dict())
-        self.env = gym.make(env_name)
+        self.env = gym.make(params.env_name)
 
     def run(self):
         total_step = 1
@@ -50,7 +78,8 @@ class Worker(mp.Process):
                 self.g_ep.value += 1
                 real_g_ep = self.g_ep.value
             total_ep += 1
-            time.sleep(0.5)
+            if self.params.ep_sleep_time > 0:
+                time.sleep(self.params.ep_sleep_time)
             s = self.env.reset()
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
@@ -64,7 +93,7 @@ class Worker(mp.Process):
                 if done: real_r = -1
 
                 # 有问题的进程，其奖励返回不准确
-                if self.actor_id in bad_worker_id:
+                if self.actor_id in self.params.bad_worker_id:
                     # r = real_r + (random.random()-0.5)/0.5*20
                     r = -real_r
                     # print('bad',self.actor_id)
@@ -78,9 +107,10 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_r.append(r)
 
-                if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
+                if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
-                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                                  self.params.GAMMA)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -101,84 +131,88 @@ class Worker(mp.Process):
         # print('close',self.name,total_ep)
         self.res_queue.put(None)
 
-
-def evaluate_network(g_net, evaluate_num):
-    env = gym.make(env_name)
-    sum_r = 0
-    for i in range(evaluate_num):
-        s = env.reset()
-        while True:
-            a = g_net.choose_action(v_wrap(s[None, :]))
-            s, real_r, done, _ = env.step(a)
-            if done:
-                real_r = -1
-            sum_r += real_r
-            if done:
-                break
-    return sum_r / evaluate_num
-
-
-def linear_decay(min_v, max_v, cur_step, totoal_step):
-    return max_v - (max_v - min_v) * (cur_step / totoal_step)
-
-
 if __name__ == "__main__":
-    gnet = DiscreteNet(N_S, N_A)  # global network
-    gnet.share_memory()  # share the global parameters in multiprocessing
-    opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
-    global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
+    for test in range(5):
+        params = gen_args()
+        if not os.path.exists(params.save_path):
+            os.makedirs(params.save_path)
+        save_config(params, params.save_path)
+        sys.stdout = Logger(os.path.join(params.save_path, 'log.txt'), sys.stdout)
+        print('test session num {}'.format(test))
+        gnet = DiscreteNet(params.N_S, params.N_A)  # global network
+        gnet.share_memory()  # share the global parameters in multiprocessing
+        opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
+        global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
-    res = []  # record episode reward to plot
-    evaluate_good_value_list = []
-    # 初始化置信度
-    worker_credit = [0] * NUM_Actor
-    for i in range(int(10 * MAX_EP / each_test_episodes)):
-        # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-        if random.random() >= linear_decay(0.2, 1, global_ep.value, MAX_EP):
-            print('greedy credit choice')
-            topk_action_id = np.argsort(-np.array(worker_credit[1:]), kind="heapsort")[:Good_Actor_num - 1]
-            topk_action_id += 1
-            # print(topk_action_id, worker_credit)
-        else:
-            print('random_choice')
-            topk_action_id = random.sample([index for index in range(1, NUM_Actor)], Good_Actor_num - 1)
-        topk_action_id = np.insert(topk_action_id, 0, 0, axis=0)
-        # 选出来的worker进行异步更新
-        workers = [Worker(gnet, opt, global_ep, global_ep_r, (i + 1) * each_test_episodes, res_queue, w_id) for w_id in
-                   topk_action_id]
-        random.shuffle(workers)
-        [w.start() for w in workers]
-        # 接收本轮奖励
-        none_count = 0
-        while True:
-            r = res_queue.get()
-            if r is not None:
-                res.append(r)
+        res = []  # record episode reward to plot
+        evaluate_good_value_list = []
+        # 初始化置信度
+        worker_credit = [0] * params.NUM_Actor
+        is_random_choice = False
+        random_choice_info = {True: 'random choice', False: 'Greedy choice'}
+        evaluate_reward_list = []
+        for i in range(int(params.MAX_EP / params.each_test_episodes)):
+            # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
+            if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
+            #if random.random() >= 0.5:
+                is_random_choice = False
+                topk_action_id = np.argsort(-np.array(worker_credit[1:]), kind="heapsort")[:params.Good_Actor_num - 1]
+                topk_action_id += 1
+                # print(topk_action_id, worker_credit)
             else:
-                none_count += 1
-                if none_count >= Good_Actor_num:
+                is_random_choice = True
+                topk_action_id = random.sample([index for index in range(1, params.NUM_Actor)],
+                                               params.Good_Actor_num - 1)
+            topk_action_id = np.insert(topk_action_id, 0, 0, axis=0)
+            # 选出来的worker进行异步更新
+            workers = [
+                Worker(params, gnet, opt, global_ep, global_ep_r, (i + 1) * params.each_test_episodes, res_queue, w_id)
+                for
+                w_id in
+                topk_action_id]
+            random.shuffle(workers)
+            [w.start() for w in workers]
+            # 接收本轮奖励
+            none_count = 0
+            while True:
+                r = res_queue.get()
+                if r is not None:
+                    res.append(r)
+                else:
+                    none_count += 1
+                    if none_count >= params.Good_Actor_num:
+                        break
+            [w.join() for w in workers]
+            # [w.close() for w in workers]
+            # 运用0号worker进评估
+            eval_reward = evaluate_network(params.env_name, gnet, params.evaluate_epoch)
+            evaluate_reward_list.append(eval_reward)
+            # 使用评估结果 更新worker的置信度
+            for id in topk_action_id:
+                worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
+            print('run_count:', i, 'choose_type:', random_choice_info[is_random_choice])
+            print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
+            if eval_reward > 150:
+                evaluate_good_value_list.append(eval_reward)
+                if len(evaluate_good_value_list) > 10:
                     break
-        [w.join() for w in workers]
-        # [w.close() for w in workers]
-        # 运用0号worker进评估
-        eval_reward = evaluate_network(gnet, 5)
-        print('evaluate reward',eval_reward)
-        # 使用评估结果 更新worker的置信度
-        for id in topk_action_id:
-            worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
-        print(i, topk_action_id, worker_credit)
-        if eval_reward > 150:
-            evaluate_good_value_list.append(eval_reward)
-            if len(evaluate_good_value_list) > 10:
-                break
 
-    print('worker_credit', worker_credit)
-    topk_action_id = np.argsort(-np.array(worker_credit), kind="heapsort")
-    print('sort credit num', topk_action_id)
+        print('last worker_credit', worker_credit)
+        topk_action_id = np.argsort(-np.array(worker_credit), kind="heapsort")
+        print('sorted credit num', topk_action_id)
 
-    import matplotlib.pyplot as plt
+        import matplotlib.pyplot as plt
 
-    plt.plot(res)
-    plt.ylabel('Moving average ep reward')
-    plt.xlabel('Step')
-    plt.show()
+        plt.plot(res)
+        plt.ylabel('Moving average ep reward')
+        plt.xlabel('Step')
+        plt.savefig(os.path.join(params.save_path, 'mv_reward.png'))
+        plt.close()
+
+        plt.plot(evaluate_reward_list)
+        plt.ylabel('evaluate reward')
+        plt.xlabel('Step*{}'.format(params.each_test_episodes))
+        plt.savefig(os.path.join(params.save_path, 'evaluate_reward.png'))
+        plt.close()
+
+
