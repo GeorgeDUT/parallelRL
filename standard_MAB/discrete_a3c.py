@@ -8,6 +8,7 @@ sys.path.append(r'D:\RL\parallelRL')
 import random
 import time
 import argparse
+import xlwt
 import torch.multiprocessing as mp
 import numpy as np
 from shared_adam import SharedAdam
@@ -34,6 +35,7 @@ class Logger(object):
     def close_file_output(self):
         self.log.close()
 
+
 def gen_args():
     args = argparse.ArgumentParser()
     args = args.parse_args()
@@ -51,7 +53,7 @@ def gen_args():
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = random.sample(range(1, 10), 3)#[1, 3, 8]  # [2, 9, 5]
+    args.bad_worker_id = [4, 7, 9]  # random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
     args.base_path = './std_results/'
@@ -135,8 +137,10 @@ class Worker(mp.Process):
         # print('close',self.name,total_ep)
         self.res_queue.put(None)
 
+
 if __name__ == "__main__":
-    for test in range(100):
+    analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
+    for test in range(10):
         s_time = time.time()
         params = gen_args()
         if not os.path.exists(params.save_path):
@@ -160,7 +164,7 @@ if __name__ == "__main__":
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
             if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
-            #if random.random() >= 0.5:
+                # if random.random() >= 0.5:
                 is_random_choice = False
                 topk_action_id = np.argsort(-np.array(worker_credit[1:]), kind="heapsort")[:params.Good_Actor_num - 1]
                 topk_action_id += 1
@@ -204,8 +208,8 @@ if __name__ == "__main__":
                     break
 
         print('last worker_credit', worker_credit)
-        topk_action_id = np.argsort(-np.array(worker_credit), kind="heapsort")
-        print('sorted credit num', topk_action_id)
+        sorted_id = np.argsort(-np.array(worker_credit), kind="heapsort")
+        print('sorted credit num', sorted_id)
 
         import matplotlib.pyplot as plt
 
@@ -222,8 +226,17 @@ if __name__ == "__main__":
         plt.close()
 
         print('test session num {}, end time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
-        print('bad worker list: {}, spend time: {}'.format(params.bad_worker_id, s_time-time.time()))
+        print('bad worker list: {}, spend time: {}'.format(params.bad_worker_id, s_time - time.time()))
+        analyse_data["bad_id"].append(params.bad_worker_id)
+        analyse_data["bandit_credit"].append(worker_credit)
+        analyse_data["sorted_id"].append(sorted_id)
         # 关闭本次log文件输入
         sys.stdout.close_file_output()
-
-
+    # 最后写出多轮测试数据到excel
+    workbook = xlwt.Workbook()
+    worksheet = workbook.add_sheet("analyse_data_result")
+    for i in range(len(analyse_data["bad_id"])):
+        worksheet.write(i, 0, str(analyse_data["bad_id"][i]))
+        worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
+        worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
+    workbook.save('./bad479_test.xls')
