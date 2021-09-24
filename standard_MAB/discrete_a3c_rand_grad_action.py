@@ -15,6 +15,8 @@ from shared_adam import SharedAdam
 from a3c.NN import DiscreteNet
 from standard_MAB.my_utils import *
 from utils import push_and_pull, push_grad, push_rand_grad
+import matplotlib.pyplot as plt
+import pandas as pd
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
@@ -53,10 +55,10 @@ def gen_args():
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = [1, 3, 4]  # random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
+    args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './std_results_rand_grad/'
+    args.base_path = './plot_reward/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -114,7 +116,7 @@ class Worker(mp.Process):
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
                         push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                                      self.params.GAMMA)
+                                       self.params.GAMMA)
                     else:
                         # sync
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
@@ -142,7 +144,7 @@ class Worker(mp.Process):
 
 if __name__ == "__main__":
     analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
-    for test in range(30):
+    for test in range(10):
         s_time = time.time()
         params = gen_args()
         if not os.path.exists(params.save_path):
@@ -163,6 +165,7 @@ if __name__ == "__main__":
         is_random_choice = False
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
+        step_list = []
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
             if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
@@ -199,21 +202,21 @@ if __name__ == "__main__":
             # 运用0号worker进评估
             eval_reward = evaluate_network(params.env_name, gnet, params.evaluate_epoch)
             evaluate_reward_list.append(eval_reward)
+            step_list.append(i)
             # 使用评估结果 更新worker的置信度
             for id in topk_action_id:
                 worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
             print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
-            if eval_reward > 150:
-                evaluate_good_value_list.append(eval_reward)
-                if len(evaluate_good_value_list) > 10:
-                    break
+            # 达到预期奖励进行早停
+            # if eval_reward > 150:
+            #     evaluate_good_value_list.append(eval_reward)
+            #     if len(evaluate_good_value_list) > 10:
+            #         break
 
         print('last worker_credit', worker_credit)
         sorted_id = np.argsort(-np.array(worker_credit), kind="heapsort")
         print('sorted credit num', sorted_id)
-
-        import matplotlib.pyplot as plt
 
         plt.plot(res)
         plt.ylabel('Moving average ep reward')
@@ -228,10 +231,12 @@ if __name__ == "__main__":
         plt.close()
 
         print('test session num {}, end time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
-        print('bad worker list: {}, spend time: {}'.format(params.bad_worker_id, time.time()-s_time))
+        print('bad worker list: {}, spend time: {}'.format(params.bad_worker_id, time.time() - s_time))
         analyse_data["bad_id"].append(params.bad_worker_id)
         analyse_data["bandit_credit"].append(worker_credit)
         analyse_data["sorted_id"].append(sorted_id)
+        # 存储奖励曲线csv
+        pd.DataFrame({"Epochs": step_list, "Reward": evaluate_reward_list}).to_csv(params.save_path+'/reward.csv')
         # 关闭本次log文件输入
         sys.stdout.close_file_output()
     # 最后写出多轮测试数据到excel
@@ -241,4 +246,4 @@ if __name__ == "__main__":
         worksheet.write(i, 0, str(analyse_data["bad_id"][i]))
         worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
         worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
-    workbook.save('./no_update_bad_worker_id.xls')
+    workbook.save('./std_results_rand_grad_rand_bad/summary.xls')
