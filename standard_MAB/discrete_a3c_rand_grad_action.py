@@ -14,7 +14,7 @@ import numpy as np
 from shared_adam import SharedAdam
 from a3c.NN import DiscreteNet
 from standard_MAB.my_utils import *
-from utils import push_and_pull
+from utils import push_and_pull, push_grad, push_rand_grad
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
@@ -56,7 +56,7 @@ def gen_args():
     args.bad_worker_id = [1, 3, 4]  # random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './std_results_rand_reward/'
+    args.base_path = './std_results_rand_grad/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -93,19 +93,15 @@ class Worker(mp.Process):
 
             while True:
                 # print(self.name, total_step)
-                a = self.lnet.choose_action(v_wrap(s[None, :]))
+                if self.actor_id in self.params.bad_worker_id:
+                    a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+                else:
+                    a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
 
                 if done: real_r = -1
 
-                # 有问题的进程，其奖励返回不准确
-                if self.actor_id in self.params.bad_worker_id:
-                    # r = real_r + (random.random()-0.5)/0.5*20
-                    r = -real_r
-                    r = random.random()+random.random()-1
-                    # print('bad',self.actor_id)
-                else:
-                    r = real_r
+                r = real_r
 
                 ep_r += r
                 real_ep_r += real_r
@@ -115,9 +111,14 @@ class Worker(mp.Process):
                 buffer_r.append(r)
 
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
-                    # sync
-                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                                  self.params.GAMMA)
+                    if self.actor_id in self.params.bad_worker_id:
+                        # 坏臂不更新自己的网络
+                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                                      self.params.GAMMA)
+                    else:
+                        # sync
+                        push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                                      self.params.GAMMA)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -201,7 +202,7 @@ if __name__ == "__main__":
             # 使用评估结果 更新worker的置信度
             for id in topk_action_id:
                 worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
-            print('run_count:', i, 'choose_type:', random_choice_info[is_random_choice])
+            print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
             if eval_reward > 150:
                 evaluate_good_value_list.append(eval_reward)
@@ -240,4 +241,4 @@ if __name__ == "__main__":
         worksheet.write(i, 0, str(analyse_data["bad_id"][i]))
         worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
         worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
-    workbook.save('./bad134_test1.xls')
+    workbook.save('./no_update_bad_worker_id.xls')
