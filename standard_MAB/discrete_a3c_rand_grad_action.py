@@ -49,7 +49,7 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 50000
+    args.MAX_EP = 100000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
@@ -101,7 +101,7 @@ class Worker(mp.Process):
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
 
-                if done: real_r = -1
+                if done: real_r = -50 #失败时，给一个较高的负的奖励
 
                 r = real_r
 
@@ -144,7 +144,7 @@ class Worker(mp.Process):
 
 if __name__ == "__main__":
     analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
-    for test in range(10):
+    for test in range(5):
         s_time = time.time()
         params = gen_args()
         if not os.path.exists(params.save_path):
@@ -208,11 +208,11 @@ if __name__ == "__main__":
                 worker_credit[id] += 0.01 * (eval_reward - worker_credit[id])
             print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
-            # 达到预期奖励进行早停
-            # if eval_reward > 150:
-            #     evaluate_good_value_list.append(eval_reward)
-            #     if len(evaluate_good_value_list) > 10:
-            #         break
+            #达到预期奖励进行早停
+            if eval_reward > 100:
+                evaluate_good_value_list.append(eval_reward)
+                if len(evaluate_good_value_list) > 10:
+                    break
 
         print('last worker_credit', worker_credit)
         sorted_id = np.argsort(-np.array(worker_credit), kind="heapsort")
@@ -239,11 +239,11 @@ if __name__ == "__main__":
         pd.DataFrame({"Epochs": step_list, "Reward": evaluate_reward_list}).to_csv(params.save_path+'/reward.csv')
         # 关闭本次log文件输入
         sys.stdout.close_file_output()
-    # 最后写出多轮测试数据到excel
-    workbook = xlwt.Workbook()
-    worksheet = workbook.add_sheet("analyse_data_result")
-    for i in range(len(analyse_data["bad_id"])):
-        worksheet.write(i, 0, str(analyse_data["bad_id"][i]))
-        worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
-        worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
-    workbook.save('./std_results_rand_grad_rand_bad/summary.xls')
+        # 最后写出多轮测试数据到excel
+        workbook = xlwt.Workbook()
+        worksheet = workbook.add_sheet("analyse_data_result")
+        for i in range(len(analyse_data["bad_id"])):
+            worksheet.write(i, 0, str(analyse_data["bad_id"][i]))
+            worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
+            worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
+        workbook.save(os.path.join(params.save_path, 'summary.xls'))
