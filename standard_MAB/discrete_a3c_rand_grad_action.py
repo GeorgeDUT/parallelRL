@@ -14,7 +14,7 @@ import numpy as np
 from shared_adam import SharedAdam
 from a3c.NN import DiscreteNet
 from standard_MAB.my_utils import *
-from utils import push_and_pull, push_grad, push_rand_grad
+from utils import *
 import matplotlib.pyplot as plt
 import pandas as pd
 
@@ -49,7 +49,7 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 100000
+    args.MAX_EP = 25000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
@@ -115,7 +115,7 @@ class Worker(mp.Process):
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
-                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
                                        self.params.GAMMA)
                     else:
                         # sync
@@ -144,7 +144,7 @@ class Worker(mp.Process):
 
 if __name__ == "__main__":
     analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
-    for test in range(5):
+    for test in range(10):
         s_time = time.time()
         params = gen_args()
         if not os.path.exists(params.save_path):
@@ -209,10 +209,10 @@ if __name__ == "__main__":
             print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
             #达到预期奖励进行早停
-            if eval_reward > 100:
-                evaluate_good_value_list.append(eval_reward)
-                if len(evaluate_good_value_list) > 10:
-                    break
+            # if eval_reward > 100:
+            #     evaluate_good_value_list.append(eval_reward)
+            #     if len(evaluate_good_value_list) > 10:
+            #         break
 
         print('last worker_credit', worker_credit)
         sorted_id = np.argsort(-np.array(worker_credit), kind="heapsort")

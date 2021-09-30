@@ -19,7 +19,7 @@ def evaluate_network(env_name, g_net, evaluate_num):
             a = g_net.choose_action(v_wrap(s[None, :]))
             s, real_r, done, _ = env.step(a)
             if done:
-                real_r = -1
+                real_r = -50
             sum_r += real_r
             if done:
                 break

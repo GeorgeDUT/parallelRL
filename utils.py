@@ -1,6 +1,7 @@
 """
 Functions that use multiple times
 """
+import random
 
 from torch import nn
 import torch
@@ -71,7 +72,7 @@ def push_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     lnet.zero_grad()
     loss.backward()
     for lp, gp in zip(lnet.parameters(), gnet.parameters()):
-        gp._grad = lp.grad
+        gp._grad = lp.grad*(random.random()+1)
     opt.step()
 
     # pull global parameters
@@ -103,12 +104,42 @@ def push_rand_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
         # gp._grad = lp.grad
         # grad = torch.randn(tuple(lp.grad.shape), dtype=torch.float32)
         # grad = torch.randn(tuple(lp.grad.shape), dtype=torch.float32)
-        gp._grad = torch.rand_like(lp.grad) * 2 - 1 #生成-1到1的均匀分布的随机梯度
+        gp._grad = 2*(torch.rand_like(lp.grad) * 2 - 1) #生成-1到1的均匀分布的随机梯度
     opt.step()
 
     # pull global parameters
     # lnet.load_state_dict(gnet.state_dict())
 
+
+def push_constant_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+    # print("update net")
+    if done:
+        v_s_ = 0.  # terminal
+    else:
+        v_s_ = lnet.forward(v_wrap(s_[None, :]))[-1].data.numpy()[0, 0]
+
+    buffer_v_target = []
+    for r in br[::-1]:  # reverse buffer r
+        v_s_ = r + gamma * v_s_
+        buffer_v_target.append(v_s_)
+    buffer_v_target.reverse()
+
+    loss = lnet.loss_func(
+        v_wrap(np.stack(bs)),
+        v_wrap(np.array(ba), dtype=np.int64) if ba[0].dtype == np.int64 else v_wrap(np.vstack(ba)),
+        v_wrap(np.array(buffer_v_target)[:, None]))
+
+    # calculate local gradients and push local parameters to global
+    opt.zero_grad()
+    lnet.zero_grad()
+    loss.backward()
+    for lp, gp in zip(lnet.parameters(), gnet.parameters()):
+        # gp._grad = lp.grad
+        # grad = torch.randn(tuple(lp.grad.shape), dtype=torch.float32)
+        # grad = torch.randn(tuple(lp.grad.shape), dtype=torch.float32)
+        # gp._grad = torch.ones_like(lp.grad) #梯度
+        gp._grad = 3*torch.ones_like(lp.grad) + torch.rand_like(lp.grad)#梯度
+    opt.step()
 
 def record(global_ep, global_ep_r, ep_r, res_queue, name):
     with global_ep.get_lock():

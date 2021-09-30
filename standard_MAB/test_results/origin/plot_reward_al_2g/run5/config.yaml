@@ -1,0 +1,17 @@
+env_name: CartPole-v0
+N_S: 4
+N_A: 2
+UPDATE_GLOBAL_ITER: 32
+GAMMA: 0.9
+MAX_EP: 25000
+each_test_episodes: 100
+ep_sleep_time: 0.5
+NUM_Actor: 10
+Good_Actor_num: 7
+bad_worker_id:
+- 4
+- 7
+- 9
+evaluate_epoch: 5
+base_path: ./plot_reward/
+save_path: ./plot_reward/run5

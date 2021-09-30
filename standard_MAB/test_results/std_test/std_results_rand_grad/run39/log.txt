@@ -1,0 +1,1006 @@
+test session num 15, start time Fri Sep 24 06:30:06 2021
+bad worker id list: [1, 3, 4]
+run_count: 0 eval_reward 32.8 choose_type: random choice
+choose arms: [0 5 1 8 4 6 9] cur_worker_credit: [0.328, 0.328, 0, 0, 0.328, 0.328, 0.328, 0, 0.328, 0.328]
+run_count: 1 eval_reward 26.6 choose_type: random choice
+choose arms: [0 5 1 7 4 9 2] cur_worker_credit: [0.5907, 0.5907, 0.266, 0, 0.5907, 0.5907, 0.328, 0.266, 0.328, 0.5907]
+run_count: 2 eval_reward 27.2 choose_type: random choice
+choose arms: [0 5 9 3 8 6 7] cur_worker_credit: [0.8568, 0.5907, 0.266, 0.272, 0.5907, 0.8568, 0.5967, 0.5353, 0.5967, 0.8568]
+run_count: 3 eval_reward 16.8 choose_type: random choice
+choose arms: [0 3 7 2 1 5 4] cur_worker_credit: [1.0162, 0.7528, 0.4313, 0.4373, 0.7528, 1.0162, 0.5967, 0.698, 0.5967, 0.8568]
+run_count: 4 eval_reward 29.6 choose_type: random choice
+choose arms: [0 5 7 3 2 9 4] cur_worker_credit: [1.3021, 0.7528, 0.723, 0.7289, 1.0413, 1.3021, 0.5967, 0.987, 0.5967, 1.1442]
+run_count: 5 eval_reward 19.6 choose_type: random choice
+choose arms: [0 1 2 9 5 4 3] cur_worker_credit: [1.4851, 0.9413, 0.9118, 0.9176, 1.2269, 1.4851, 0.5967, 0.987, 0.5967, 1.3288]
+run_count: 6 eval_reward 19.2 choose_type: random choice
+choose arms: [0 4 2 1 8 3 9] cur_worker_credit: [1.6622, 1.1239, 1.0947, 1.1004, 1.4066, 1.4851, 0.5967, 0.987, 0.7828, 1.5075]
+run_count: 7 eval_reward 14.6 choose_type: random choice
+choose arms: [0 2 7 1 3 5 9] cur_worker_credit: [1.7916, 1.2586, 1.2297, 1.2354, 1.4066, 1.6162, 0.5967, 1.1231, 0.7828, 1.6384]
+run_count: 8 eval_reward 16.6 choose_type: Greedy choice
+choose arms: [0 9 5 4 1 3 2] cur_worker_credit: [1.9397, 1.412, 1.3834, 1.3891, 1.5585, 1.766, 0.5967, 1.1231, 0.7828, 1.7881]
+run_count: 9 eval_reward 17.4 choose_type: random choice
+choose arms: [0 2 6 8 7 9 5] cur_worker_credit: [2.0943, 1.412, 1.5436, 1.3891, 1.5585, 1.9224, 0.7648, 1.2859, 0.9489, 1.9442]
+run_count: 10 eval_reward 14.0 choose_type: random choice
+choose arms: [0 7 8 3 9 2 4] cur_worker_credit: [2.2133, 1.412, 1.6682, 1.5152, 1.683, 1.9224, 0.7648, 1.413, 1.0794, 2.0647]
+run_count: 11 eval_reward 21.4 choose_type: random choice
+choose arms: [0 8 4 7 9 5 2] cur_worker_credit: [2.4052, 1.412, 1.8655, 1.5152, 1.8801, 2.1172, 0.7648, 1.6129, 1.2826, 2.2581]
+run_count: 12 eval_reward 36.0 choose_type: random choice
+choose arms: [0 6 8 5 2 1 9] cur_worker_credit: [2.7411, 1.7579, 2.2068, 1.5152, 1.8801, 2.456, 1.1171, 1.6129, 1.6298, 2.5955]
+run_count: 13 eval_reward 12.8 choose_type: random choice
+choose arms: [0 2 5 7 3 9 4] cur_worker_credit: [2.8417, 1.7579, 2.3128, 1.628, 1.9893, 2.5594, 1.1171, 1.7248, 1.6298, 2.6975]
+run_count: 14 eval_reward 18.4 choose_type: random choice
+choose arms: [0 8 2 1 3 4 6] cur_worker_credit: [2.9973, 1.9243, 2.4736, 1.7958, 2.1534, 2.5594, 1.2899, 1.7248, 1.7975, 2.6975]
+run_count: 15 eval_reward 24.6 choose_type: random choice
+choose arms: [0 6 7 1 5 8 3] cur_worker_credit: [3.2133, 2.1511, 2.4736, 2.0238, 2.1534, 2.7798, 1.523, 1.9535, 2.0255, 2.6975]
+run_count: 16 eval_reward 13.0 choose_type: random choice
+choose arms: [0 9 1 7 6 3 4] cur_worker_credit: [3.3112, 2.2596, 2.4736, 2.1336, 2.2619, 2.7798, 1.6378, 2.064, 2.0255, 2.8006]
+run_count: 17 eval_reward 24.0 choose_type: random choice
+choose arms: [0 2 8 5 9 7 1] cur_worker_credit: [3.5181, 2.477, 2.6889, 2.1336, 2.2619, 2.992, 1.6378, 2.2834, 2.2453, 3.0126]
+run_count: 18 eval_reward 26.6 choose_type: Greedy choice
+choose arms: [0 9 5 2 1 7 4] cur_worker_credit: [3.7489, 2.7182, 2.928, 2.1336, 2.5053, 3.2281, 1.6378, 2.5265, 2.2453, 3.2484]
+run_count: 19 eval_reward 43.6 choose_type: random choice
+choose arms: [0 9 8 4 5 1 3] cur_worker_credit: [4.1474, 3.127, 2.928, 2.5482, 2.9162, 3.6318, 1.6378, 2.5265, 2.6588, 3.652]
+run_count: 20 eval_reward 25.4 choose_type: random choice
+choose arms: [0 8 2 9 4 1 5] cur_worker_credit: [4.36, 3.3498, 3.1527, 2.5482, 3.1411, 3.8495, 1.6378, 2.5265, 2.8862, 3.8694]
+run_count: 21 eval_reward 22.6 choose_type: random choice
+choose arms: [0 3 9 2 5 7 4] cur_worker_credit: [4.5424, 3.3498, 3.3472, 2.7487, 3.3356, 4.037, 1.6378, 2.7273, 2.8862, 4.0567]
+run_count: 22 eval_reward 27.2 choose_type: random choice
+choose arms: [0 6 2 4 1 8 9] cur_worker_credit: [4.7689, 3.5883, 3.5857, 2.7487, 3.5743, 4.037, 1.8934, 2.7273, 3.1294, 4.2882]
+run_count: 23 eval_reward 19.2 choose_type: random choice
+choose arms: [0 2 3 5 9 6 1] cur_worker_credit: [4.9132, 3.7444, 3.7419, 2.9133, 3.5743, 4.1887, 2.0665, 2.7273, 3.1294, 4.4373]
+run_count: 24 eval_reward 19.6 choose_type: random choice
+choose arms: [0 9 8 6 7 2 4] cur_worker_credit: [5.0601, 3.7444, 3.9005, 2.9133, 3.7345, 4.1887, 2.2418, 2.896, 3.2941, 4.5889]
+run_count: 25 eval_reward 15.0 choose_type: random choice
+choose arms: [0 3 4 8 7 2 9] cur_worker_credit: [5.1595, 3.7444, 4.0114, 3.0341, 3.8472, 4.1887, 2.2418, 3.017, 3.4111, 4.693]
+run_count: 26 eval_reward 34.6 choose_type: Greedy choice
+choose arms: [0 9 5 2 4 1 8] cur_worker_credit: [5.4539, 4.0529, 4.3173, 3.0341, 4.1547, 4.4928, 2.2418, 3.017, 3.723, 4.9921]
+run_count: 27 eval_reward 15.8 choose_type: random choice
+choose arms: [0 5 4 9 1 6 2] cur_worker_credit: [5.5574, 4.1704, 4.4322, 3.0341, 4.2712, 4.6058, 2.3774, 3.017, 3.723, 5.1002]
+run_count: 28 eval_reward 19.8 choose_type: Greedy choice
+choose arms: [0 9 5 2 4 1 8] cur_worker_credit: [5.6998, 4.3267, 4.5858, 3.0341, 4.4265, 4.7578, 2.3774, 3.017, 3.8838, 5.2472]
+run_count: 29 eval_reward 24.2 choose_type: random choice
+choose arms: [0 1 8 3 7 6 5] cur_worker_credit: [5.8848, 4.5254, 4.5858, 3.2458, 4.4265, 4.9522, 2.5956, 3.2289, 4.087, 5.2472]
+run_count: 30 eval_reward 14.4 choose_type: random choice
+choose arms: [0 3 6 7 4 8 1] cur_worker_credit: [5.97, 4.6242, 4.5858, 3.3573, 4.5262, 4.9522, 2.7137, 3.3406, 4.1901, 5.2472]
+run_count: 31 eval_reward 22.0 choose_type: random choice
+choose arms: [0 5 9 6 2 1 8] cur_worker_credit: [6.1303, 4.798, 4.76, 3.3573, 4.5262, 5.1227, 2.9065, 3.3406, 4.3682, 5.4147]
+run_count: 32 eval_reward 25.8 choose_type: random choice
+choose arms: [0 5 9 3 6 2 1] cur_worker_credit: [6.327, 5.008, 4.9704, 3.5818, 4.5262, 5.3295, 3.1355, 3.3406, 4.3682, 5.6186]
+run_count: 33 eval_reward 21.2 choose_type: random choice
+choose arms: [0 2 5 9 6 1 3] cur_worker_credit: [6.4757, 5.1699, 5.1327, 3.7579, 4.5262, 5.4882, 3.3161, 3.3406, 4.3682, 5.7744]
+run_count: 34 eval_reward 15.6 choose_type: Greedy choice
+choose arms: [0 9 5 1 2 4 8] cur_worker_credit: [6.5669, 5.2742, 5.2373, 3.7579, 4.6369, 5.5893, 3.3161, 3.3406, 4.4805, 5.8726]
+run_count: 35 eval_reward 27.4 choose_type: Greedy choice
+choose arms: [0 9 5 1 2 4 8] cur_worker_credit: [6.7753, 5.4955, 5.459, 3.7579, 4.8646, 5.8074, 3.3161, 3.3406, 4.7097, 6.0879]
+run_count: 36 eval_reward 19.2 choose_type: random choice
+choose arms: [0 4 1 5 9 3 6] cur_worker_credit: [6.8995, 5.6325, 5.459, 3.9124, 5.0079, 5.9413, 3.475, 3.3406, 4.7097, 6.219]
+run_count: 37 eval_reward 35.2 choose_type: Greedy choice
+choose arms: [0 9 5 1 2 4 8] cur_worker_credit: [7.1825, 5.9282, 5.7564, 3.9124, 5.3099, 6.2339, 3.475, 3.3406, 5.0146, 6.5088]
+run_count: 38 eval_reward 19.2 choose_type: random choice
+choose arms: [0 6 2 7 9 4 5] cur_worker_credit: [7.3027, 5.9282, 5.8908, 3.9124, 5.4488, 6.3636, 3.6322, 3.4992, 5.0146, 6.6357]
+run_count: 39 eval_reward 34.0 choose_type: random choice
+choose arms: [0 8 5 4 3 7 2] cur_worker_credit: [7.5697, 5.9282, 6.1719, 4.2132, 5.7343, 6.6399, 3.6322, 3.8042, 5.3045, 6.6357]
+run_count: 40 eval_reward 18.0 choose_type: random choice
+choose arms: [0 9 6 8 3 4 1] cur_worker_credit: [7.674, 6.0489, 6.1719, 4.3511, 5.8569, 6.6399, 3.7759, 3.8042, 5.4314, 6.7494]
+run_count: 41 eval_reward 27.8 choose_type: random choice
+choose arms: [0 1 6 3 8 4 2] cur_worker_credit: [7.8752, 6.2664, 6.3882, 4.5856, 6.0764, 6.6399, 4.0161, 3.8042, 5.6551, 6.7494]
+run_count: 42 eval_reward 27.4 choose_type: random choice
+choose arms: [0 4 3 8 7 6 2] cur_worker_credit: [8.0705, 6.2664, 6.5983, 4.8137, 6.2896, 6.6399, 4.25, 4.0401, 5.8726, 6.7494]
+run_count: 43 eval_reward 31.0 choose_type: random choice
+choose arms: [0 7 8 2 6 4 3] cur_worker_credit: [8.2998, 6.2664, 6.8423, 5.0756, 6.5367, 6.6399, 4.5175, 4.3097, 6.1238, 6.7494]
+run_count: 44 eval_reward 35.6 choose_type: random choice
+choose arms: [0 2 6 1 4 8 9] cur_worker_credit: [8.5728, 6.5597, 7.1299, 5.0756, 6.8273, 6.6399, 4.8283, 4.3097, 6.4186, 7.0379]
+run_count: 45 eval_reward 13.0 choose_type: random choice
+choose arms: [0 9 5 7 6 2 8] cur_worker_credit: [8.617, 6.5597, 7.1886, 5.0756, 6.8273, 6.7035, 4.91, 4.3966, 6.4844, 7.0975]
+run_count: 46 eval_reward 21.2 choose_type: random choice
+choose arms: [0 4 8 7 5 6 9] cur_worker_credit: [8.7429, 6.5597, 7.1886, 5.0756, 6.9711, 6.8485, 5.0729, 4.5647, 6.6316, 7.2385]
+run_count: 47 eval_reward 16.0 choose_type: random choice
+choose arms: [0 8 7 9 6 1 5] cur_worker_credit: [8.8154, 6.6541, 7.1886, 5.0756, 6.9711, 6.94, 5.1822, 4.679, 6.7252, 7.3262]
+run_count: 48 eval_reward 25.2 choose_type: Greedy choice
+choose arms: [0 9 2 4 5 8 1] cur_worker_credit: [8.9793, 6.8396, 7.3687, 5.0756, 7.1533, 7.1226, 5.1822, 4.679, 6.91, 7.5049]
+run_count: 49 eval_reward 33.4 choose_type: random choice
+choose arms: [0 4 9 8 2 1 3] cur_worker_credit: [9.2235, 7.1052, 7.629, 5.3588, 7.4158, 7.1226, 5.1822, 4.679, 7.1749, 7.7638]
+run_count: 50 eval_reward 27.2 choose_type: random choice
+choose arms: [0 6 7 3 2 8 9] cur_worker_credit: [9.4033, 7.1052, 7.8247, 5.5773, 7.4158, 7.1226, 5.4024, 4.9042, 7.3751, 7.9582]
+run_count: 51 eval_reward 19.6 choose_type: Greedy choice
+choose arms: [0 9 2 4 8 5 1] cur_worker_credit: [9.5052, 7.2302, 7.9425, 5.5773, 7.5377, 7.2474, 5.4024, 4.9042, 7.4974, 8.0746]
+run_count: 52 eval_reward 12.6 choose_type: Greedy choice
+choose arms: [0 9 2 4 8 5 1] cur_worker_credit: [9.5362, 7.2838, 7.9891, 5.5773, 7.5883, 7.3009, 5.4024, 4.9042, 7.5484, 8.1199]
+run_count: 53 eval_reward 17.6 choose_type: random choice
+choose arms: [0 5 9 6 2 1 4] cur_worker_credit: [9.6168, 7.387, 8.0852, 5.5773, 7.6884, 7.4039, 5.5243, 4.9042, 7.5484, 8.2147]
+run_count: 54 eval_reward 14.0 choose_type: random choice
+choose arms: [0 4 6 5 2 8 1] cur_worker_credit: [9.6606, 7.4531, 8.1443, 5.5773, 7.7515, 7.4699, 5.6091, 4.9042, 7.6129, 8.2147]
+run_count: 55 eval_reward 37.2 choose_type: Greedy choice
+choose arms: [0 9 2 4 8 5 1] cur_worker_credit: [9.936, 7.7506, 8.4349, 5.5773, 8.046, 7.7672, 5.6091, 4.9042, 7.9088, 8.5045]
+run_count: 56 eval_reward 23.8 choose_type: random choice
+choose arms: [0 3 6 1 4 8 9] cur_worker_credit: [10.0747, 7.9111, 8.4349, 5.7595, 8.2035, 7.7672, 5.791, 4.9042, 8.0677, 8.6575]
+run_count: 57 eval_reward 23.8 choose_type: random choice
+choose arms: [0 3 7 1 9 6 4] cur_worker_credit: [10.2119, 8.07, 8.4349, 5.9399, 8.3595, 7.7672, 5.9711, 5.0932, 8.0677, 8.8089]
+run_count: 58 eval_reward 15.4 choose_type: random choice
+choose arms: [0 6 1 5 2 9 7] cur_worker_credit: [10.2638, 8.1433, 8.5045, 5.9399, 8.3595, 7.8435, 6.0654, 5.1963, 8.0677, 8.8748]
+run_count: 59 eval_reward 24.0 choose_type: random choice
+choose arms: [0 3 4 2 6 9 7] cur_worker_credit: [10.4012, 8.1433, 8.6595, 6.1205, 8.5159, 7.8435, 6.2447, 5.3843, 8.0677, 9.0261]
+run_count: 60 eval_reward 38.0 choose_type: random choice
+choose arms: [0 4 5 9 7 3 1] cur_worker_credit: [10.6772, 8.4419, 8.6595, 6.4393, 8.8107, 8.1451, 6.2447, 5.7105, 8.0677, 9.3158]
+run_count: 61 eval_reward 37.4 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [10.9444, 8.7314, 8.9469, 6.4393, 9.0966, 8.4376, 6.2447, 5.7105, 8.361, 9.5967]
+run_count: 62 eval_reward 25.4 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [11.0889, 8.8981, 9.1114, 6.4393, 9.2597, 8.6072, 6.2447, 5.7105, 8.5314, 9.7547]
+run_count: 63 eval_reward 25.6 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [11.2341, 9.0651, 9.2763, 6.4393, 9.4231, 8.7772, 6.2447, 5.7105, 8.7021, 9.9131]
+run_count: 64 eval_reward 35.4 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [11.4757, 9.3285, 9.5375, 6.4393, 9.6828, 9.0434, 6.2447, 5.7105, 8.9691, 10.168]
+run_count: 65 eval_reward 18.8 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [11.549, 9.4232, 9.6302, 6.4393, 9.774, 9.1409, 6.2447, 5.7105, 9.0674, 10.2543]
+run_count: 66 eval_reward 27.0 choose_type: random choice
+choose arms: [0 1 6 7 4 3 5] cur_worker_credit: [11.7035, 9.599, 9.6302, 6.6449, 9.9463, 9.3195, 6.4523, 5.9233, 9.0674, 10.2543]
+run_count: 67 eval_reward 29.0 choose_type: random choice
+choose arms: [0 5 4 7 8 9 6] cur_worker_credit: [11.8764, 9.599, 9.6302, 6.6449, 10.1368, 9.5163, 6.6778, 6.1541, 9.2667, 10.4418]
+run_count: 68 eval_reward 12.8 choose_type: random choice
+choose arms: [0 3 4 5 1 6 2] cur_worker_credit: [11.8857, 9.631, 9.6619, 6.7064, 10.1634, 9.5492, 6.739, 6.1541, 9.2667, 10.4418]
+run_count: 69 eval_reward 18.0 choose_type: random choice
+choose arms: [0 2 1 5 6 4 9] cur_worker_credit: [11.9468, 9.7147, 9.7453, 6.7064, 10.2418, 9.6337, 6.8516, 6.1541, 9.2667, 10.5174]
+run_count: 70 eval_reward 16.6 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [11.9933, 9.7835, 9.8138, 6.7064, 10.3054, 9.7034, 6.8516, 6.1541, 9.3401, 10.5782]
+run_count: 71 eval_reward 31.4 choose_type: Greedy choice
+choose arms: [0 9 4 2 1 5 8] cur_worker_credit: [12.1874, 9.9997, 10.0297, 6.7064, 10.5163, 9.9203, 6.8516, 6.1541, 9.5607, 10.7864]
+run_count: 72 eval_reward 26.6 choose_type: random choice
+choose arms: [0 4 1 3 8 6 7] cur_worker_credit: [12.3315, 10.1657, 10.0297, 6.9054, 10.6772, 9.9203, 7.0491, 6.3586, 9.7311, 10.7864]
+run_count: 73 eval_reward 24.8 choose_type: random choice
+choose arms: [0 8 1 7 5 3 2] cur_worker_credit: [12.4562, 10.312, 10.1774, 7.0843, 10.6772, 10.0691, 7.0491, 6.543, 9.8817, 10.7864]
+run_count: 74 eval_reward 36.2 choose_type: Greedy choice
+choose arms: [0 9 4 1 2 5 8] cur_worker_credit: [12.6937, 10.5709, 10.4376, 7.0843, 10.9324, 10.3304, 7.0491, 6.543, 10.1449, 11.0406]
+run_count: 75 eval_reward 23.6 choose_type: random choice
+choose arms: [0 7 1 3 9 8 4] cur_worker_credit: [12.8027, 10.7012, 10.4376, 7.2495, 11.0591, 10.3304, 7.0491, 6.7136, 10.2795, 11.1661]
+run_count: 76 eval_reward 17.8 choose_type: random choice
+choose arms: [0 7 9 3 4 5 6] cur_worker_credit: [12.8527, 10.7012, 10.4376, 7.355, 11.1265, 10.4051, 7.1566, 6.8244, 10.2795, 11.2325]
+run_count: 77 eval_reward 44.0 choose_type: Greedy choice
+choose arms: [0 9 4 1 2 5 8] cur_worker_credit: [13.1642, 11.0342, 10.7732, 7.355, 11.4552, 10.7411, 7.1566, 6.8244, 10.6167, 11.5602]
+run_count: 78 eval_reward 35.6 choose_type: random choice
+choose arms: [0 3 2 1 5 9 6] cur_worker_credit: [13.3885, 11.2799, 11.0215, 7.6374, 11.4552, 10.9897, 7.441, 6.8244, 10.6167, 11.8006]
+run_count: 79 eval_reward 34.6 choose_type: random choice
+choose arms: [0 8 2 1 5 9 6] cur_worker_credit: [13.6006, 11.5131, 11.2573, 7.6374, 11.4552, 11.2258, 7.7126, 6.8244, 10.8565, 12.0286]
+run_count: 80 eval_reward 20.6 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [13.6706, 11.6039, 11.3507, 7.6374, 11.5467, 11.3195, 7.7126, 6.8244, 10.954, 12.1143]
+run_count: 81 eval_reward 16.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [13.6979, 11.6519, 11.4012, 7.6374, 11.5952, 11.3703, 7.7126, 6.8244, 11.0084, 12.1571]
+run_count: 82 eval_reward 14.6 choose_type: random choice
+choose arms: [0 4 5 7 1 2 9] cur_worker_credit: [13.707, 11.6814, 11.4332, 7.6374, 11.6253, 11.4026, 7.7126, 6.9022, 11.0084, 12.1816]
+run_count: 83 eval_reward 20.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [13.7699, 11.7646, 11.5188, 7.6374, 11.709, 11.4886, 7.7126, 6.9022, 11.0983, 12.2597]
+run_count: 84 eval_reward 24.4 choose_type: random choice
+choose arms: [0 1 2 3 6 9 8] cur_worker_credit: [13.8762, 11.8909, 11.6477, 7.8051, 11.709, 11.4886, 7.8795, 6.9022, 11.2313, 12.3811]
+run_count: 85 eval_reward 25.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [13.9874, 12.022, 11.7812, 7.8051, 11.8419, 11.6237, 7.8795, 6.9022, 11.369, 12.5073]
+run_count: 86 eval_reward 19.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.0395, 12.0938, 11.8554, 7.8051, 11.9155, 11.6995, 7.8795, 6.9022, 11.4473, 12.5743]
+run_count: 87 eval_reward 15.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.0532, 12.1268, 11.8908, 7.8051, 11.9503, 11.7365, 7.8795, 6.9022, 11.4869, 12.6025]
+run_count: 88 eval_reward 20.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.1126, 12.2056, 11.9719, 7.8051, 12.0308, 11.8191, 7.8795, 6.9022, 11.572, 12.6765]
+run_count: 89 eval_reward 27.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.2435, 12.3555, 12.1242, 7.8051, 12.1825, 11.9729, 7.8795, 6.9022, 11.7283, 12.8217]
+run_count: 90 eval_reward 21.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.3191, 12.45, 12.2209, 7.8051, 12.2787, 12.0712, 7.8795, 6.9022, 11.829, 12.9115]
+run_count: 91 eval_reward 20.4 choose_type: random choice
+choose arms: [0 7 3 4 6 2 5] cur_worker_credit: [14.3799, 12.45, 12.3027, 7.931, 12.3599, 12.1545, 8.0047, 7.0372, 11.829, 12.9115]
+run_count: 92 eval_reward 27.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.5101, 12.5995, 12.4537, 7.931, 12.5103, 12.3069, 8.0047, 7.0372, 11.9847, 13.0564]
+run_count: 93 eval_reward 33.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 2 5 8] cur_worker_credit: [14.695, 12.8035, 12.6592, 7.931, 12.7152, 12.5139, 8.0047, 7.0372, 12.1949, 13.2558]
+run_count: 94 eval_reward 23.0 choose_type: random choice
+choose arms: [0 5 7 8 2 3 9] cur_worker_credit: [14.778, 12.8035, 12.7626, 8.0817, 12.7152, 12.6187, 8.0047, 7.1968, 12.3029, 13.3533]
+run_count: 95 eval_reward 22.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [14.8582, 12.9034, 12.863, 8.0817, 12.8161, 12.7205, 8.0047, 7.1968, 12.4079, 13.4477]
+run_count: 96 eval_reward 36.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [15.0757, 13.1404, 13.1003, 8.0817, 13.0539, 12.9593, 8.0047, 7.1968, 12.6498, 13.6793]
+run_count: 97 eval_reward 28.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [15.2109, 13.295, 13.2553, 8.0817, 13.2094, 13.1157, 8.0047, 7.1968, 12.8093, 13.8285]
+run_count: 98 eval_reward 37.2 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [15.4308, 13.534, 13.4948, 8.0817, 13.4493, 13.3566, 8.0047, 7.1968, 13.0532, 14.0622]
+run_count: 99 eval_reward 35.0 choose_type: random choice
+choose arms: [0 9 3 7 5 1 2] cur_worker_credit: [15.6265, 13.7487, 13.7098, 8.3509, 13.4493, 13.573, 8.0047, 7.4748, 13.0532, 14.2716]
+run_count: 100 eval_reward 20.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [15.6782, 13.8192, 13.7807, 8.3509, 13.5228, 13.6453, 8.0047, 7.4748, 13.1307, 14.3368]
+run_count: 101 eval_reward 18.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [15.7074, 13.867, 13.8289, 8.3509, 13.5735, 13.6948, 8.0047, 7.4748, 13.1854, 14.3795]
+run_count: 102 eval_reward 33.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [15.8864, 14.0644, 14.0266, 8.3509, 13.7738, 13.8939, 8.0047, 7.4748, 13.3895, 14.5717]
+run_count: 103 eval_reward 23.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [15.9635, 14.1597, 14.1224, 8.3509, 13.8721, 13.9909, 8.0047, 7.4748, 13.4916, 14.662]
+run_count: 104 eval_reward 30.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [16.1119, 14.3261, 14.2891, 8.3509, 14.0413, 14.159, 8.0047, 7.4748, 13.6647, 14.8233]
+run_count: 105 eval_reward 30.0 choose_type: random choice
+choose arms: [0 6 1 5 4 3 8] cur_worker_credit: [16.2507, 14.4829, 14.2891, 8.5674, 14.2009, 14.3174, 8.2246, 7.4748, 13.8281, 14.8233]
+run_count: 106 eval_reward 19.0 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.2782, 14.528, 14.3362, 8.5674, 14.2489, 14.3643, 8.2246, 7.4748, 13.8798, 14.8651]
+run_count: 107 eval_reward 18.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.3035, 14.5707, 14.3809, 8.5674, 14.2944, 14.4086, 8.2246, 7.4748, 13.929, 14.9045]
+run_count: 108 eval_reward 22.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.3684, 14.653, 14.4651, 8.5674, 14.3795, 14.4925, 8.2246, 7.4748, 14.0177, 14.9834]
+run_count: 109 eval_reward 22.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.4327, 14.7345, 14.5484, 8.5674, 14.4637, 14.5756, 8.2246, 7.4748, 14.1055, 15.0616]
+run_count: 110 eval_reward 19.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.4604, 14.7792, 14.5949, 8.5674, 14.5111, 14.6219, 8.2246, 7.4748, 14.1565, 15.103]
+run_count: 111 eval_reward 31.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [16.6118, 14.9474, 14.765, 8.5674, 14.682, 14.7916, 8.2246, 7.4748, 14.3309, 15.2679]
+run_count: 112 eval_reward 35.6 choose_type: random choice
+choose arms: [0 1 2 8 4 6 3] cur_worker_credit: [16.8017, 15.1539, 14.9733, 8.8377, 14.8911, 14.7916, 8.4984, 7.4748, 14.5436, 15.2679]
+run_count: 113 eval_reward 47.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.1097, 15.4784, 15.2996, 8.8377, 15.2182, 15.1197, 8.4984, 7.4748, 14.8742, 15.5913]
+run_count: 114 eval_reward 23.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.1766, 15.5616, 15.3846, 8.8377, 15.304, 15.2065, 8.4984, 7.4748, 14.9634, 15.6733]
+run_count: 115 eval_reward 14.2 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.1468, 15.548, 15.3728, 8.8377, 15.293, 15.1965, 8.4984, 7.4748, 14.9558, 15.6586]
+run_count: 116 eval_reward 30.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.2833, 15.7005, 15.527, 8.8377, 15.4481, 15.3525, 8.4984, 7.4748, 15.1142, 15.81]
+run_count: 117 eval_reward 34.2 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.4525, 15.8855, 15.7138, 8.8377, 15.6356, 15.541, 8.4984, 7.4748, 15.3051, 15.9939]
+run_count: 118 eval_reward 26.2 choose_type: random choice
+choose arms: [0 5 1 3 9 2 6] cur_worker_credit: [17.54, 15.9886, 15.8186, 9.0113, 15.6356, 15.6476, 8.6754, 7.4748, 15.3051, 16.096]
+run_count: 119 eval_reward 19.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [17.5606, 16.0247, 15.8564, 9.0113, 15.6752, 15.6871, 8.6754, 7.4748, 15.348, 16.131]
+run_count: 120 eval_reward 21.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [17.601, 16.0805, 15.9139, 9.0113, 15.7345, 15.7462, 8.6754, 7.4748, 15.4105, 16.1857]
+run_count: 121 eval_reward 25.0 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [17.675, 16.1697, 16.0047, 9.0113, 15.8271, 15.8387, 8.6754, 7.4748, 15.5064, 16.2739]
+run_count: 122 eval_reward 33.2 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [17.8302, 16.34, 16.1767, 9.0113, 16.0009, 16.0124, 8.6754, 7.4748, 15.6834, 16.4431]
+run_count: 123 eval_reward 20.4 choose_type: Greedy choice
+choose arms: [0 9 1 2 5 4 8] cur_worker_credit: [17.8559, 16.3806, 16.2189, 9.0113, 16.0449, 16.0562, 8.6754, 7.4748, 15.7305, 16.4827]
+run_count: 124 eval_reward 19.0 choose_type: random choice
+choose arms: [0 8 1 4 7 2 9] cur_worker_credit: [17.8674, 16.4068, 16.2467, 9.0113, 16.0744, 16.0562, 8.6754, 7.5901, 15.7632, 16.5079]
+run_count: 125 eval_reward 26.4 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.9527, 16.5067, 16.3483, 9.0113, 16.1777, 16.1597, 8.6754, 7.5901, 15.8696, 16.6068]
+run_count: 126 eval_reward 22.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [17.9992, 16.5676, 16.4108, 9.0113, 16.2419, 16.2241, 8.6754, 7.5901, 15.9369, 16.6667]
+run_count: 127 eval_reward 27.4 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.0932, 16.676, 16.5207, 9.0113, 16.3535, 16.3358, 8.6754, 7.5901, 16.0515, 16.774]
+run_count: 128 eval_reward 18.0 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.0922, 16.6892, 16.5355, 9.0113, 16.3699, 16.3525, 8.6754, 7.5901, 16.071, 16.7863]
+run_count: 129 eval_reward 25.6 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.1673, 16.7783, 16.6261, 9.0113, 16.4622, 16.445, 8.6754, 7.5901, 16.1663, 16.8744]
+run_count: 130 eval_reward 21.4 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.1996, 16.8245, 16.6739, 9.0113, 16.5116, 16.4945, 8.6754, 7.5901, 16.2186, 16.9197]
+run_count: 131 eval_reward 26.0 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.2776, 16.9163, 16.7671, 9.0113, 16.6065, 16.5896, 8.6754, 7.5901, 16.3165, 17.0105]
+run_count: 132 eval_reward 48.8 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [18.5829, 17.2351, 17.0874, 9.0113, 16.9284, 16.9117, 8.6754, 7.5901, 16.6413, 17.3284]
+run_count: 133 eval_reward 31.2 choose_type: random choice
+choose arms: [0 5 7 3 6 8 4] cur_worker_credit: [18.709, 17.2351, 17.0874, 9.2332, 17.0711, 17.0545, 8.9007, 7.8262, 16.7869, 17.3284]
+run_count: 134 eval_reward 48.0 choose_type: Greedy choice
+choose arms: [0 9 1 2 4 5 8] cur_worker_credit: [19.0019, 17.5428, 17.3966, 9.2332, 17.3804, 17.364, 8.9007, 7.8262, 17.099, 17.6351]
+run_count: 135 eval_reward 25.4 choose_type: random choice
+choose arms: [0 6 5 9 1 3 7] cur_worker_credit: [19.0659, 17.6213, 17.3966, 9.3949, 17.3804, 17.4444, 9.0656, 8.0019, 17.099, 17.7128]
+run_count: 136 eval_reward 21.4 choose_type: random choice
+choose arms: [0 7 8 9 4 1 3] cur_worker_credit: [19.0893, 17.6591, 17.3966, 9.5149, 17.4206, 17.4444, 9.0656, 8.1359, 17.142, 17.7496]
+run_count: 137 eval_reward 37.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.2764, 17.8605, 17.6006, 9.5149, 17.6244, 17.6479, 9.0656, 8.1359, 17.3486, 17.9501]
+run_count: 138 eval_reward 20.4 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.2876, 17.8859, 17.6286, 9.5149, 17.6522, 17.6754, 9.0656, 8.1359, 17.3791, 17.9746]
+run_count: 139 eval_reward 31.4 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.4087, 18.0211, 17.7663, 9.5149, 17.7897, 17.8127, 9.0656, 8.1359, 17.5193, 18.1089]
+run_count: 140 eval_reward 48.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.7006, 18.3269, 18.0747, 9.5149, 18.0978, 18.1206, 9.0656, 8.1359, 17.8301, 18.4138]
+run_count: 141 eval_reward 23.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.7356, 18.3756, 18.1259, 9.5149, 18.1488, 18.1714, 9.0656, 8.1359, 17.8838, 18.4617]
+run_count: 142 eval_reward 27.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.8143, 18.4678, 18.2206, 9.5149, 18.2433, 18.2656, 9.0656, 8.1359, 17.981, 18.553]
+run_count: 143 eval_reward 33.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [19.9521, 18.6192, 18.3744, 9.5149, 18.3969, 18.419, 9.0656, 8.1359, 18.1372, 18.7035]
+run_count: 144 eval_reward 26.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [20.0146, 18.695, 18.4527, 9.5149, 18.4749, 18.4968, 9.0656, 8.1359, 18.2178, 18.7785]
+run_count: 145 eval_reward 30.0 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [20.1145, 18.808, 18.5682, 9.5149, 18.5901, 18.6118, 9.0656, 8.1359, 18.3356, 18.8907]
+run_count: 146 eval_reward 34.2 choose_type: random choice
+choose arms: [0 3 6 2 7 5 8] cur_worker_credit: [20.2553, 18.808, 18.7245, 9.7618, 18.5901, 18.7677, 9.317, 8.3965, 18.4943, 18.8907]
+run_count: 147 eval_reward 44.2 choose_type: random choice
+choose arms: [0 4 1 9 5 2 7] cur_worker_credit: [20.4948, 19.0619, 18.9792, 9.7618, 18.8462, 19.022, 9.317, 8.7546, 18.4943, 19.1438]
+run_count: 148 eval_reward 40.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [20.6918, 19.2733, 19.1914, 9.7618, 19.0598, 19.2338, 9.317, 8.7546, 18.7113, 19.3544]
+run_count: 149 eval_reward 32.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [20.8129, 19.4086, 19.3275, 9.7618, 19.1972, 19.3695, 9.317, 8.7546, 18.8522, 19.4888]
+run_count: 150 eval_reward 25.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [20.8608, 19.4705, 19.3903, 9.7618, 19.2612, 19.4318, 9.317, 8.7546, 18.9197, 19.5499]
+run_count: 151 eval_reward 21.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [20.8682, 19.4918, 19.4124, 9.7618, 19.2846, 19.4535, 9.317, 8.7546, 18.9465, 19.5704]
+run_count: 152 eval_reward 44.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.1015, 19.7389, 19.6602, 9.7618, 19.5338, 19.7009, 9.317, 8.7546, 19.199, 19.8167]
+run_count: 153 eval_reward 20.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.0925, 19.7435, 19.6656, 9.7618, 19.5404, 19.7059, 9.317, 8.7546, 19.209, 19.8205]
+run_count: 154 eval_reward 41.4 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.2955, 19.9601, 19.883, 9.7618, 19.759, 19.9229, 9.317, 8.7546, 19.431, 20.0363]
+run_count: 155 eval_reward 25.2 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.3346, 20.0125, 19.9361, 9.7618, 19.8134, 19.9756, 9.317, 8.7546, 19.4886, 20.088]
+run_count: 156 eval_reward 23.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.3592, 20.0503, 19.9748, 9.7618, 19.8533, 20.0139, 9.317, 8.7546, 19.5318, 20.1251]
+run_count: 157 eval_reward 24.0 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.3857, 20.0898, 20.015, 9.7618, 19.8948, 20.0537, 9.317, 8.7546, 19.5764, 20.1638]
+run_count: 158 eval_reward 25.4 choose_type: Greedy choice
+choose arms: [0 9 1 5 2 4 8] cur_worker_credit: [21.4258, 20.1429, 20.0689, 9.7618, 19.9498, 20.1072, 9.317, 8.7546, 19.6347, 20.2162]
+run_count: 159 eval_reward 40.0 choose_type: random choice
+choose arms: [0 7 1 5 3 4 2] cur_worker_credit: [21.6115, 20.3415, 20.2682, 10.0642, 20.1503, 20.3061, 9.317, 9.067, 19.6347, 20.2162]
+run_count: 160 eval_reward 53.8 choose_type: Greedy choice
+choose arms: [0 1 5 2 9 4 8] cur_worker_credit: [21.9334, 20.6761, 20.6035, 10.0642, 20.4868, 20.6411, 9.317, 9.067, 19.9763, 20.552]
+run_count: 161 eval_reward 33.0 choose_type: random choice
+choose arms: [0 9 8 7 1 3 6] cur_worker_credit: [22.0441, 20.7993, 20.6035, 10.2935, 20.4868, 20.6411, 9.5538, 9.3063, 20.1066, 20.6765]
+run_count: 162 eval_reward 37.4 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.1977, 20.9653, 20.7715, 10.2935, 20.6559, 20.8086, 9.5538, 9.3063, 20.2795, 20.8438]
+run_count: 163 eval_reward 41.2 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.3877, 21.1677, 20.9758, 10.2935, 20.8614, 21.0126, 9.5538, 9.3063, 20.4887, 21.0473]
+run_count: 164 eval_reward 29.8 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.4618, 21.254, 21.064, 10.2935, 20.9508, 21.1004, 9.5538, 9.3063, 20.5818, 21.1349]
+run_count: 165 eval_reward 31.6 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.5532, 21.3575, 21.1694, 10.2935, 21.0573, 21.2054, 9.5538, 9.3063, 20.692, 21.2395]
+run_count: 166 eval_reward 34.4 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.6716, 21.4879, 21.3017, 10.2935, 21.1907, 21.3374, 9.5538, 9.3063, 20.8291, 21.3711]
+run_count: 167 eval_reward 27.4 choose_type: random choice
+choose arms: [0 8 5 4 3 9 1] cur_worker_credit: [22.7189, 21.547, 21.3017, 10.4646, 21.2528, 21.398, 9.5538, 9.3063, 20.8948, 21.4314]
+run_count: 168 eval_reward 23.4 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.7257, 21.5655, 21.3227, 10.4646, 21.2742, 21.418, 9.5538, 9.3063, 20.9198, 21.4511]
+run_count: 169 eval_reward 31.8 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.8165, 21.6679, 21.4274, 10.4646, 21.3795, 21.5218, 9.5538, 9.3063, 21.0286, 21.5546]
+run_count: 170 eval_reward 34.0 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.9283, 21.7912, 21.5532, 10.4646, 21.5057, 21.6466, 9.5538, 9.3063, 21.1584, 21.679]
+run_count: 171 eval_reward 32.2 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.021, 21.8953, 21.6596, 10.4646, 21.6127, 21.7522, 9.5538, 9.3063, 21.2688, 21.7842]
+run_count: 172 eval_reward 20.0 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [22.9908, 21.8763, 21.643, 10.4646, 21.5965, 21.7346, 9.5538, 9.3063, 21.2561, 21.7664]
+run_count: 173 eval_reward 33.2 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.0929, 21.9896, 21.7586, 10.4646, 21.7126, 21.8493, 9.5538, 9.3063, 21.3755, 21.8807]
+run_count: 174 eval_reward 57.2 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.434, 22.3417, 22.113, 10.4646, 22.0674, 22.2028, 9.5538, 9.3063, 21.7338, 22.2339]
+run_count: 175 eval_reward 37.0 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.5696, 22.4883, 22.2619, 10.4646, 22.2168, 22.3508, 9.5538, 9.3063, 21.8864, 22.3816]
+run_count: 176 eval_reward 21.8 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.552, 22.4814, 22.2573, 10.4646, 22.2126, 22.3453, 9.5538, 9.3063, 21.8856, 22.3758]
+run_count: 177 eval_reward 19.0 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.5064, 22.4466, 22.2247, 10.4646, 22.1805, 22.3118, 9.5538, 9.3063, 21.8567, 22.342]
+run_count: 178 eval_reward 31.0 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.5814, 22.5321, 22.3124, 10.4646, 22.2687, 22.3987, 9.5538, 9.3063, 21.9481, 22.4286]
+run_count: 179 eval_reward 36.6 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.7116, 22.6728, 22.4553, 10.4646, 22.412, 22.5407, 9.5538, 9.3063, 22.0947, 22.5703]
+run_count: 180 eval_reward 26.0 choose_type: random choice
+choose arms: [0 8 6 9 1 5 3] cur_worker_credit: [23.7344, 22.7061, 22.4553, 10.6199, 22.412, 22.5753, 9.7183, 9.3063, 22.1337, 22.6046]
+run_count: 181 eval_reward 27.2 choose_type: Greedy choice
+choose arms: [0 1 9 5 2 4 8] cur_worker_credit: [23.7691, 22.751, 22.5028, 10.6199, 22.4599, 22.6215, 9.7183, 9.3063, 22.1844, 22.6506]
+run_count: 182 eval_reward 36.0 choose_type: random choice
+choose arms: [0 8 6 7 4 9 5] cur_worker_credit: [23.8914, 22.751, 22.5028, 10.6199, 22.5953, 22.7553, 9.9811, 9.5733, 22.3225, 22.784]
+run_count: 183 eval_reward 36.4 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.0165, 22.8875, 22.6417, 10.6199, 22.7333, 22.8918, 9.9811, 9.5733, 22.4633, 22.9202]
+run_count: 184 eval_reward 27.8 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.0543, 22.9366, 22.6933, 10.6199, 22.784, 22.9409, 9.9811, 9.5733, 22.5167, 22.969]
+run_count: 185 eval_reward 31.2 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.1258, 23.0192, 22.7784, 10.6199, 22.8681, 23.0235, 9.9811, 9.5733, 22.6035, 23.0513]
+run_count: 186 eval_reward 25.6 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.1405, 23.045, 22.8066, 10.6199, 22.8955, 23.0492, 9.9811, 9.5733, 22.6335, 23.0768]
+run_count: 187 eval_reward 21.4 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.1131, 23.0286, 22.7925, 10.6199, 22.8805, 23.0327, 9.9811, 9.5733, 22.6211, 23.06]
+run_count: 188 eval_reward 39.6 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.268, 23.1943, 22.9606, 10.6199, 23.0477, 23.1984, 9.9811, 9.5733, 22.7909, 23.2254]
+run_count: 189 eval_reward 36.0 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.3853, 23.3224, 23.091, 10.6199, 23.1772, 23.3264, 9.9811, 9.5733, 22.923, 23.3532]
+run_count: 190 eval_reward 31.6 choose_type: Greedy choice
+choose arms: [0 9 5 1 4 2 8] cur_worker_credit: [24.4575, 23.4051, 23.1761, 10.6199, 23.2614, 23.4091, 9.9811, 9.5733, 23.0098, 23.4356]
+run_count: 191 eval_reward 37.2 choose_type: random choice
+choose arms: [0 3 4 1 6 8 9] cur_worker_credit: [24.5849, 23.5431, 23.1761, 10.8857, 23.4008, 23.4091, 10.2533, 9.5733, 23.1517, 23.5733]
+run_count: 192 eval_reward 30.0 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [24.639, 23.6077, 23.2443, 10.8857, 23.4668, 23.4751, 10.2533, 9.5733, 23.2202, 23.6376]
+run_count: 193 eval_reward 35.8 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [24.7506, 23.7296, 23.3699, 10.8857, 23.5902, 23.5983, 10.2533, 9.5733, 23.346, 23.7592]
+run_count: 194 eval_reward 31.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [24.8191, 23.8083, 23.4522, 10.8857, 23.6703, 23.6783, 10.2533, 9.5733, 23.4285, 23.8376]
+run_count: 195 eval_reward 39.0 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [24.9609, 23.9602, 23.6077, 10.8857, 23.8235, 23.8315, 10.2533, 9.5733, 23.5842, 23.9892]
+run_count: 196 eval_reward 33.6 choose_type: Greedy choice
+choose arms: [0 9 1 5 4 2 8] cur_worker_credit: [25.0473, 24.0566, 23.7076, 10.8857, 23.9213, 23.9292, 10.2533, 9.5733, 23.6844, 24.0853]
+run_count: 197 eval_reward 62.0 choose_type: random choice
+choose arms: [0 1 4 6 3 9 8] cur_worker_credit: [25.4169, 24.436, 23.7076, 11.3969, 24.3021, 23.9292, 10.7708, 9.5733, 24.0675, 24.4645]
+run_count: 198 eval_reward 36.6 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [25.5287, 24.5577, 23.8365, 11.3969, 24.4251, 24.0559, 10.7708, 9.5733, 24.1929, 24.5858]
+run_count: 199 eval_reward 28.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [25.5554, 24.5941, 23.8802, 11.3969, 24.4628, 24.0974, 10.7708, 9.5733, 24.2329, 24.622]
+run_count: 200 eval_reward 60.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [25.9079, 24.9562, 24.2494, 11.3969, 24.8262, 24.4644, 10.7708, 9.5733, 24.5986, 24.9837]
+run_count: 201 eval_reward 43.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.0828, 25.1406, 24.4409, 11.3969, 25.0119, 24.6538, 10.7708, 9.5733, 24.7866, 25.1679]
+run_count: 202 eval_reward 42.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.2499, 25.3172, 24.6244, 11.3969, 25.1898, 24.8352, 10.7708, 9.5733, 24.9668, 25.3442]
+run_count: 203 eval_reward 22.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.2114, 25.288, 24.6022, 11.3969, 25.1619, 24.8109, 10.7708, 9.5733, 24.9411, 25.3148]
+run_count: 204 eval_reward 28.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.2373, 25.3231, 24.6442, 11.3969, 25.1983, 24.8508, 10.7708, 9.5733, 24.9797, 25.3496]
+run_count: 205 eval_reward 23.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.209, 25.3039, 24.6317, 11.3969, 25.1803, 24.8362, 10.7708, 9.5733, 24.9639, 25.3301]
+run_count: 206 eval_reward 65.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.6009, 25.7049, 25.0394, 11.3969, 25.5825, 25.2419, 10.7708, 9.5733, 25.3682, 25.7308]
+run_count: 207 eval_reward 34.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.6749, 25.7878, 25.129, 11.3969, 25.6667, 25.3295, 10.7708, 9.5733, 25.4546, 25.8135]
+run_count: 208 eval_reward 44.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.8481, 25.9699, 25.3177, 11.3969, 25.85, 25.5162, 10.7708, 9.5733, 25.64, 25.9954]
+run_count: 209 eval_reward 29.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.8716, 26.0022, 25.3566, 11.3969, 25.8835, 25.553, 10.7708, 9.5733, 25.6756, 26.0274]
+run_count: 210 eval_reward 21.6 choose_type: random choice
+choose arms: [0 4 1 5 8 7 3] cur_worker_credit: [26.8189, 25.9582, 25.3566, 11.4989, 25.8407, 25.5135, 10.7708, 9.6936, 25.6349, 26.0274]
+run_count: 211 eval_reward 34.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.8947, 26.0426, 25.447, 11.4989, 25.9263, 25.6023, 10.7708, 9.6936, 25.7225, 26.1112]
+run_count: 212 eval_reward 30.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [26.9338, 26.0902, 25.5005, 11.4989, 25.975, 25.6543, 10.7708, 9.6936, 25.7733, 26.1581]
+run_count: 213 eval_reward 52.4 choose_type: random choice
+choose arms: [0 4 9 1 2 5 8] cur_worker_credit: [27.1884, 26.3533, 25.7695, 11.4989, 26.2393, 25.9218, 10.7708, 9.6936, 26.0396, 26.4205]
+run_count: 214 eval_reward 23.8 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.1546, 26.3278, 25.7498, 11.4989, 26.2149, 25.9006, 10.7708, 9.6936, 26.0172, 26.3943]
+run_count: 215 eval_reward 25.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.137, 26.3185, 25.7463, 11.4989, 26.2067, 25.8956, 10.7708, 9.6936, 26.011, 26.3843]
+run_count: 216 eval_reward 36.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.2276, 26.4173, 25.8509, 11.4989, 26.3067, 25.9986, 10.7708, 9.6936, 26.1129, 26.4825]
+run_count: 217 eval_reward 42.4 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.3794, 26.5771, 26.0164, 11.4989, 26.4676, 26.1626, 10.7708, 9.6936, 26.2757, 26.6417]
+run_count: 218 eval_reward 48.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.5876, 26.7934, 26.2382, 11.4989, 26.6849, 26.383, 10.7708, 9.6936, 26.495, 26.8572]
+run_count: 219 eval_reward 52.0 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 5 2] cur_worker_credit: [27.8317, 27.0454, 26.4958, 11.4989, 26.9381, 26.6392, 10.7708, 9.6936, 26.75, 27.1087]
+run_count: 220 eval_reward 34.8 choose_type: random choice
+choose arms: [0 3 5 2 1 9 7] cur_worker_credit: [27.9014, 27.123, 26.5789, 11.7319, 26.9381, 26.7208, 10.7708, 9.9446, 26.75, 27.1856]
+run_count: 221 eval_reward 44.4 choose_type: random choice
+choose arms: [0 8 6 3 9 1 2] cur_worker_credit: [28.0664, 27.2958, 26.7571, 12.0586, 26.9381, 26.7208, 11.107, 9.9446, 26.9265, 27.3577]
+run_count: 222 eval_reward 28.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 2 5] cur_worker_credit: [28.0677, 27.3048, 26.7715, 12.0586, 26.9507, 26.7356, 11.107, 9.9446, 26.9393, 27.3662]
+run_count: 223 eval_reward 50.6 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 2 5] cur_worker_credit: [28.293, 27.5377, 27.0098, 12.0586, 27.1872, 26.9742, 11.107, 9.9446, 27.1759, 27.5985]
+run_count: 224 eval_reward 27.2 choose_type: Greedy choice
+choose arms: [0 9 1 4 8 2 5] cur_worker_credit: [28.2821, 27.5344, 27.0117, 12.0586, 27.1873, 26.9765, 11.107, 9.9446, 27.1761, 27.5945]
+run_count: 225 eval_reward 47.0 choose_type: random choice
+choose arms: [0 3 1 8 6 7 4] cur_worker_credit: [28.4693, 27.729, 27.0117, 12.408, 27.3854, 26.9765, 11.466, 10.3152, 27.3744, 27.5945]
+run_count: 226 eval_reward 57.2 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 2 5] cur_worker_credit: [28.7566, 28.0237, 27.3136, 12.408, 27.6836, 27.2787, 11.466, 10.3152, 27.6726, 27.8906]
+run_count: 227 eval_reward 40.6 choose_type: random choice
+choose arms: [0 1 8 7 5 6 4] cur_worker_credit: [28.875, 28.1495, 27.3136, 12.408, 27.8127, 27.4119, 11.7573, 10.618, 27.8019, 27.8906]
+run_count: 228 eval_reward 30.2 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [28.8883, 28.17, 27.3424, 12.408, 27.8366, 27.4398, 11.7573, 10.618, 27.8259, 27.9137]
+run_count: 229 eval_reward 42.6 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.0254, 28.3143, 27.495, 12.408, 27.9843, 27.5914, 11.7573, 10.618, 27.9736, 28.0605]
+run_count: 230 eval_reward 42.8 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.1631, 28.4592, 27.6481, 12.408, 28.1324, 27.7435, 11.7573, 10.618, 28.1219, 28.2079]
+run_count: 231 eval_reward 28.0 choose_type: random choice
+choose arms: [0 6 5 4 1 8 2] cur_worker_credit: [29.1515, 28.4546, 27.6516, 12.408, 28.1311, 27.746, 11.9197, 10.618, 28.1207, 28.2079]
+run_count: 232 eval_reward 37.0 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.23, 28.54, 27.7451, 12.408, 28.2198, 27.8386, 11.9197, 10.618, 28.2095, 28.2958]
+run_count: 233 eval_reward 33.6 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.2737, 28.5906, 27.8036, 12.408, 28.2736, 27.8962, 11.9197, 10.618, 28.2634, 28.3489]
+run_count: 234 eval_reward 34.2 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.3229, 28.6467, 27.8676, 12.408, 28.3328, 27.9592, 11.9197, 10.618, 28.3227, 28.4074]
+run_count: 235 eval_reward 29.8 choose_type: Greedy choice
+choose arms: [0 1 9 4 8 5 2] cur_worker_credit: [29.3277, 28.6582, 27.8869, 12.408, 28.3475, 27.9776, 11.9197, 10.618, 28.3375, 28.4213]
+run_count: 236 eval_reward 56.8 choose_type: random choice
+choose arms: [0 3 4 1 2 8 7] cur_worker_credit: [29.6024, 28.9397, 28.176, 12.8519, 28.632, 27.9776, 11.9197, 11.0798, 28.6221, 28.4213]
+run_count: 237 eval_reward 24.2 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.5484, 28.8923, 28.1363, 12.8519, 28.5877, 27.9399, 11.9197, 11.0798, 28.5779, 28.3791]
+run_count: 238 eval_reward 34.2 choose_type: random choice
+choose arms: [0 6 1 2 4 7 5] cur_worker_credit: [29.5949, 28.9453, 28.1969, 12.8519, 28.6438, 28.0025, 12.1425, 11.311, 28.5779, 28.3791]
+run_count: 239 eval_reward 31.4 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.613, 28.9699, 28.2289, 12.8519, 28.6714, 28.0364, 12.1425, 11.311, 28.6061, 28.4093]
+run_count: 240 eval_reward 25.0 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.5668, 28.9302, 28.1966, 12.8519, 28.6347, 28.0061, 12.1425, 11.311, 28.5701, 28.3752]
+run_count: 241 eval_reward 50.0 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.7712, 29.1409, 28.4147, 12.8519, 28.8483, 28.226, 12.1425, 11.311, 28.7844, 28.5915]
+run_count: 242 eval_reward 18.6 choose_type: random choice
+choose arms: [0 6 1 8 3 7 9] cur_worker_credit: [29.6595, 29.0355, 28.4147, 12.9094, 28.8483, 28.226, 12.2071, 11.3839, 28.6825, 28.4916]
+run_count: 243 eval_reward 40.2 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.7649, 29.1471, 28.5325, 12.9094, 28.9619, 28.3458, 12.2071, 11.3839, 28.7977, 28.6086]
+run_count: 244 eval_reward 43.8 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.9052, 29.2937, 28.6852, 12.9094, 29.1102, 28.5003, 12.2071, 11.3839, 28.9477, 28.7605]
+run_count: 245 eval_reward 33.6 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.9422, 29.3367, 28.7344, 12.9094, 29.1551, 28.5513, 12.2071, 11.3839, 28.9942, 28.8089]
+run_count: 246 eval_reward 29.0 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [29.9328, 29.3334, 28.737, 12.9094, 29.1536, 28.5558, 12.2071, 11.3839, 28.9943, 28.8109]
+run_count: 247 eval_reward 67.8 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [30.3114, 29.718, 29.1276, 12.9094, 29.54, 28.9482, 12.2071, 11.3839, 29.3824, 29.2007]
+run_count: 248 eval_reward 26.0 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [30.2683, 29.6808, 29.0964, 12.9094, 29.5046, 28.9187, 12.2071, 11.3839, 29.3485, 29.1687]
+run_count: 249 eval_reward 54.6 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [30.5116, 29.93, 29.3514, 12.9094, 29.7556, 29.1756, 12.2071, 11.3839, 29.601, 29.4231]
+run_count: 250 eval_reward 33.2 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [30.5385, 29.9627, 29.3899, 12.9094, 29.79, 29.2158, 12.2071, 11.3839, 29.637, 29.4608]
+run_count: 251 eval_reward 35.4 choose_type: random choice
+choose arms: [0 4 6 8 5 1 3] cur_worker_credit: [30.5871, 30.0171, 29.3899, 13.1343, 29.8461, 29.2776, 12.4391, 11.3839, 29.6947, 29.4608]
+run_count: 252 eval_reward 27.0 choose_type: Greedy choice
+choose arms: [0 1 4 8 9 2 5] cur_worker_credit: [30.5513, 29.9869, 29.366, 13.1343, 29.8177, 29.2549, 12.4391, 11.3839, 29.6677, 29.4362]
+run_count: 253 eval_reward 39.0 choose_type: random choice
+choose arms: [0 7 8 4 2 6 5] cur_worker_credit: [30.6357, 29.9869, 29.4623, 13.1343, 29.9095, 29.3523, 12.7047, 11.6601, 29.761, 29.4362]
+run_count: 254 eval_reward 34.2 choose_type: Greedy choice
+choose arms: [0 1 4 8 2 9 5] cur_worker_credit: [30.6714, 30.0291, 29.5097, 13.1343, 29.9524, 29.4008, 12.7047, 11.6601, 29.8054, 29.4839]
+run_count: 255 eval_reward 43.2 choose_type: Greedy choice
+choose arms: [0 1 4 8 2 9 5] cur_worker_credit: [30.7967, 30.1608, 29.6466, 13.1343, 30.0849, 29.5388, 12.7047, 11.6601, 29.9394, 29.621]
+run_count: 256 eval_reward 47.8 choose_type: Greedy choice
+choose arms: [0 1 4 8 2 9 5] cur_worker_credit: [30.9667, 30.3372, 29.8281, 13.1343, 30.262, 29.7214, 12.7047, 11.6601, 30.118, 29.8028]
+run_count: 257 eval_reward 41.8 choose_type: random choice
+choose arms: [0 4 9 8 5 6 7] cur_worker_credit: [31.075, 30.3372, 29.8281, 13.1343, 30.3774, 29.8422, 12.9956, 11.9615, 30.2348, 29.9228]
+run_count: 258 eval_reward 66.6 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.4303, 30.6998, 30.1959, 13.1343, 30.7396, 30.2098, 12.9956, 11.9615, 30.5985, 30.2895]
+run_count: 259 eval_reward 27.8 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.394, 30.6708, 30.1719, 13.1343, 30.7102, 30.1857, 12.9956, 11.9615, 30.5705, 30.2647]
+run_count: 260 eval_reward 34.8 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.428, 30.7121, 30.2182, 13.1343, 30.7511, 30.2318, 12.9956, 11.9615, 30.6128, 30.31]
+run_count: 261 eval_reward 22.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.3358, 30.627, 30.138, 13.1343, 30.6656, 30.1515, 12.9956, 11.9615, 30.5286, 30.2289]
+run_count: 262 eval_reward 32.4 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.3464, 30.6447, 30.1606, 13.1343, 30.683, 30.174, 12.9956, 11.9615, 30.5473, 30.2506]
+run_count: 263 eval_reward 29.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [31.3249, 30.6303, 30.151, 13.1343, 30.6681, 30.1642, 12.9956, 11.9615, 30.5339, 30.2401]
+run_count: 264 eval_reward 24.0 choose_type: random choice
+choose arms: [0 7 3 5 1 4 8] cur_worker_credit: [31.2517, 30.5639, 30.151, 13.243, 30.6015, 30.1026, 12.9956, 12.0819, 30.4685, 30.2401]
+run_count: 265 eval_reward 47.4 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [31.4132, 30.7323, 30.3235, 13.243, 30.7695, 30.2756, 12.9956, 12.0819, 30.6379, 30.4117]
+run_count: 266 eval_reward 35.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [31.451, 30.777, 30.3723, 13.243, 30.8138, 30.3248, 12.9956, 12.0819, 30.6835, 30.4596]
+run_count: 267 eval_reward 34.4 choose_type: random choice
+choose arms: [0 9 1 3 7 5 6] cur_worker_credit: [31.4805, 30.8132, 30.3723, 13.4546, 30.8138, 30.3656, 13.2097, 12.3051, 30.6835, 30.499]
+run_count: 268 eval_reward 36.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [31.5277, 30.8671, 30.4305, 13.4546, 30.8676, 30.4239, 13.2097, 12.3051, 30.7386, 30.556]
+run_count: 269 eval_reward 37.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [31.5844, 30.9304, 30.4982, 13.4546, 30.9309, 30.4917, 13.2097, 12.3051, 30.8033, 30.6224]
+run_count: 270 eval_reward 38.2 choose_type: random choice
+choose arms: [0 2 7 3 9 1 4] cur_worker_credit: [31.6506, 31.0031, 30.5753, 13.702, 31.0036, 30.4917, 13.2097, 12.564, 30.8033, 30.6982]
+run_count: 271 eval_reward 27.4 choose_type: random choice
+choose arms: [0 2 1 4 5 9 7] cur_worker_credit: [31.6081, 30.9671, 30.5435, 13.702, 30.9676, 30.4608, 13.2097, 12.7124, 30.8033, 30.6652]
+run_count: 272 eval_reward 51.6 choose_type: random choice
+choose arms: [0 6 9 4 7 1 8] cur_worker_credit: [31.808, 31.1734, 30.5435, 13.702, 31.1739, 30.4608, 13.5936, 13.1012, 31.0112, 30.8746]
+run_count: 273 eval_reward 75.4 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [32.2439, 31.6157, 30.9921, 13.702, 31.6162, 30.9101, 13.5936, 13.1012, 31.4551, 31.3198]
+run_count: 274 eval_reward 45.4 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 2 5] cur_worker_credit: [32.3755, 31.7535, 31.1361, 13.702, 31.754, 31.055, 13.5936, 13.1012, 31.5946, 31.4606]
+run_count: 275 eval_reward 92.2 choose_type: random choice
+choose arms: [0 4 3 8 9 1 5] cur_worker_credit: [32.9737, 32.358, 31.1361, 14.487, 32.3585, 31.6665, 13.5936, 13.1012, 32.2006, 32.068]
+run_count: 276 eval_reward 37.6 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.02, 32.4104, 31.2008, 14.487, 32.4109, 31.7258, 13.5936, 13.1012, 32.2546, 32.1234]
+run_count: 277 eval_reward 47.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.1618, 32.5583, 31.3608, 14.487, 32.5588, 31.8806, 13.5936, 13.1012, 32.4041, 32.2741]
+run_count: 278 eval_reward 35.0 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.1802, 32.5827, 31.3972, 14.487, 32.5832, 31.9118, 13.5936, 13.1012, 32.43, 32.3014]
+run_count: 279 eval_reward 36.2 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.2104, 32.6189, 31.4452, 14.487, 32.6194, 31.9546, 13.5936, 13.1012, 32.4677, 32.3404]
+run_count: 280 eval_reward 41.0 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.2883, 32.7027, 31.5407, 14.487, 32.7032, 32.0451, 13.5936, 13.1012, 32.553, 32.427]
+run_count: 281 eval_reward 53.6 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.4914, 32.9117, 31.7613, 14.487, 32.9121, 32.2606, 13.5936, 13.1012, 32.7635, 32.6387]
+run_count: 282 eval_reward 23.6 choose_type: Greedy choice
+choose arms: [0 4 1 8 9 5 2] cur_worker_credit: [33.3925, 32.8186, 31.6797, 14.487, 32.819, 32.174, 13.5936, 13.1012, 32.6719, 32.5483]
+run_count: 283 eval_reward 60.6 choose_type: random choice
+choose arms: [0 5 9 6 1 7 4] cur_worker_credit: [33.6646, 33.0964, 31.6797, 14.487, 33.0968, 32.4583, 14.0636, 13.5762, 32.6719, 32.8288]
+run_count: 284 eval_reward 47.6 choose_type: random choice
+choose arms: [0 4 6 5 1 7 9] cur_worker_credit: [33.8039, 33.2414, 31.6797, 14.487, 33.2419, 32.6097, 14.399, 13.9165, 32.6719, 32.9765]
+run_count: 285 eval_reward 41.6 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.8819, 33.325, 31.7789, 14.487, 33.3254, 32.6996, 14.399, 13.9165, 32.7612, 33.0628]
+run_count: 286 eval_reward 36.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.9031, 33.3517, 31.8211, 14.487, 33.3522, 32.7326, 14.399, 13.9165, 32.7935, 33.0921]
+run_count: 287 eval_reward 28.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.848, 33.3022, 31.7869, 14.487, 33.3027, 32.6893, 14.399, 13.9165, 32.7496, 33.0452]
+run_count: 288 eval_reward 33.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.8475, 33.3072, 31.8071, 14.487, 33.3076, 32.7004, 14.399, 13.9165, 32.7601, 33.0528]
+run_count: 289 eval_reward 42.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.9291, 33.3941, 31.909, 14.487, 33.3946, 32.7934, 14.399, 13.9165, 32.8525, 33.1422]
+run_count: 290 eval_reward 40.6 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [33.9958, 33.4662, 31.9959, 14.487, 33.4666, 32.8715, 14.399, 13.9165, 32.93, 33.2168]
+run_count: 291 eval_reward 41.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.0738, 33.5495, 32.0939, 14.487, 33.55, 32.9608, 14.399, 13.9165, 33.0187, 33.3026]
+run_count: 292 eval_reward 73.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.4711, 33.952, 32.511, 14.487, 33.9525, 33.3691, 14.399, 13.9165, 33.4265, 33.7076]
+run_count: 293 eval_reward 34.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.4744, 33.9605, 32.5339, 14.487, 33.9609, 33.3835, 14.399, 13.9165, 33.4402, 33.7185]
+run_count: 294 eval_reward 49.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.6196, 34.1109, 32.6986, 14.487, 34.1113, 33.5396, 14.399, 13.9165, 33.5958, 33.8714]
+run_count: 295 eval_reward 39.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.6634, 34.1598, 32.7616, 14.487, 34.1602, 33.5942, 14.399, 13.9165, 33.6499, 33.9226]
+run_count: 296 eval_reward 49.8 choose_type: random choice
+choose arms: [0 6 3 8 7 1 4] cur_worker_credit: [34.8148, 34.3162, 32.7616, 14.8401, 34.3166, 33.5942, 14.753, 14.2753, 33.8114, 33.9226]
+run_count: 297 eval_reward 31.2 choose_type: random choice
+choose arms: [0 8 7 4 3 1 2] cur_worker_credit: [34.7787, 34.285, 32.746, 15.0037, 34.2854, 33.5942, 14.753, 14.4445, 33.7853, 33.9226]
+run_count: 298 eval_reward 45.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.8849, 34.3962, 32.8725, 15.0037, 34.3966, 33.7123, 14.753, 14.4445, 33.9014, 34.0374]
+run_count: 299 eval_reward 46.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [34.996, 34.5122, 33.0038, 15.0037, 34.5126, 33.8352, 14.753, 14.4445, 34.0224, 34.157]
+run_count: 300 eval_reward 47.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.1201, 34.6411, 33.1477, 15.0037, 34.6415, 33.9708, 14.753, 14.4445, 34.1562, 34.2895]
+run_count: 301 eval_reward 36.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.1289, 34.6547, 33.1763, 15.0037, 34.6551, 33.9911, 14.753, 14.4445, 34.1746, 34.3066]
+run_count: 302 eval_reward 41.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.1916, 34.7221, 33.2585, 15.0037, 34.7225, 34.0652, 14.753, 14.4445, 34.2469, 34.3775]
+run_count: 303 eval_reward 40.6 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.2457, 34.7809, 33.3319, 15.0037, 34.7813, 34.1305, 14.753, 14.4445, 34.3104, 34.4397]
+run_count: 304 eval_reward 46.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.3572, 34.8971, 33.4626, 15.0037, 34.8975, 34.2532, 14.753, 14.4445, 34.4313, 34.5593]
+run_count: 305 eval_reward 32.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.3316, 34.8761, 33.456, 15.0037, 34.8765, 34.2387, 14.753, 14.4445, 34.415, 34.5417]
+run_count: 306 eval_reward 41.2 choose_type: random choice
+choose arms: [0 9 1 7 8 4 6] cur_worker_credit: [35.3903, 34.9394, 33.456, 15.0037, 34.9397, 34.2387, 15.0175, 14.7121, 34.4828, 34.6083]
+run_count: 307 eval_reward 40.8 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.4444, 34.998, 33.5294, 15.0037, 34.9983, 34.3043, 15.0175, 14.7121, 34.546, 34.6702]
+run_count: 308 eval_reward 61.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.7, 35.258, 33.8041, 15.0037, 35.2584, 34.5713, 15.0175, 14.7121, 34.8105, 34.9335]
+run_count: 309 eval_reward 46.6 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.809, 35.3714, 33.9321, 15.0037, 35.3718, 34.6916, 15.0175, 14.7121, 34.9284, 35.0502]
+run_count: 310 eval_reward 44.4 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [35.8949, 35.4617, 34.0367, 15.0037, 35.4621, 34.7886, 15.0175, 14.7121, 35.0232, 35.1437]
+run_count: 311 eval_reward 50.6 choose_type: random choice
+choose arms: [0 4 7 1 5 3 9] cur_worker_credit: [36.0419, 35.6131, 34.0367, 15.3597, 35.6134, 34.9468, 15.0175, 15.071, 35.0232, 35.2983]
+run_count: 312 eval_reward 57.8 choose_type: random choice
+choose arms: [0 4 6 7 8 5 1] cur_worker_credit: [36.2595, 35.835, 34.0367, 15.3597, 35.8353, 35.1753, 15.4453, 15.4983, 35.2509, 35.2983]
+run_count: 313 eval_reward 64.0 choose_type: Greedy choice
+choose arms: [0 4 1 9 8 5 2] cur_worker_credit: [36.5369, 36.1166, 34.3364, 15.3597, 36.117, 35.4635, 15.4453, 15.4983, 35.5384, 35.5853]
+run_count: 314 eval_reward 61.2 choose_type: random choice
+choose arms: [0 2 5 6 9 7 1] cur_worker_credit: [36.7835, 36.3674, 34.605, 15.3597, 36.117, 35.7209, 15.9028, 15.9553, 35.5384, 35.8414]
+run_count: 315 eval_reward 56.0 choose_type: Greedy choice
+choose arms: [0 1 4 9 5 8 2] cur_worker_credit: [36.9757, 36.5638, 34.819, 15.3597, 36.3158, 35.9237, 15.9028, 15.9553, 35.743, 36.043]
+run_count: 316 eval_reward 38.2 choose_type: Greedy choice
+choose arms: [0 1 4 9 5 8 2] cur_worker_credit: [36.9879, 36.5801, 34.8528, 15.3597, 36.3346, 35.9465, 15.9028, 15.9553, 35.7676, 36.0646]
+run_count: 317 eval_reward 61.2 choose_type: random choice
+choose arms: [0 2 5 3 8 7 4] cur_worker_credit: [37.2301, 36.5801, 35.1162, 15.8181, 36.5833, 36.199, 15.9028, 16.4077, 36.0219, 36.0646]
+run_count: 318 eval_reward 48.2 choose_type: Greedy choice
+choose arms: [0 4 1 5 9 8 2] cur_worker_credit: [37.3398, 36.6963, 35.2471, 15.8181, 36.6994, 36.319, 15.9028, 16.4077, 36.1437, 36.1859]
+run_count: 319 eval_reward 48.8 choose_type: random choice
+choose arms: [0 8 6 5 4 1 2] cur_worker_credit: [37.4544, 36.8174, 35.3826, 15.8181, 36.8205, 36.4438, 16.2318, 16.4077, 36.2703, 36.1859]
+run_count: 320 eval_reward 81.2 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [37.8918, 37.2612, 35.8408, 15.8181, 37.2643, 36.8914, 16.2318, 16.4077, 36.7196, 36.6361]
+run_count: 321 eval_reward 35.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [37.8669, 37.2426, 35.8364, 15.8181, 37.2456, 36.8765, 16.2318, 16.4077, 36.7064, 36.6237]
+run_count: 322 eval_reward 49.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [37.9842, 37.3662, 35.974, 15.8181, 37.3692, 37.0037, 16.2318, 16.4077, 36.8353, 36.7535]
+run_count: 323 eval_reward 32.8 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [37.9324, 37.3205, 35.9423, 15.8181, 37.3235, 36.9617, 16.2318, 16.4077, 36.7949, 36.714]
+run_count: 324 eval_reward 63.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.1891, 37.5833, 36.2189, 15.8181, 37.5862, 37.228, 16.2318, 16.4077, 37.063, 36.9828]
+run_count: 325 eval_reward 58.4 choose_type: random choice
+choose arms: [0 5 3 6 4 7 2] cur_worker_credit: [38.3912, 37.5833, 36.4407, 16.2439, 37.7944, 37.4398, 16.6535, 16.8277, 37.063, 36.9828]
+run_count: 326 eval_reward 49.6 choose_type: random choice
+choose arms: [0 4 1 2 7 6 8] cur_worker_credit: [38.5033, 37.7035, 36.5723, 16.2439, 37.9124, 37.4398, 16.983, 17.1554, 37.1884, 36.9828]
+run_count: 327 eval_reward 29.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.4142, 37.6224, 36.5025, 16.2439, 37.8293, 37.3614, 16.983, 17.1554, 37.1125, 36.909]
+run_count: 328 eval_reward 48.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.5141, 37.7302, 36.6215, 16.2439, 37.935, 37.4717, 16.983, 17.1554, 37.2254, 37.0239]
+run_count: 329 eval_reward 63.0 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.759, 37.9829, 36.8853, 16.2439, 38.1857, 37.727, 16.983, 17.1554, 37.4831, 37.2837]
+run_count: 330 eval_reward 37.0 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.7414, 37.9731, 36.8864, 16.2439, 38.1738, 37.7198, 16.983, 17.1554, 37.4783, 37.2808]
+run_count: 331 eval_reward 38.0 choose_type: random choice
+choose arms: [0 4 5 6 7 8 1] cur_worker_credit: [38.7339, 37.9733, 36.8864, 16.2439, 38.1721, 37.7226, 17.1931, 17.3638, 37.4835, 37.2808]
+run_count: 332 eval_reward 59.0 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.9366, 38.1836, 37.1076, 16.2439, 38.3803, 37.9353, 17.1931, 17.3638, 37.6987, 37.498]
+run_count: 333 eval_reward 41.0 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [38.9572, 38.2118, 37.1465, 16.2439, 38.4065, 37.966, 17.1931, 17.3638, 37.7317, 37.533]
+run_count: 334 eval_reward 43.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.0017, 38.2637, 37.209, 16.2439, 38.4565, 38.0203, 17.1931, 17.3638, 37.7884, 37.5917]
+run_count: 335 eval_reward 60.2 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.2137, 38.483, 37.4389, 16.2439, 38.6739, 38.2421, 17.1931, 17.3638, 38.0125, 37.8178]
+run_count: 336 eval_reward 44.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.2655, 38.5422, 37.5086, 16.2439, 38.7312, 38.3037, 17.1931, 17.3638, 38.0763, 37.8836]
+run_count: 337 eval_reward 59.8 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.4709, 38.7548, 37.7315, 16.2439, 38.9419, 38.5187, 17.1931, 17.3638, 38.2936, 38.1028]
+run_count: 338 eval_reward 53.2 choose_type: random choice
+choose arms: [0 5 8 4 1 2 9] cur_worker_credit: [39.6082, 38.8992, 37.8862, 16.2439, 39.0844, 38.6655, 17.1931, 17.3638, 38.4426, 38.2537]
+run_count: 339 eval_reward 29.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.5081, 38.8062, 37.8033, 16.2439, 38.9896, 38.5748, 17.1931, 17.3638, 38.3542, 38.1672]
+run_count: 340 eval_reward 34.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.459, 38.7642, 37.7713, 16.2439, 38.9457, 38.5351, 17.1931, 17.3638, 38.3167, 38.1315]
+run_count: 341 eval_reward 49.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.5584, 38.8705, 37.8875, 16.2439, 39.0502, 38.6437, 17.1931, 17.3638, 38.4275, 38.2442]
+run_count: 342 eval_reward 49.8 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.6608, 38.9798, 38.0067, 16.2439, 39.1577, 38.7553, 17.1931, 17.3638, 38.5412, 38.3598]
+run_count: 343 eval_reward 31.2 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.5762, 38.902, 37.9386, 16.2439, 39.0782, 38.6797, 17.1931, 17.3638, 38.4678, 38.2882]
+run_count: 344 eval_reward 36.4 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.5444, 38.877, 37.9232, 16.2439, 39.0514, 38.6569, 17.1931, 17.3638, 38.4471, 38.2693]
+run_count: 345 eval_reward 38.6 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.535, 38.8742, 37.93, 16.2439, 39.0469, 38.6564, 17.1931, 17.3638, 38.4487, 38.2726]
+run_count: 346 eval_reward 68.8 choose_type: Greedy choice
+choose arms: [0 4 1 5 8 9 2] cur_worker_credit: [39.8277, 39.1735, 38.2387, 16.2439, 39.3444, 38.9578, 17.1931, 17.3638, 38.7522, 38.5779]
+run_count: 347 eval_reward 63.4 choose_type: random choice
+choose arms: [0 5 7 9 8 2 6] cur_worker_credit: [40.0634, 39.1735, 38.4903, 16.2439, 39.3444, 39.2022, 17.6552, 17.8242, 38.9987, 38.8261]
+run_count: 348 eval_reward 40.4 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [40.0667, 39.1858, 38.5094, 16.2439, 39.355, 39.2142, 17.6552, 17.8242, 39.0127, 38.8418]
+run_count: 349 eval_reward 77.2 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [40.4381, 39.5659, 38.8963, 16.2439, 39.7334, 39.5941, 17.6552, 17.8242, 39.3946, 39.2254]
+run_count: 350 eval_reward 36.4 choose_type: random choice
+choose arms: [0 5 3 6 8 7 1] cur_worker_credit: [40.3977, 39.5342, 38.8963, 16.4455, 39.7334, 39.5621, 17.8426, 18.0099, 39.3646, 39.2254]
+run_count: 351 eval_reward 33.2 choose_type: random choice
+choose arms: [0 6 4 7 1 2 3] cur_worker_credit: [40.3257, 39.4709, 38.8393, 16.613, 39.6681, 39.5621, 17.9962, 18.1618, 39.3646, 39.2254]
+run_count: 352 eval_reward 55.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [40.4805, 39.6342, 39.0089, 16.613, 39.8294, 39.7245, 17.9962, 18.1618, 39.529, 39.3912]
+run_count: 353 eval_reward 42.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [40.5037, 39.6658, 39.0469, 16.613, 39.8591, 39.7553, 17.9962, 18.1618, 39.5617, 39.4253]
+run_count: 354 eval_reward 73.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [40.8366, 40.0072, 39.3944, 16.613, 40.1985, 40.0957, 17.9962, 18.1618, 39.9041, 39.769]
+run_count: 355 eval_reward 61.2 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [41.0403, 40.2191, 39.6124, 16.613, 40.4085, 40.3067, 17.9962, 18.1618, 40.117, 39.9833]
+run_count: 356 eval_reward 59.2 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [41.2219, 40.4089, 39.8083, 16.613, 40.5964, 40.4957, 17.9962, 18.1618, 40.3078, 40.1755]
+run_count: 357 eval_reward 96.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [41.7696, 40.9648, 40.3702, 16.613, 41.1505, 41.0507, 17.9962, 18.1618, 40.8648, 40.7337]
+run_count: 358 eval_reward 37.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [41.7219, 40.9252, 40.3365, 16.613, 41.109, 41.0102, 17.9962, 18.1618, 40.8261, 40.6964]
+run_count: 359 eval_reward 71.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.0227, 41.2339, 40.6512, 16.613, 41.4159, 41.3181, 17.9962, 18.1618, 41.1359, 41.0074]
+run_count: 360 eval_reward 48.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.0905, 41.3096, 40.7327, 16.613, 41.4897, 41.3929, 17.9962, 18.1618, 41.2125, 41.0853]
+run_count: 361 eval_reward 41.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.0796, 41.3065, 40.7353, 16.613, 41.4848, 41.389, 17.9962, 18.1618, 41.2104, 41.0845]
+run_count: 362 eval_reward 50.4 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.1628, 41.3974, 40.832, 16.613, 41.574, 41.4791, 17.9962, 18.1618, 41.3023, 41.1776]
+run_count: 363 eval_reward 38.6 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.1272, 41.3695, 40.8097, 16.613, 41.5442, 41.4503, 17.9962, 18.1618, 41.2752, 41.1519]
+run_count: 364 eval_reward 60.6 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.3119, 41.5618, 41.0076, 16.613, 41.7348, 41.6418, 17.9962, 18.1618, 41.4685, 41.3464]
+run_count: 365 eval_reward 69.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.5788, 41.8361, 41.2875, 16.613, 42.0074, 41.9154, 17.9962, 18.1618, 41.7438, 41.6229]
+run_count: 366 eval_reward 69.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [42.843, 42.1078, 41.5646, 16.613, 42.2774, 42.1862, 17.9962, 18.1618, 42.0164, 41.8967]
+run_count: 367 eval_reward 83.2 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.2466, 42.5187, 41.981, 16.613, 42.6866, 42.5964, 17.9962, 18.1618, 42.4282, 42.3097]
+run_count: 368 eval_reward 56.6 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.3801, 42.6595, 42.1272, 16.613, 42.8257, 42.7364, 17.9962, 18.1618, 42.5699, 42.4526]
+run_count: 369 eval_reward 39.2 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.3383, 42.6249, 42.0979, 16.613, 42.7895, 42.7011, 17.9962, 18.1618, 42.5362, 42.4201]
+run_count: 370 eval_reward 64.4 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.5489, 42.8427, 42.3209, 16.613, 43.0056, 42.918, 17.9962, 18.1618, 42.7549, 42.6399]
+run_count: 371 eval_reward 47.6 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.5894, 42.8902, 42.3737, 16.613, 43.0515, 42.9649, 17.9962, 18.1618, 42.8033, 42.6895]
+run_count: 372 eval_reward 60.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.7615, 43.0693, 42.558, 16.613, 43.229, 43.1432, 17.9962, 18.1618, 42.9833, 42.8706]
+run_count: 373 eval_reward 49.6 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [43.8199, 43.1347, 42.6284, 16.613, 43.2927, 43.2078, 17.9962, 18.1618, 43.0494, 42.9379]
+run_count: 374 eval_reward 97.0 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [44.3517, 43.6733, 43.1721, 16.613, 43.8298, 43.7457, 17.9962, 18.1618, 43.589, 43.4785]
+run_count: 375 eval_reward 48.8 choose_type: Greedy choice
+choose arms: [0 4 5 1 8 9 2] cur_worker_credit: [44.3962, 43.7246, 43.2284, 16.613, 43.8795, 43.7962, 17.9962, 18.1618, 43.6411, 43.5317]
+run_count: 376 eval_reward 61.2 choose_type: random choice
+choose arms: [0 2 7 4 8 5 9] cur_worker_credit: [44.5642, 43.7246, 43.4081, 16.613, 44.0527, 43.9703, 17.9962, 18.5922, 43.8167, 43.7084]
+run_count: 377 eval_reward 69.2 choose_type: random choice
+choose arms: [0 9 6 2 1 4 5] cur_worker_credit: [44.8106, 43.9793, 43.666, 16.613, 44.3042, 44.2226, 18.5083, 18.5922, 43.8167, 43.9633]
+run_count: 378 eval_reward 66.4 choose_type: Greedy choice
+choose arms: [0 4 5 1 9 8 2] cur_worker_credit: [45.0265, 44.2035, 43.8934, 16.613, 44.5251, 44.4444, 18.5083, 18.5922, 44.0425, 44.1877]
+run_count: 379 eval_reward 68.2 choose_type: random choice
+choose arms: [0 3 8 5 9 2 1] cur_worker_credit: [45.2582, 44.4435, 44.1364, 17.1289, 44.5251, 44.6819, 18.5083, 18.5922, 44.2841, 44.4278]
+run_count: 380 eval_reward 39.2 choose_type: random choice
+choose arms: [0 1 6 5 3 8 7] cur_worker_credit: [45.1976, 44.3911, 44.1364, 17.3496, 44.5251, 44.6271, 18.7152, 18.7983, 44.2332, 44.4278]
+run_count: 381 eval_reward 49.0 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [45.2357, 44.4372, 44.1851, 17.3496, 44.5699, 44.6708, 18.7152, 18.7983, 44.2809, 44.4735]
+run_count: 382 eval_reward 72.4 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [45.5073, 44.7168, 44.4672, 17.3496, 44.8482, 44.9481, 18.7152, 18.7983, 44.5621, 44.7528]
+run_count: 383 eval_reward 74.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [45.7942, 45.0116, 44.7645, 17.3496, 45.1417, 45.2406, 18.7152, 18.7983, 44.8585, 45.0473]
+run_count: 384 eval_reward 81.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [46.1483, 45.3735, 45.1289, 17.3496, 45.5023, 45.6002, 18.7152, 18.7983, 45.2219, 45.4088]
+run_count: 385 eval_reward 97.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [46.6588, 45.8918, 45.6496, 17.3496, 46.0193, 46.1162, 18.7152, 18.7983, 45.7417, 45.9267]
+run_count: 386 eval_reward 42.6 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [46.6182, 45.8588, 45.6191, 17.3496, 45.9851, 46.0811, 18.7152, 18.7983, 45.7102, 45.8934]
+run_count: 387 eval_reward 58.8 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [46.74, 45.9883, 45.7509, 17.3496, 46.1132, 46.2082, 18.7152, 18.7983, 45.8411, 46.0225]
+run_count: 388 eval_reward 99.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [47.2646, 46.5204, 46.2854, 17.3496, 46.6441, 46.7382, 18.7152, 18.7983, 46.3747, 46.5543]
+run_count: 389 eval_reward 72.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [47.514, 46.7772, 46.5445, 17.3496, 46.8996, 46.9928, 18.7152, 18.7983, 46.633, 46.8107]
+run_count: 390 eval_reward 57.0 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [47.6088, 46.8794, 46.6491, 17.3496, 47.0006, 47.0929, 18.7152, 18.7983, 46.7366, 46.9126]
+run_count: 391 eval_reward 51.6 choose_type: Greedy choice
+choose arms: [0 5 4 9 1 8 2] cur_worker_credit: [47.6488, 46.9266, 46.6986, 17.3496, 47.0466, 47.1379, 18.7152, 18.7983, 46.7853, 46.9595]
+run_count: 392 eval_reward 63.0 choose_type: random choice
+choose arms: [0 9 7 2 5 8 6] cur_worker_credit: [47.8023, 46.9266, 46.8616, 17.3496, 47.0466, 47.2966, 19.158, 19.2403, 46.9474, 47.1199]
+run_count: 393 eval_reward 49.2 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [47.8162, 46.9493, 46.885, 17.3496, 47.0682, 47.3156, 19.158, 19.2403, 46.97, 47.1407]
+run_count: 394 eval_reward 87.0 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.2081, 47.3498, 47.2862, 17.3496, 47.4675, 47.7124, 19.158, 19.2403, 47.3703, 47.5393]
+run_count: 395 eval_reward 54.2 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.268, 47.4183, 47.3553, 17.3496, 47.5348, 47.7773, 19.158, 19.2403, 47.4386, 47.6059]
+run_count: 396 eval_reward 45.4 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.2393, 47.3982, 47.3357, 17.3496, 47.5135, 47.7535, 19.158, 19.2403, 47.4182, 47.5838]
+run_count: 397 eval_reward 87.8 choose_type: random choice
+choose arms: [0 9 3 6 5 4 8] cur_worker_credit: [48.6349, 47.3982, 47.3357, 18.0541, 47.9163, 48.154, 19.8444, 19.2403, 47.822, 47.986]
+run_count: 398 eval_reward 54.6 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.6946, 47.4702, 47.4084, 18.0541, 47.9832, 48.2185, 19.8444, 19.2403, 47.8898, 48.0521]
+run_count: 399 eval_reward 50.6 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.7136, 47.5015, 47.4403, 18.0541, 48.0093, 48.2423, 19.8444, 19.2403, 47.9169, 48.0776]
+run_count: 400 eval_reward 64.2 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [48.8685, 47.6685, 47.6079, 18.0541, 48.1712, 48.4018, 19.8444, 19.2403, 48.0797, 48.2388]
+run_count: 401 eval_reward 48.8 choose_type: random choice
+choose arms: [0 7 1 4 9 6 8] cur_worker_credit: [48.8678, 47.6798, 47.6079, 18.0541, 48.1775, 48.4018, 20.134, 19.5359, 48.0869, 48.2445]
+run_count: 402 eval_reward 86.0 choose_type: Greedy choice
+choose arms: [0 5 9 4 8 1 2] cur_worker_credit: [49.2391, 48.063, 47.9918, 18.0541, 48.5558, 48.7778, 20.134, 19.5359, 48.466, 48.622]
+run_count: 403 eval_reward 55.2 choose_type: random choice
+choose arms: [0 7 3 5 4 8 2] cur_worker_credit: [49.2987, 48.063, 48.0639, 18.4256, 48.6222, 48.8421, 20.134, 19.8926, 48.5334, 48.622]
+run_count: 404 eval_reward 85.4 choose_type: Greedy choice
+choose arms: [0 5 4 9 8 2 1] cur_worker_credit: [49.6598, 48.4364, 48.4373, 18.4256, 48.99, 49.2076, 20.134, 19.8926, 48.902, 48.9898]
+run_count: 405 eval_reward 88.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 8 2 1] cur_worker_credit: [50.0452, 48.834, 48.8349, 18.4256, 49.3821, 49.5976, 20.134, 19.8926, 49.295, 49.3819]
+run_count: 406 eval_reward 77.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 8 2 1] cur_worker_credit: [50.3167, 49.1176, 49.1185, 18.4256, 49.6603, 49.8736, 20.134, 19.8926, 49.5741, 49.6601]
+run_count: 407 eval_reward 63.0 choose_type: Greedy choice
+choose arms: [0 5 4 9 8 2 1] cur_worker_credit: [50.4435, 49.2565, 49.2574, 18.4256, 49.7936, 50.0048, 20.134, 19.8926, 49.7083, 49.7935]
+run_count: 408 eval_reward 93.2 choose_type: Greedy choice
+choose arms: [0 5 4 9 8 2 1] cur_worker_credit: [50.8711, 49.6959, 49.6968, 18.4256, 50.2277, 50.4368, 20.134, 19.8926, 50.1432, 50.2275]
+run_count: 409 eval_reward 119.2 choose_type: random choice
+choose arms: [0 6 4 1 5 2 3] cur_worker_credit: [51.5544, 50.3909, 50.3918, 19.4333, 50.9174, 51.1244, 21.1247, 19.8926, 50.1432, 50.2275]
+run_count: 410 eval_reward 64.2 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [51.6808, 50.529, 50.5299, 19.4333, 51.0503, 51.2552, 21.1247, 19.8926, 50.2838, 50.3673]
+run_count: 411 eval_reward 86.2 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [52.026, 50.8857, 50.8866, 19.4333, 51.4018, 51.6046, 21.1247, 19.8926, 50.643, 50.7256]
+run_count: 412 eval_reward 66.0 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [52.1658, 51.0369, 51.0377, 19.4333, 51.5477, 51.7486, 21.1247, 19.8926, 50.7965, 50.8783]
+run_count: 413 eval_reward 32.8 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [51.9721, 50.8545, 50.8554, 19.4333, 51.3603, 51.5591, 21.1247, 19.8926, 50.6166, 50.6976]
+run_count: 414 eval_reward 73.0 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [52.1824, 51.076, 51.0768, 19.4333, 51.5767, 51.7735, 21.1247, 19.8926, 50.8404, 50.9206]
+run_count: 415 eval_reward 107.0 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [52.7306, 51.6352, 51.636, 19.4333, 52.1309, 52.3258, 21.1247, 19.8926, 51.402, 51.4814]
+run_count: 416 eval_reward 74.0 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [52.9433, 51.8589, 51.8597, 19.4333, 52.3496, 52.5425, 21.1247, 19.8926, 51.628, 51.7066]
+run_count: 417 eval_reward 98.4 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [53.3978, 52.3243, 52.3251, 19.4333, 52.8101, 53.0011, 21.1247, 19.8926, 52.0957, 52.1735]
+run_count: 418 eval_reward 59.0 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [53.4539, 52.391, 52.3918, 19.4333, 52.872, 53.0611, 21.1247, 19.8926, 52.1648, 52.2418]
+run_count: 419 eval_reward 108.6 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [54.0053, 52.9531, 52.9539, 19.4333, 53.4293, 53.6165, 21.1247, 19.8926, 52.7291, 52.8053]
+run_count: 420 eval_reward 108.6 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [54.5513, 53.5096, 53.5104, 19.4333, 53.981, 54.1663, 21.1247, 19.8926, 53.2878, 53.3633]
+run_count: 421 eval_reward 86.8 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [54.8738, 53.8425, 53.8433, 19.4333, 54.3092, 54.4926, 21.1247, 19.8926, 53.6229, 53.6977]
+run_count: 422 eval_reward 47.8 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [54.803, 53.7821, 53.7828, 19.4333, 54.2441, 54.4257, 21.1247, 19.8926, 53.5647, 53.6387]
+run_count: 423 eval_reward 44.8 choose_type: Greedy choice
+choose arms: [0 5 4 2 1 9 8] cur_worker_credit: [54.703, 53.6922, 53.693, 19.4333, 54.1496, 54.3295, 21.1247, 19.8926, 53.4771, 53.5503]
+run_count: 424 eval_reward 75.8 choose_type: random choice
+choose arms: [0 6 1 5 4 2 3] cur_worker_credit: [54.914, 53.9133, 53.9141, 19.997, 54.3661, 54.5442, 21.6714, 19.8926, 53.4771, 53.5503]
+run_count: 425 eval_reward 56.8 choose_type: random choice
+choose arms: [0 2 7 9 6 8 1] cur_worker_credit: [54.9328, 53.9422, 53.9429, 19.997, 54.3661, 54.5442, 22.0227, 20.2616, 53.5103, 53.5828]
+run_count: 426 eval_reward 113.6 choose_type: random choice
+choose arms: [0 9 1 8 6 3 5] cur_worker_credit: [55.5195, 54.5388, 53.9429, 20.933, 54.3661, 55.1347, 22.9385, 20.2616, 54.1112, 54.183]
+run_count: 427 eval_reward 77.4 choose_type: random choice
+choose arms: [0 4 2 3 9 6 8] cur_worker_credit: [55.7383, 54.5388, 54.1775, 21.4977, 54.5965, 55.1347, 23.4831, 20.2616, 54.3441, 54.4151]
+run_count: 428 eval_reward 116.2 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 8 2] cur_worker_credit: [56.3429, 55.1554, 54.7977, 21.4977, 55.2125, 55.7454, 23.4831, 20.2616, 54.9626, 55.033]
+run_count: 429 eval_reward 96.4 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 8 2] cur_worker_credit: [56.7435, 55.5678, 55.2137, 21.4977, 55.6244, 56.1519, 23.4831, 20.2616, 55.377, 55.4466]
+run_count: 430 eval_reward 65.6 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 8 2] cur_worker_credit: [56.832, 55.6682, 55.3176, 21.4977, 55.7241, 56.2464, 23.4831, 20.2616, 55.4792, 55.5482]
+run_count: 431 eval_reward 106.6 choose_type: random choice
+choose arms: [0 8 5 7 4 6 1] cur_worker_credit: [57.3297, 56.1775, 55.3176, 21.4977, 56.2329, 56.7499, 24.3143, 21.125, 55.9904, 55.5482]
+run_count: 432 eval_reward 79.4 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [57.5504, 56.4097, 55.5584, 21.4977, 56.4646, 56.9764, 24.3143, 21.125, 56.2245, 55.7867]
+run_count: 433 eval_reward 97.4 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [57.9489, 56.8196, 55.9769, 21.4977, 56.8739, 57.3807, 24.3143, 21.125, 56.6363, 56.2028]
+run_count: 434 eval_reward 73.8 choose_type: random choice
+choose arms: [0 2 5 4 1 8 9] cur_worker_credit: [58.1074, 56.9894, 56.1551, 21.4977, 57.0432, 57.5449, 24.3143, 21.125, 56.8079, 56.3788]
+run_count: 435 eval_reward 91.6 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [58.4424, 57.3355, 56.5095, 21.4977, 57.3888, 57.8854, 24.3143, 21.125, 57.1559, 56.731]
+run_count: 436 eval_reward 122.0 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [59.0779, 57.9822, 57.1644, 21.4977, 58.0349, 58.5266, 24.3143, 21.125, 57.8043, 57.3837]
+run_count: 437 eval_reward 85.6 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [59.3432, 58.2583, 57.4488, 21.4977, 58.3105, 58.7973, 24.3143, 21.125, 58.0823, 57.6659]
+run_count: 438 eval_reward 54.6 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [59.2957, 58.2217, 57.4203, 21.4977, 58.2734, 58.7553, 24.3143, 21.125, 58.0474, 57.6352]
+run_count: 439 eval_reward 97.4 choose_type: random choice
+choose arms: [0 1 7 4 2 9 6] cur_worker_credit: [59.6768, 58.6135, 57.8201, 21.4977, 58.6647, 58.7553, 25.0451, 21.8878, 58.0474, 58.0329]
+run_count: 440 eval_reward 86.2 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [59.942, 58.8894, 58.1039, 21.4977, 58.94, 59.0298, 25.0451, 21.8878, 58.329, 58.3145]
+run_count: 441 eval_reward 76.0 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [60.1026, 59.0605, 58.2829, 21.4977, 59.1106, 59.1995, 25.0451, 21.8878, 58.5057, 58.4914]
+run_count: 442 eval_reward 91.8 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [60.4196, 59.3879, 58.618, 21.4977, 59.4375, 59.5255, 25.0451, 21.8878, 58.8386, 58.8245]
+run_count: 443 eval_reward 66.8 choose_type: Greedy choice
+choose arms: [0 5 4 1 8 9 2] cur_worker_credit: [60.4834, 59.462, 58.6999, 21.4977, 59.5112, 59.5982, 25.0451, 21.8878, 58.9182, 58.9042]
+run_count: 444 eval_reward 83.8 choose_type: random choice
+choose arms: [0 7 1 6 2 5 3] cur_worker_credit: [60.7165, 59.7054, 58.9509, 22.1207, 59.5112, 59.8402, 25.6327, 22.5069, 58.9182, 58.9042]
+run_count: 445 eval_reward 59.8 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [60.7074, 59.7063, 58.9593, 22.1207, 59.514, 59.8398, 25.6327, 22.5069, 58.927, 58.9132]
+run_count: 446 eval_reward 44.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [60.5443, 59.5533, 58.8138, 22.1207, 59.3629, 59.6854, 25.6327, 22.5069, 58.7818, 58.7681]
+run_count: 447 eval_reward 62.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [60.5648, 59.5837, 58.8516, 22.1207, 59.3953, 59.7146, 25.6327, 22.5069, 58.82, 58.8064]
+run_count: 448 eval_reward 109.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [61.0552, 60.0839, 59.3591, 22.1207, 59.8973, 60.2134, 25.6327, 22.5069, 59.3278, 59.3143]
+run_count: 449 eval_reward 68.8 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [61.1326, 60.1711, 59.4535, 22.1207, 59.9863, 60.2993, 25.6327, 22.5069, 59.4225, 59.4092]
+run_count: 450 eval_reward 44.0 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [60.9613, 60.0094, 59.299, 22.1207, 59.8265, 60.1363, 25.6327, 22.5069, 59.2683, 59.2551]
+run_count: 451 eval_reward 56.8 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [60.9197, 59.9773, 59.274, 22.1207, 59.7962, 60.103, 25.6327, 22.5069, 59.2436, 59.2305]
+run_count: 452 eval_reward 119.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [61.5045, 60.5715, 59.8752, 22.1207, 60.3923, 60.6959, 25.6327, 22.5069, 59.8451, 59.8322]
+run_count: 453 eval_reward 103.8 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [61.9275, 61.0038, 60.3145, 22.1207, 60.8263, 61.127, 25.6327, 22.5069, 60.2847, 60.2719]
+run_count: 454 eval_reward 64.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [61.9522, 61.0377, 60.3553, 22.1207, 60.8621, 61.1597, 25.6327, 22.5069, 60.3258, 60.3132]
+run_count: 455 eval_reward 99.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [62.3267, 61.4214, 60.7458, 22.1207, 61.2474, 61.5421, 25.6327, 22.5069, 60.7166, 60.704]
+run_count: 456 eval_reward 139.2 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [63.0954, 62.1992, 61.5303, 22.1207, 62.027, 62.3187, 25.6327, 22.5069, 61.5014, 61.489]
+run_count: 457 eval_reward 87.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [63.3404, 62.4532, 61.791, 22.1207, 62.2827, 62.5715, 25.6327, 22.5069, 61.7624, 61.7501]
+run_count: 458 eval_reward 80.8 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [63.515, 62.6366, 61.9811, 22.1207, 62.4679, 62.7538, 25.6327, 22.5069, 61.9528, 61.9406]
+run_count: 459 eval_reward 119.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 2 8 9] cur_worker_credit: [64.0759, 63.2063, 62.5573, 22.1207, 63.0392, 63.3222, 25.6327, 22.5069, 62.5292, 62.5172]
+run_count: 460 eval_reward 83.8 choose_type: random choice
+choose arms: [0 3 8 9 5 1 7] cur_worker_credit: [64.2731, 63.4122, 62.5573, 22.7375, 63.0392, 63.527, 25.6327, 23.1198, 62.742, 62.73]
+run_count: 461 eval_reward 101.4 choose_type: random choice
+choose arms: [0 1 4 5 9 3 6] cur_worker_credit: [64.6444, 63.7921, 62.5573, 23.5241, 63.4228, 63.9057, 26.3903, 23.1198, 62.742, 63.1167]
+run_count: 462 eval_reward 127.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [65.272, 64.4282, 63.2057, 23.5241, 64.0626, 64.5407, 26.3903, 23.1198, 63.3885, 63.7596]
+run_count: 463 eval_reward 87.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [65.4952, 64.6599, 63.4497, 23.5241, 64.298, 64.7713, 26.3903, 23.1198, 63.6306, 63.998]
+run_count: 464 eval_reward 63.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [65.4763, 64.6493, 63.4512, 23.5241, 64.291, 64.7596, 26.3903, 23.1198, 63.6303, 63.994]
+run_count: 465 eval_reward 117.2 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [65.9935, 65.1748, 63.9887, 23.5241, 64.8201, 65.284, 26.3903, 23.1198, 64.166, 64.5261]
+run_count: 466 eval_reward 139.0 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [66.7236, 65.913, 64.7388, 23.5241, 65.5619, 66.0211, 26.3903, 23.1198, 64.9144, 65.2708]
+run_count: 467 eval_reward 73.4 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [66.7904, 65.9879, 64.8254, 23.5241, 65.6402, 66.0949, 26.3903, 23.1198, 64.9992, 65.3521]
+run_count: 468 eval_reward 86.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [66.9884, 66.194, 65.0431, 23.5241, 65.8498, 66.3, 26.3903, 23.1198, 65.2152, 65.5646]
+run_count: 469 eval_reward 81.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [67.1346, 66.3481, 65.2087, 23.5241, 66.0073, 66.453, 26.3903, 23.1198, 65.3791, 65.7249]
+run_count: 470 eval_reward 98.6 choose_type: Greedy choice
+choose arms: [0 5 1 4 9 8 2] cur_worker_credit: [67.4492, 66.6706, 65.5426, 23.5241, 66.3333, 66.7744, 26.3903, 23.1198, 65.7113, 66.0537]
+run_count: 471 eval_reward 121.4 choose_type: random choice
+choose arms: [0 4 5 6 7 9 2] cur_worker_credit: [67.9887, 66.6706, 66.1012, 23.5241, 66.8839, 67.3207, 27.3404, 24.1026, 65.7113, 66.6071]
+run_count: 472 eval_reward 81.8 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 2 8] cur_worker_credit: [68.1268, 66.8219, 66.2582, 23.5241, 67.0331, 67.4655, 27.3404, 24.1026, 65.8722, 66.7591]
+run_count: 473 eval_reward 122.0 choose_type: random choice
+choose arms: [0 9 2 3 5 1 8] cur_worker_credit: [68.6656, 67.3737, 66.8156, 24.5089, 67.0331, 68.0108, 27.3404, 24.1026, 66.4335, 67.3115]
+run_count: 474 eval_reward 144.8 choose_type: Greedy choice
+choose arms: [0 5 1 9 4 2 8] cur_worker_credit: [69.4269, 68.1479, 67.5954, 24.5089, 67.8108, 68.7787, 27.3404, 24.1026, 67.2171, 68.0864]
+run_count: 475 eval_reward 129.4 choose_type: Greedy choice
+choose arms: [0 5 1 9 4 2 8] cur_worker_credit: [70.0266, 68.7605, 68.2135, 24.5089, 68.4267, 69.3849, 27.3404, 24.1026, 67.839, 68.6995]
+run_count: 476 eval_reward 142.0 choose_type: Greedy choice
+choose arms: [0 5 1 9 4 2 8] cur_worker_credit: [70.7464, 69.4929, 68.9514, 24.5089, 69.1624, 70.1111, 27.3404, 24.1026, 68.5806, 69.4325]
+run_count: 477 eval_reward 99.2 choose_type: random choice
+choose arms: [0 2 9 7 4 6 3] cur_worker_credit: [71.0309, 69.4929, 69.2538, 25.2558, 69.4628, 70.1111, 28.059, 24.8536, 68.5806, 69.7302]
+run_count: 478 eval_reward 122.2 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [71.5426, 70.0199, 69.7833, 25.2558, 69.9901, 70.632, 28.059, 24.8536, 69.1168, 70.2549]
+run_count: 479 eval_reward 113.0 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [71.9572, 70.4497, 70.2155, 25.2558, 70.4202, 71.0557, 28.059, 24.8536, 69.5556, 70.6823]
+run_count: 480 eval_reward 129.4 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [72.5316, 71.0392, 70.8073, 25.2558, 71.01, 71.6391, 28.059, 24.8536, 70.154, 71.2695]
+run_count: 481 eval_reward 96.4 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [72.7703, 71.2928, 71.0632, 25.2558, 71.2639, 71.8867, 28.059, 24.8536, 70.4165, 71.5208]
+run_count: 482 eval_reward 92.6 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [72.9686, 71.5059, 71.2786, 25.2558, 71.4773, 72.0938, 28.059, 24.8536, 70.6383, 71.7316]
+run_count: 483 eval_reward 112.2 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [73.3609, 71.9129, 71.6878, 25.2558, 71.8845, 72.4949, 28.059, 24.8536, 71.0539, 72.1363]
+run_count: 484 eval_reward 133.0 choose_type: random choice
+choose arms: [0 2 9 5 4 6 1] cur_worker_credit: [73.9573, 72.5237, 72.3009, 25.2558, 72.4957, 73.1, 29.1084, 24.8536, 71.0539, 72.7449]
+run_count: 485 eval_reward 90.4 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [74.1217, 72.7025, 72.4819, 25.2558, 72.6747, 73.273, 29.1084, 24.8536, 71.2474, 72.9215]
+run_count: 486 eval_reward 146.0 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [74.8405, 73.4355, 73.2171, 25.2558, 73.408, 74.0002, 29.1084, 24.8536, 71.9949, 73.6523]
+run_count: 487 eval_reward 128.8 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [75.3801, 73.9891, 73.7729, 25.2558, 73.9619, 74.5482, 29.1084, 24.8536, 72.563, 74.2037]
+run_count: 488 eval_reward 135.4 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [75.9803, 74.6032, 74.3892, 25.2558, 74.5763, 75.1567, 29.1084, 24.8536, 73.1914, 74.8157]
+run_count: 489 eval_reward 139.6 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [76.6165, 75.2532, 75.0413, 25.2558, 75.2265, 75.8012, 29.1084, 24.8536, 73.8554, 75.4635]
+run_count: 490 eval_reward 86.2 choose_type: random choice
+choose arms: [0 2 6 4 5 1 7] cur_worker_credit: [76.7123, 75.3627, 75.1529, 25.2558, 75.3362, 75.9052, 29.6794, 25.4671, 73.8554, 75.4635]
+run_count: 491 eval_reward 142.8 choose_type: Greedy choice
+choose arms: [0 5 9 1 4 2 8] cur_worker_credit: [77.3732, 76.037, 75.8294, 25.2558, 76.0109, 76.5741, 29.6794, 25.4671, 74.5449, 76.1369]
+run_count: 492 eval_reward 87.6 choose_type: random choice
+choose arms: [0 9 7 2 5 3 4] cur_worker_credit: [77.4755, 76.037, 75.9471, 25.8792, 76.1268, 76.6844, 29.6794, 26.0884, 74.5449, 76.2515]
+run_count: 493 eval_reward 103.2 choose_type: random choice
+choose arms: [0 3 7 6 8 4 1] cur_worker_credit: [77.7327, 76.3087, 75.9471, 26.6524, 76.3975, 76.6844, 30.4146, 26.8595, 74.8314, 76.2515]
+run_count: 494 eval_reward 165.0 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 2 8] cur_worker_credit: [78.6054, 77.1956, 76.8376, 26.6524, 77.2835, 77.5675, 30.4146, 26.8595, 75.7331, 77.139]
+run_count: 495 eval_reward 112.0 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 2 8] cur_worker_credit: [78.9393, 77.5436, 77.1892, 26.6524, 77.6307, 77.9119, 30.4146, 26.8595, 76.0958, 77.4876]
+run_count: 496 eval_reward 123.2 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 2 8] cur_worker_credit: [79.3819, 78.0002, 77.6494, 26.6524, 78.0864, 78.3647, 30.4146, 26.8595, 76.5668, 77.9447]
+run_count: 497 eval_reward 171.2 choose_type: Greedy choice
+choose arms: [0 5 4 1 9 2 8] cur_worker_credit: [80.3001, 78.9322, 78.5849, 26.6524, 79.0175, 79.2931, 30.4146, 26.8595, 77.5132, 78.8773]
+run_count: 498 eval_reward 97.0 choose_type: random choice
+choose arms: [0 2 5 1 8 9 7] cur_worker_credit: [80.4671, 79.1129, 78.769, 26.6524, 79.0175, 79.4702, 30.4146, 27.5609, 77.708, 79.0585]
+run_count: 499 eval_reward 110.0 choose_type: random choice
+choose arms: [0 8 4 9 1 2 5] cur_worker_credit: [80.7625, 79.4217, 79.0813, 26.6524, 79.3274, 79.7755, 30.4146, 27.5609, 78.031, 79.3679]
+last worker_credit [80.7624535960983, 79.42172555022688, 79.08131842482055, 26.652425135282538, 79.32735196964511, 79.77545329316, 30.414560855928148, 27.560913322657854, 78.03095527050229, 79.36794298196764]
+sorted credit num [0 5 1 9 4 2 8 6 7 3]
+test session num 15, end time Fri Sep 24 07:58:37 2021
+bad worker list: [1, 3, 4], spend time: 5310.663142681122
