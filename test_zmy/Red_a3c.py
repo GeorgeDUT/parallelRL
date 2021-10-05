@@ -23,7 +23,7 @@ MAX_EP = 10000
 
 NUM_Actor = 10
 Good_Actor = 6
-bad_worker_id = [2,4,7,9]
+bad_worker_id = [1,4,7,9]
 
 env_name = 'CartPole-v0'
 env = gym.make(env_name)
