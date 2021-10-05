@@ -16,10 +16,10 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 4000
+MAX_EP = 20000
 
 Actor_NUM = 10
-bad_actor_id = [0, 2, 5, 6, 7]
+bad_actor_id = [1, 3, 5, 8]
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
@@ -137,6 +137,7 @@ if __name__ == "__main__":
         else:
             break
     # [w.join() for w in workers]
+    [w.terminate() for w in workers]
 
     import matplotlib.pyplot as plt
 

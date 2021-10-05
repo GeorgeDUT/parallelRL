@@ -96,7 +96,6 @@ class Worker(mp.Process):
             # 更新该worker的置信度
             self.bandit_credit = self.bandit_credit + self.bandit_learning_rate * (real_ep_r - self.bandit_credit)
             with Global_credit[NUM_Actor].get_lock():
-                print('value')
                 Global_credit[self.actor_id].value = self.bandit_credit
 
             # 更新 actor 的选择
