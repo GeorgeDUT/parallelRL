@@ -49,7 +49,7 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 25000
+    args.MAX_EP = 200
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
@@ -58,14 +58,14 @@ def gen_args():
     args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './plot_substract_constant3/'
+    args.base_path = './plot_worker_evaluate/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args
 
 
 class Worker(mp.Process):
-    def __init__(self, params, gnet, opt, global_ep, global_ep_r, stop_episode, res_queue, name):
+    def __init__(self, params, gnet, opt, global_ep, global_ep_r, stop_episode, res_queue, name, my_credit):
         super(Worker, self).__init__()
         self.params = params
         self.actor_id = name
@@ -76,6 +76,7 @@ class Worker(mp.Process):
         self.lnet = DiscreteNet(params.N_S, params.N_A)  # local network
         self.lnet.load_state_dict(self.gnet.state_dict())
         self.env = gym.make(params.env_name)
+        self.my_credit = my_credit
 
     def run(self):
         total_step = 1
@@ -101,7 +102,7 @@ class Worker(mp.Process):
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
 
-                if done: real_r = -50 #失败时，给一个较高的负的奖励
+                if done: real_r = -50  # 失败时，给一个较高的负的奖励
 
                 r = real_r
 
@@ -116,7 +117,7 @@ class Worker(mp.Process):
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
                         push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                                       self.params.GAMMA)
+                                           self.params.GAMMA)
                     else:
                         # sync
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
@@ -124,6 +125,8 @@ class Worker(mp.Process):
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
+                        # 更新当前臂的奖励
+                        self.my_credit.value += 0.01 * (real_ep_r - self.my_credit.value)
                         with self.g_ep_r.get_lock():
                             if self.g_ep_r.value == 0.:
                                 self.g_ep_r.value = real_ep_r
@@ -157,11 +160,12 @@ if __name__ == "__main__":
         gnet.share_memory()  # share the global parameters in multiprocessing
         opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
         global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
+        global_credit = [mp.Value('d', 0.) for i in range(params.NUM_Actor)]
 
         res = []  # record episode reward to plot
         evaluate_good_value_list = []
         # 初始化置信度
-        worker_credit = [0] * params.NUM_Actor
+        # worker_credit = [0] * params.NUM_Actor
         is_random_choice = False
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
@@ -172,6 +176,7 @@ if __name__ == "__main__":
             if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
                 # if random.random() >= 0.5:
                 is_random_choice = False
+                worker_credit = [ele.value for ele in global_credit]
                 topk_action_id = np.argsort(-np.array(worker_credit[1:]), kind="heapsort")[:params.Good_Actor_num - 1]
                 topk_action_id += 1
                 # print(topk_action_id, worker_credit)
@@ -182,10 +187,8 @@ if __name__ == "__main__":
             topk_action_id = np.insert(topk_action_id, 0, 0, axis=0)
             # 选出来的worker进行异步更新
             workers = [
-                Worker(params, gnet, opt, global_ep, global_ep_r, (i + 1) * params.each_test_episodes, res_queue, w_id)
-                for
-                w_id in
-                topk_action_id]
+                Worker(params, gnet, opt, global_ep, global_ep_r, (i + 1) * params.each_test_episodes, res_queue, w_id,
+                       global_credit[w_id]) for w_id in topk_action_id]
             random.shuffle(workers)
             [w.start() for w in workers]
             # 接收本轮奖励
@@ -205,12 +208,13 @@ if __name__ == "__main__":
             evaluate_reward_list.append(eval_reward)
             step_list.append(i)
             # 使用评估结果 更新worker的置信度
-            for id in topk_action_id:
-                worker_credit[id] += 0.01 * (eval_reward - last_evaluate - worker_credit[id])
+            # for id in topk_action_id:
+            #     worker_credit[id] += 0.01 * (eval_reward - last_evaluate - worker_credit[id])
             last_evaluate = eval_reward
+            worker_credit = [ele.value for ele in global_credit]
             print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
-            #达到预期奖励进行早停
+            # 达到预期奖励进行早停
             # if eval_reward > 100:
             #     evaluate_good_value_list.append(eval_reward)
             #     if len(evaluate_good_value_list) > 10:
@@ -238,7 +242,7 @@ if __name__ == "__main__":
         analyse_data["bandit_credit"].append(worker_credit)
         analyse_data["sorted_id"].append(sorted_id)
         # 存储奖励曲线csv
-        pd.DataFrame({"Epochs": step_list, "Reward": evaluate_reward_list}).to_csv(params.save_path+'/reward.csv')
+        pd.DataFrame({"Epochs": step_list, "Reward": evaluate_reward_list}).to_csv(params.save_path + '/reward.csv')
         # 关闭本次log文件输入
         sys.stdout.close_file_output()
         # 最后写出多轮测试数据到excel
