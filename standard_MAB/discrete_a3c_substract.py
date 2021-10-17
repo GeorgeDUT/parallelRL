@@ -58,7 +58,7 @@ def gen_args():
     args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './plot_substract_constant3/'
+    args.base_path = './plot_subtract_constant3/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args

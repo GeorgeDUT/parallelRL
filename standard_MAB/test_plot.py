@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 
 def plot_many_lines():
-    base_path = './plot_substract/'
-    num_list = range(0, 5)
+    base_path = './plot_worker_evaluate/'
+    num_list = range(0, 2)
     csv_path_list = [base_path + 'run' + str(num) + '/reward.csv' for num in num_list]
     class_name_list = ['test' + str(num) for num in num_list]
     data = pd.DataFrame()
@@ -47,21 +47,29 @@ def plot_many_lines():
 
 def plot_fuse_pic():
     figure_name = "plot_reward.pdf"
-    """subtract constant3"""
-    # path_list = ['./test_results/subtract/' + name for name in ['plot_origin_al_constant3/', 'plot_rand_constant3/',
-    #                                                    'plot_reward_rand_action_to_grad/', 'plot_substract_al_constant3/',
-    #                                                    'plot_substract_constant1/']]
+    # """subtract constant3"""
+    # # path_list = ['./test_results/subtract/' + name for name in ['plot_origin_al_constant3/', 'plot_rand_constant3/',
+    # #                                                    'plot_reward_rand_action_to_grad/', 'plot_substract_al_constant3/',
+    # #                                                    'plot_substract_constant1/']]
+    # # path_list.append('./test_results/all_good/')
+    # # path_list.append('./plot_worker_evaluate/')
+    # # line_name = ['origin_al_constant3', 'rand_constant3', 'rand_action_to_grad_constant1', 'subtract_constant3',
+    # #              'subtract_constant1', 'all_good', 'worker_evaluate']
+    # path_list = ['./test_results/subtract/' + name for name in ['plot_rand_constant3/']]
     # path_list.append('./test_results/all_good/')
-    # line_name = ['origin_al_constant3', 'rand_constant3', 'rand_action_to_grad_constant1', 'subtract_constant3',
-    #              'subtract_constant1', 'all_good']
+    # path_list.append('./plot_worker_evaluate/')
+    # line_name = ['rand_constant3', 'all_good', 'worker_evaluate']
     """basic origin"""
-    path_list = ['./test_results/origin/' + name for name in ['plot_reward_al/', 'plot_reward_rand/',
-                                                              'plot_reward_al_2g/', 'plot_reward_rand_2g/',
-                                                              'plot_reward_al_-50/', 'plot_reward_rand_-50/',
-                                                              'plot_reward_al_constant/', 'plot_reward_rand_constant/']]
-    path_list.append('./test_results/all_good/')
-    line_name = ['basic_al', 'basic_rand', 'al_2g', 'al_rand', 'al_-50', 'rand_-50', 'al_constant', 'rand_constant', 'all_good']
-    colors = ["green", "red", "blue", "black", "yellow", "pink", "orange", "purple", "brown"]
+    # path_list = ['./test_results/origin/' + name for name in ['plot_reward_al/', 'plot_reward_rand/',
+    #                                                           'plot_reward_al_2g/', 'plot_reward_rand_2g/',
+    #                                                           'plot_reward_al_-50/', 'plot_reward_rand_-50/',
+    #                                                           # 'plot_reward_al_constant/', 'plot_reward_rand_constant/']]
+    # path_list.append('./test_results/all_good/')
+    # line_name = ['basic_al', 'basic_rand', 'al_2g', 'al_rand', 'al_-50', 'rand_-50', 'al_constant', 'rand_constant', 'all_good']
+    """paper result1"""
+    path_list = ['./paper_result/plot_worker_evaluate' + name for name in ['/', '_all/', '_all_good/', '_rand/', '_all_1e5/', '_rand_1e5/']]
+    line_name = ['algorithm', 'all_bandits', 'all_good_bandits', 'rand_choice', 'all_1e5', 'rand_1e5']
+    colors = ["green", "red", "blue", "black", "pink", "orange", "purple", "brown", "yellow"]
     colors = colors[:len(path_list)]
     data = pd.DataFrame()
     for line_num, base_path in enumerate(path_list):

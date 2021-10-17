@@ -26,6 +26,22 @@ def evaluate_network(env_name, g_net, evaluate_num):
     return sum_r / evaluate_num
 
 
+def evaluate_network_normal(env_name, g_net, evaluate_num, continuous=False, min_a=None, max_a=None):
+    env = gym.make(env_name)
+    sum_r = 0
+    for i in range(evaluate_num):
+        s = env.reset()
+        while True:
+            a = g_net.choose_action(v_wrap(s[None, :]))
+            if continuous:
+                a = a.clip(min_a, max_a)
+            s, real_r, done, _ = env.step(a)
+            sum_r += real_r
+            if done:
+                break
+    return sum_r / evaluate_num
+
+
 def linear_decay(min_v, max_v, cur_step, totoal_step):
     return max_v - (max_v - min_v) * (min(cur_step, totoal_step) / totoal_step)
 

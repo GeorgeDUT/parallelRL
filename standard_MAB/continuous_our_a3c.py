@@ -12,14 +12,13 @@ import xlwt
 import torch.multiprocessing as mp
 import numpy as np
 from shared_adam import SharedAdam
-from a3c.NN import DiscreteNet
+from a3c.NN import ContinuousNet
 from standard_MAB.my_utils import *
 from utils import *
 import matplotlib.pyplot as plt
 import pandas as pd
 
 os.environ["OMP_NUM_THREADS"] = "1"
-os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 
 class Logger(object):
@@ -43,23 +42,25 @@ def gen_args():
     args = argparse.ArgumentParser()
     args = args.parse_args()
 
-    args.env_name = 'CartPole-v0'
+    args.env_name = 'HalfCheetah-v2'
     env = gym.make(args.env_name)
     args.N_S = env.observation_space.shape[0]
-    args.N_A = env.action_space.n
+    args.N_A = env.action_space.shape[0]
+    args.min_a = env.action_space.low[0]  # 目前连续动作只支持多个动作的最低值和最高值相同的情况
+    args.max_a = env.action_space.high[0]
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 20000
+    args.MAX_EP = 4000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
-    args.Good_Actor_num = 7
-    args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
+    args.Good_Actor_num = 10
+    args.bad_worker_id = []  # random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './plot_worker_evaluate/'
+    args.base_path = './plot_' + args.env_name + '/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -74,7 +75,7 @@ class Worker(mp.Process):
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.stop_episode = stop_episode
         self.gnet, self.opt = gnet, opt
-        self.lnet = DiscreteNet(params.N_S, params.N_A)  # local network
+        self.lnet = ContinuousNet(params.N_S, params.N_A)  # local network
         if self.actor_id not in self.params.bad_worker_id:
             self.lnet.load_state_dict(self.gnet.state_dict())
         self.env = gym.make(params.env_name)
@@ -99,12 +100,12 @@ class Worker(mp.Process):
             while True:
                 # print(self.name, total_step)
                 if self.actor_id in self.params.bad_worker_id:
-                    a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+                    delta_a = np.random.rand(self.params.N_A) * (self.params.max_a - self.params.min_a)
+                    a = delta_a + np.ones_like(delta_a) * self.params.min_a
                 else:
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
+                    a = a.clip(self.params.min_a, self.params.max_a)
                 s_, real_r, done, _ = self.env.step(a)
-
-                if done: real_r = -50  # 失败时，给一个较高的负的奖励
 
                 r = real_r
 
@@ -158,7 +159,7 @@ if __name__ == "__main__":
         sys.stdout = Logger(os.path.join(params.save_path, 'log.txt'), sys.stdout)
         print('test session num {}, start time {}'.format(test, str(time.asctime(time.localtime(time.time())))))
         print('bad worker id list:', params.bad_worker_id)
-        gnet = DiscreteNet(params.N_S, params.N_A)  # global network
+        gnet = ContinuousNet(params.N_S, params.N_A)  # global network
         gnet.share_memory()  # share the global parameters in multiprocessing
         opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
         global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
@@ -172,7 +173,7 @@ if __name__ == "__main__":
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
         step_list = []
-        last_evaluate = -50
+        last_evaluate = -500
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
             if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
@@ -205,8 +206,9 @@ if __name__ == "__main__":
                         break
             [w.join() for w in workers]
             # [w.close() for w in workers]
-            # 运用0号worker进评估
-            eval_reward = evaluate_network(params.env_name, gnet, params.evaluate_epoch)
+            # 运用全局网络进评估
+            eval_reward = evaluate_network_normal(params.env_name, gnet, params.evaluate_epoch, True, params.min_a,
+                                                  params.max_a)
             evaluate_reward_list.append(eval_reward)
             step_list.append(i)
             # 使用评估结果 更新worker的置信度

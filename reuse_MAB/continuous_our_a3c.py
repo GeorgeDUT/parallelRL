@@ -10,26 +10,30 @@ from a3c.NN import ContinuousNet
 
 os.environ["OMP_NUM_THREADS"] = "1"
 
-UPDATE_GLOBAL_ITER = 16
+UPDATE_GLOBAL_ITER = 32
 GAMMA = 0.9
-MAX_EP = 6000
+MAX_EP = 60000
 
 NUM_Actor = 10
-Good_Actor = 7
-bad_worker_id = [7, 8, 9]
+Good_Actor = 10#7
+bad_worker_id = []#[7, 8, 9]
 Global_credit = [mp.Value('f', 0) for i in range(NUM_Actor + 1)]
 
 env_name = 'Pendulum-v0'
 # env_name = 'BipedalWalker-v3'
+env_name = 'HalfCheetah-v2'
+# env_name = 'Ant-v2'
 min_a, max_a = None, None
-if env_name == 'Pendulum-v0':
-    min_a, max_a = -2, 2
-    MAX_EP_STEP = 200
-if env_name == 'BipedalWalker-v3':
-    min_a, max_a = -1, 1
+# if env_name == 'Pendulum-v0':
+#     min_a, max_a = -2, 2
+#     MAX_EP_STEP = 200
+# if env_name == 'BipedalWalker-v3':
+#     min_a, max_a = -1, 1
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
+min_a = env.action_space.low[0]
+max_a = env.action_space.high[0]
 
 # 这个是全局变量用于选择actor，1表示actor被选择，0表示未被选择。最后一位 global_Choose_actors[NUM_Actor] 表示是否拿到全局锁
 global_Choose_actors = [mp.Value('i', 0) for i in range(NUM_Actor + 1)]
@@ -58,11 +62,12 @@ class Worker(mp.Process):
             ep_r = 0.
             real_ep_r = 0.
 
-            for t in range(MAX_EP_STEP):
+            #for t in range(MAX_EP_STEP):
+            while True:
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a.clip(min_a, max_a))
-                if t == MAX_EP_STEP - 1:
-                    done = True
+                # if t == MAX_EP_STEP - 1:
+                #     done = True
 
                 # 有问题的进程，其奖励返回不准确
                 if self.actor_id in bad_worker_id:
