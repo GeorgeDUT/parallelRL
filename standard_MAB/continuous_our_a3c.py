@@ -19,6 +19,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 os.environ["OMP_NUM_THREADS"] = "1"
+# os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
 
 class Logger(object):
@@ -51,8 +52,8 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 4000
-    args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
+    args.MAX_EP = 100000
+    args.each_test_episodes = 10000  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
@@ -105,6 +106,7 @@ class Worker(mp.Process):
                 else:
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
                     a = a.clip(self.params.min_a, self.params.max_a)
+
                 s_, real_r, done, _ = self.env.step(a)
 
                 r = real_r
@@ -136,11 +138,11 @@ class Worker(mp.Process):
                             else:
                                 self.g_ep_r.value = self.g_ep_r.value * 0.99 + real_ep_r * 0.01
                         self.res_queue.put(self.g_ep_r.value)
-                        # print(
-                        #     self.name,
-                        #     "Ep:", real_g_ep,
-                        #     "| Ep_r: %.0f" % self.g_ep_r.value,
-                        # )
+                        print(
+                            self.name,
+                            "Ep:", real_g_ep,
+                            "| Ep_r: %.2f" % real_ep_r,
+                        )
                         break
                 s = s_
                 total_step += 1
@@ -161,7 +163,7 @@ if __name__ == "__main__":
         print('bad worker id list:', params.bad_worker_id)
         gnet = ContinuousNet(params.N_S, params.N_A)  # global network
         gnet.share_memory()  # share the global parameters in multiprocessing
-        opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
+        opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.95, 0.999))  # global optimizer
         global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
         global_credit = [mp.Value('d', 0.) for i in range(params.NUM_Actor)]
 

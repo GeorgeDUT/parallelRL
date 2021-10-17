@@ -65,7 +65,8 @@ class Worker(mp.Process):
             #for t in range(MAX_EP_STEP):
             while True:
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
-                s_, real_r, done, _ = self.env.step(a.clip(min_a, max_a))
+                a = a.clip(min_a, max_a)
+                s_, real_r, done, _ = self.env.step(a)
                 # if t == MAX_EP_STEP - 1:
                 #     done = True
 

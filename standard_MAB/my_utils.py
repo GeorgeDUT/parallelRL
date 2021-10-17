@@ -38,6 +38,7 @@ def evaluate_network_normal(env_name, g_net, evaluate_num, continuous=False, min
             s, real_r, done, _ = env.step(a)
             sum_r += real_r
             if done:
+                print(sum_r, continuous)
                 break
     return sum_r / evaluate_num
 
