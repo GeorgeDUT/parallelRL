@@ -34,11 +34,11 @@ def evaluate_network_normal(env_name, g_net, evaluate_num, continuous=False, min
         while True:
             a = g_net.choose_action(v_wrap(s[None, :]))
             if continuous:
-                a = a.clip(min_a, max_a)
+                a = a[0].clip(min_a, max_a)
             s, real_r, done, _ = env.step(a)
             sum_r += real_r
             if done:
-                print(sum_r, continuous)
+                # print(sum_r, continuous)
                 break
     return sum_r / evaluate_num
 

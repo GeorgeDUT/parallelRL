@@ -9,6 +9,7 @@ import time
 from a3c.NN import ContinuousNet
 
 os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 UPDATE_GLOBAL_ITER = 32
 GAMMA = 0.9
@@ -23,12 +24,6 @@ env_name = 'Pendulum-v0'
 # env_name = 'BipedalWalker-v3'
 env_name = 'HalfCheetah-v2'
 # env_name = 'Ant-v2'
-min_a, max_a = None, None
-# if env_name == 'Pendulum-v0':
-#     min_a, max_a = -2, 2
-#     MAX_EP_STEP = 200
-# if env_name == 'BipedalWalker-v3':
-#     min_a, max_a = -1, 1
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
@@ -65,8 +60,7 @@ class Worker(mp.Process):
             #for t in range(MAX_EP_STEP):
             while True:
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
-                a = a.clip(min_a, max_a)
-                s_, real_r, done, _ = self.env.step(a)
+                s_, real_r, done, _ = self.env.step(a.clip(min_a, max_a))
                 # if t == MAX_EP_STEP - 1:
                 #     done = True
 

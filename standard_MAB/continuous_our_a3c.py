@@ -19,7 +19,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 os.environ["OMP_NUM_THREADS"] = "1"
-# os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 
 class Logger(object):
@@ -52,13 +52,13 @@ def gen_args():
 
     args.UPDATE_GLOBAL_ITER = 32
     args.GAMMA = 0.9
-    args.MAX_EP = 100000
-    args.each_test_episodes = 10000  # 每轮训练，异步跑的共同的episode
+    args.MAX_EP = 30000
+    args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
-    args.Good_Actor_num = 10
-    args.bad_worker_id = []  # random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
+    args.Good_Actor_num = 7
+    args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
     args.base_path = './plot_' + args.env_name + '/'
@@ -105,9 +105,8 @@ class Worker(mp.Process):
                     a = delta_a + np.ones_like(delta_a) * self.params.min_a
                 else:
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
-                    a = a.clip(self.params.min_a, self.params.max_a)
 
-                s_, real_r, done, _ = self.env.step(a)
+                s_, real_r, done, _ = self.env.step(a[0].clip(self.params.min_a, self.params.max_a))
 
                 r = real_r
 
@@ -121,7 +120,9 @@ class Worker(mp.Process):
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
-                        push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        # push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        #                    self.params.GAMMA)
+                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
                                            self.params.GAMMA)
                     else:
                         # sync
@@ -138,11 +139,11 @@ class Worker(mp.Process):
                             else:
                                 self.g_ep_r.value = self.g_ep_r.value * 0.99 + real_ep_r * 0.01
                         self.res_queue.put(self.g_ep_r.value)
-                        print(
-                            self.name,
-                            "Ep:", real_g_ep,
-                            "| Ep_r: %.2f" % real_ep_r,
-                        )
+                        # print(
+                        #     self.name,
+                        #     "Ep:", real_g_ep,
+                        #     "| Ep_r: %.2f" % real_ep_r,
+                        # )
                         break
                 s = s_
                 total_step += 1

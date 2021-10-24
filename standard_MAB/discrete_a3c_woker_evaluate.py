@@ -43,14 +43,16 @@ def gen_args():
     args = argparse.ArgumentParser()
     args = args.parse_args()
 
-    args.env_name = 'CartPole-v0'
+    # args.env_name = 'CartPole-v0'
+    args.env_name = 'LunarLander-v2'
     env = gym.make(args.env_name)
     args.N_S = env.observation_space.shape[0]
     args.N_A = env.action_space.n
 
-    args.UPDATE_GLOBAL_ITER = 32
+    args.UPDATE_GLOBAL_ITER = 5#32
     args.GAMMA = 0.9
-    args.MAX_EP = 20000
+    args.MAX_EP = 30000
+    args.MAX_STEP = 2000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
@@ -59,7 +61,7 @@ def gen_args():
     args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './plot_worker_evaluate/'
+    args.base_path = './plot_{}_rand_grad/'.format(args.env_name)
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -96,15 +98,18 @@ class Worker(mp.Process):
             ep_r = 0.
             real_ep_r = 0.
 
+            ep_step = 0
             while True:
+                ep_step += 1
+                if ep_step > self.params.MAX_STEP:
+                    print(self.name, "up to max step ,force stop this episode", total_ep)
+                    break
                 # print(self.name, total_step)
                 if self.actor_id in self.params.bad_worker_id:
                     a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
                 else:
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
-
-                if done: real_r = -50  # 失败时，给一个较高的负的奖励
 
                 r = real_r
 
@@ -118,7 +123,9 @@ class Worker(mp.Process):
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
-                        push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        # push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        #                    self.params.GAMMA)
+                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
                                            self.params.GAMMA)
                     else:
                         # sync
@@ -172,10 +179,10 @@ if __name__ == "__main__":
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
         step_list = []
-        last_evaluate = -50
+        last_evaluate = None
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-            if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
+            if random.random() >= linear_decay(0.2, 1, global_ep.value, 15000):
                 # if random.random() >= 0.5:
                 is_random_choice = False
                 worker_credit = [ele.value for ele in global_credit]

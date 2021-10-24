@@ -1,7 +1,6 @@
 """
 Reinforcement Learning (A3C) using Pytroch + multiprocessing.
 The most simple implementation for continuous action.
-
 View more on my Chinese tutorial page [莫烦Python](https://morvanzhou.github.io/).
 """
 
@@ -14,14 +13,19 @@ from shared_adam import SharedAdam
 import gym
 import os
 os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 1000
+MAX_EP = 20000
+MAX_STEP = 1000
 
-env = gym.make('CartPole-v0')
+env_name = 'LunarLander-v2'
+# env = gym.make('CartPole-v0')
+env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.n
+
 
 class Net(nn.Module):
     def __init__(self, s_dim, a_dim):
@@ -66,30 +70,29 @@ class Net(nn.Module):
 class Worker(mp.Process):
     def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name):
         super(Worker, self).__init__()
-        self.actor_id = name
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.gnet, self.opt = gnet, opt
         self.lnet = Net(N_S, N_A)           # local network
-        self.env = gym.make('CartPole-v0').unwrapped
-        self.run_times = 0
+        self.env = gym.make(env_name)
 
     def run(self):
         total_step = 1
         while self.g_ep.value < MAX_EP:
-            # with self.g_ep.get_lock():
-            #     self.g_ep.value += 1
             s = self.env.reset()
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
+            ep_istep = 0
             while True:
+                ep_istep += 1
+                if ep_istep > 1000:
+                    print(self.name, "warning max step")
+                    break
+                if self.name == 'w00':
+                    self.env.render()
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, r, done, _ = self.env.step(a)
-                if done: r = -1
-
-                if self.actor_id in [0, 1, 2, 3]:
-                    r = r
-
+                # if done: r = -1
                 ep_r += r
                 buffer_a.append(a)
                 buffer_s.append(s)
@@ -101,12 +104,10 @@ class Worker(mp.Process):
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
-                        self.run_times += 1
                         record(self.g_ep, self.g_ep_r, ep_r, self.res_queue, self.name)
                         break
                 s = s_
                 total_step += 1
-        print(self.name, self.run_times)
         self.res_queue.put(None)
 
 
@@ -117,21 +118,15 @@ if __name__ == "__main__":
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
     # parallel training
-    CPU_NUM = mp.cpu_count()
-    CPU_NUM = 10
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(CPU_NUM)]
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(mp.cpu_count())]
     [w.start() for w in workers]
     res = []                    # record episode reward to plot
-    # [w.join() for w in workers]
-    end_count = 0
     while True:
         r = res_queue.get()
         if r is not None:
             res.append(r)
         else:
-            end_count+=1
-            if end_count == CPU_NUM:
-                break
+            break
     [w.join() for w in workers]
 
     import matplotlib.pyplot as plt

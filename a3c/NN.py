@@ -3,6 +3,7 @@ import math
 import torch
 from torch import nn
 import torch.nn.functional as F
+from torch.distributions import Categorical, Normal
 
 from utils import set_init
 
@@ -120,7 +121,8 @@ class ContinuousNet(nn.Module):
     def choose_action(self, s):
         self.training = False
         mu, sigma, _ = self.forward(s)
-        m = self.distribution(mu.view(-1, ).data, sigma.view(-1, ).data)
+        # m = self.distribution(mu.view(-1, ).data, sigma.view(-1, ).data)
+        m = self.distribution(mu, sigma)
         return m.sample().numpy()
 
     def loss_func(self, s, a, v_t):

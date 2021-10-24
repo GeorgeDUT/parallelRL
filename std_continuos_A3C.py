@@ -1,7 +1,6 @@
 """
 Reinforcement Learning (A3C) using Pytroch + multiprocessing.
 The most simple implementation for continuous action.
-
 View more on my Chinese tutorial page [莫烦Python](https://morvanzhou.github.io/).
 """
 
@@ -14,23 +13,22 @@ from shared_adam import SharedAdam
 import gym
 import math, os
 os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE"
 
-UPDATE_GLOBAL_ITER = 16
+UPDATE_GLOBAL_ITER = 32
 GAMMA = 0.9
-MAX_EP = 10000
-MAX_EP_STEP = 200
+MAX_EP = 20000
+MAX_EP_STEP = 5000
 
-env_name = 'Pendulum-v0'
+env_name = 'HalfCheetah-v2'
 # env_name = 'BipedalWalker-v3'
-min_a, max_a = None, None
-if env_name == 'Pendulum-v0':
-    min_a, max_a = -2, 2
-if env_name == 'BipedalWalker-v3':
-    min_a, max_a = -1, 1
-
+# env = gym.make('Pendulum-v0')
+# env = gym.make()
 env = gym.make(env_name)
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
+min_a = env.action_space.low[0]
+max_a = env.action_space.high[0]
 
 
 class Net(nn.Module):
@@ -48,7 +46,7 @@ class Net(nn.Module):
 
     def forward(self, x):
         a1 = F.relu6(self.a1(x))
-        mu = 2 * F.tanh(self.mu(a1))
+        mu = 2 * torch.tanh(self.mu(a1))
         sigma = F.softplus(self.sigma(a1)) + 0.001      # avoid 0
         c1 = F.relu6(self.c1(x))
         values = self.v(c1)
@@ -57,7 +55,8 @@ class Net(nn.Module):
     def choose_action(self, s):
         self.training = False
         mu, sigma, _ = self.forward(s)
-        m = self.distribution(mu.view(-1, ).data, sigma.view(-1, ).data)
+        # m = self.distribution(mu.view(1, ).data, sigma.view(1, ).data)
+        m = self.distribution(mu, sigma)
         return m.sample().numpy()
 
     def loss_func(self, s, a, v_t):
@@ -91,15 +90,17 @@ class Worker(mp.Process):
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0.
             for t in range(MAX_EP_STEP):
-                # if self.name == 'w0':
-                #     self.env.render()
+                if self.name == 'w0':
+                    pass
+                    # self.env.render()
                 a = self.lnet.choose_action(v_wrap(s[None, :]))
-                s_, r, done, _ = self.env.step(a.clip(min_a, max_a))
+                s_, r, done, _ = self.env.step(a[0].clip(min_a, max_a))
                 if t == MAX_EP_STEP - 1:
                     done = True
                 ep_r += r
                 buffer_a.append(a)
                 buffer_s.append(s)
+                # buffer_r.append((r+8.1)/8.1)    # normalize
                 buffer_r.append(r)    # normalize
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
@@ -123,7 +124,7 @@ if __name__ == "__main__":
     global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
     # parallel training
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(mp.cpu_count())]
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(3)]
     [w.start() for w in workers]
     res = []                    # record episode reward to plot
     while True:
