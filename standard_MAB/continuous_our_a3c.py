@@ -61,7 +61,7 @@ def gen_args():
     args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './plot_' + args.env_name + '/'
+    args.base_path = './' + args.env_name + '/al_constant1/'
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -120,10 +120,10 @@ class Worker(mp.Process):
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     if self.actor_id in self.params.bad_worker_id:
                         # 坏臂不更新自己的网络
-                        # push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                        #                    self.params.GAMMA)
-                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        push_constant1_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
                                            self.params.GAMMA)
+                        # push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        #                    self.params.GAMMA)
                     else:
                         # sync
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
@@ -179,7 +179,8 @@ if __name__ == "__main__":
         last_evaluate = -500
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-            if random.random() >= linear_decay(0.2, 1, global_ep.value, 10000):
+            if random.random() >= linear_decay(0.1, 1, global_ep.value, 10000):
+            # if False:
                 # if random.random() >= 0.5:
                 is_random_choice = False
                 worker_credit = [ele.value for ele in global_credit]

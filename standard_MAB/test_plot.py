@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 
 
 def plot_many_lines():
-    base_path = './plot_worker_evaluate/'
-    num_list = range(0, 2)
+    # base_path = './test_plot/'
+    base_path = './plot_LunarLander-v2_all_good/'
+    num_list = range(0, 10)
     csv_path_list = [base_path + 'run' + str(num) + '/reward.csv' for num in num_list]
     class_name_list = ['test' + str(num) for num in num_list]
     data = pd.DataFrame()
@@ -18,7 +19,8 @@ def plot_many_lines():
         t_df = pd.read_csv(csv_path, delim_whitespace=False)
         # 增加一列种类
         t_df['Name'] = [class_name_list[index]] * t_df.shape[0]
-        data = data.append(t_df)
+        data = pd.concat([data, t_df], ignore_index=True)
+        # data = data.append(t_df)
     data['Epochs'] = data["Epochs"] * 100
     # 绘制最终结果
     sns.set(font_scale=3.5)
@@ -63,12 +65,18 @@ def plot_fuse_pic():
     # path_list = ['./test_results/origin/' + name for name in ['plot_reward_al/', 'plot_reward_rand/',
     #                                                           'plot_reward_al_2g/', 'plot_reward_rand_2g/',
     #                                                           'plot_reward_al_-50/', 'plot_reward_rand_-50/',
-    #                                                           # 'plot_reward_al_constant/', 'plot_reward_rand_constant/']]
+    #                                                           'plot_reward_al_constant/', 'plot_reward_rand_constant/']]
     # path_list.append('./test_results/all_good/')
     # line_name = ['basic_al', 'basic_rand', 'al_2g', 'al_rand', 'al_-50', 'rand_-50', 'al_constant', 'rand_constant', 'all_good']
     """paper result1"""
-    path_list = ['./paper_result/plot_worker_evaluate' + name for name in ['/', '_all/', '_all_good/', '_rand/', '_all_1e5/', '_rand_1e5/']]
-    line_name = ['algorithm', 'all_bandits', 'all_good_bandits', 'rand_choice', 'all_1e5', 'rand_1e5']
+    # path_list = ['./paper_result/plot_worker_evaluate' + name for name in ['/', '_all/', '_all_good/', '_rand/', '_all_1e5/', '_rand_1e5/']]
+    # line_name = ['algorithm', 'all_bandits', 'all_good_bandits', 'rand_choice', 'all_1e5', 'rand_1e5']
+    """LunarLander"""
+    path_list = ['./' + name for name in ['plot_LunarLander-v2_all_good/', 'plot_LunarLander-v2_rand_choice/', 'plot_LunarLander-v2_rand_grad/']]#, 'plot_LunarLander-v2_constant3/']]
+    line_name = ['all_good', 'rand_choice', 'al']#, 'constant3']
+    # HalfCheetah
+    # path_list = ['./' + name for name in ['plot_HalfCheetah-v2_all_good/', 'plot_HalfCheetah-v2_rand_choice/', 'plot_HalfCheetah-v2/']]
+    # line_name = ['all_good', 'rand_choice', 'al']  # , 'constant3']
     colors = ["green", "red", "blue", "black", "pink", "orange", "purple", "brown", "yellow"]
     colors = colors[:len(path_list)]
     data = pd.DataFrame()
@@ -79,7 +87,8 @@ def plot_fuse_pic():
             t_df = pd.read_csv(csv_path, delim_whitespace=False)
             # 增加一列种类
             t_df['Name'] = [line_name[line_num]] * t_df.shape[0]
-            data = data.append(t_df)
+            # data = data.append(t_df)
+            data = pd.concat([data, t_df], ignore_index=True)
 
     data['Epochs'] = data["Epochs"] * 100
     # 绘制最终结果
@@ -87,7 +96,6 @@ def plot_fuse_pic():
 
     # colors=["red","windows blue","grey","green"]
     # colors=["green","red","blue","black"]
-
     plt.figure(dpi=80, figsize=(15, 9))
     g = sns.lineplot(x="Epochs", y="Reward", hue="Name",
                      style="Name", data=data, ci=100, linewidth=3.0,

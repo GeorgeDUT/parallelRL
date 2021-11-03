@@ -111,7 +111,7 @@ def push_rand_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     # lnet.load_state_dict(gnet.state_dict())
 
 
-def push_constant_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+def push_constant3_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     # print("update net")
     if done:
         v_s_ = 0.  # terminal
@@ -141,7 +141,7 @@ def push_constant_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
         gp._grad = 3*torch.ones_like(lp.grad) + torch.rand_like(lp.grad)#梯度
     opt.step()
 
-def push_constant_1_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+def push_constant1_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     # print("update net")
     if done:
         v_s_ = 0.  # terminal
@@ -170,6 +170,7 @@ def push_constant_1_grad(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
         # gp._grad = torch.ones_like(lp.grad) #梯度
         gp._grad = torch.ones_like(lp.grad) + torch.rand_like(lp.grad)#梯度
     opt.step()
+
 
 def record(global_ep, global_ep_r, ep_r, res_queue, name):
     with global_ep.get_lock():
