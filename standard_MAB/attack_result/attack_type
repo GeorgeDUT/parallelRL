@@ -1,0 +1,19 @@
+#1 grad attack
+constant grad = -5, -3, -2, -1, 1, 2, 3, 5
+rand uniform grad = (0,1), (0,2), (-1,0), (-2,0), (-2,2)
+rand gaussian grad(mu,std) = (0, 1) # not test in this time(0,2), (2, 2), (-2, 2)
+
+#2 rand action attack
+type 1: uniform get rand action
+type 2: get a same action in a episode
+
+#3 rand reward attack
+type 1: uniform ger reward in possible range
+type 2: get a same reward in a episode
+
+each test need following four time test:
+all 10 bandits, rand 3 of them are bad
+1. 10 bandits run
+2. use 7 good of them to run
+3. rand choose 7 of them to run
+4. use mab algorithm choose 7 of them to run

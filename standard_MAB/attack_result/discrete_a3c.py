@@ -38,6 +38,15 @@ class Logger(object):
         self.log.close()
 
 
+grad_attack_func = {
+    'constant': push_constant_N_grad,
+    'uniform': push_uniform_grad,
+    'gaussian': push_gaussian_grad
+}
+
+test_type = ['all', 'all_good', 'al', 'rand_choice']
+
+
 def gen_args():
     args = argparse.ArgumentParser()
     args = args.parse_args()
@@ -48,20 +57,24 @@ def gen_args():
     args.N_S = env.observation_space.shape[0]
     args.N_A = env.action_space.n
 
-    args.UPDATE_GLOBAL_ITER = 5#32
+    args.UPDATE_GLOBAL_ITER = 5  # 32
     args.GAMMA = 0.9
-    args.MAX_EP = 20000
+    args.MAX_EP = 25000
     args.MAX_STEP = 2000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './' + args.env_name+'/al_constant1/'
-    args.save_path = make_training_save_path(args.base_path)
+    # args.grad_attack_type = 'constant'
+    # args.grad_attack_params = [-5]
+    # args.cur_test_type = 'al'
+    # assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
+    # args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type!='all_good' else []
+    # args.base_path = './' + args.grad_attack_type + '{}_'.format(args.grad_attack_params) + args.cur_test_type
+    # args.save_path = make_training_save_path(args.base_path)
 
     return args
 
@@ -124,8 +137,10 @@ class Worker(mp.Process):
                         # 坏臂不更新自己的网络
                         # push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
                         #                    self.params.GAMMA)
-                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                                           self.params.GAMMA)
+                        # push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                        #                self.params.GAMMA)
+                        grad_attack_func[self.params.grad_attack_type](self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                                       self.params.GAMMA, *self.params.grad_attack_params)
                     else:
                         # sync
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
@@ -153,11 +168,11 @@ class Worker(mp.Process):
         self.res_queue.put(None)
 
 
-if __name__ == "__main__":
+def test_runner(params_func):
     analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
     for test in range(10):
         s_time = time.time()
-        params = gen_args()
+        params = params_func()
         if not os.path.exists(params.save_path):
             os.makedirs(params.save_path)
         save_config(params, params.save_path)
@@ -178,10 +193,9 @@ if __name__ == "__main__":
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
         step_list = []
-        last_evaluate = None
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-            if random.random() >= linear_decay(0.1, 1, global_ep.value, 15000):
+            if params.cur_test_type == 'al' and random.random() >= linear_decay(0.1, 1, global_ep.value, 15000):
                 # if random.random() >= 0.5:
                 is_random_choice = False
                 worker_credit = [ele.value for ele in global_credit]
@@ -212,7 +226,7 @@ if __name__ == "__main__":
             [w.join() for w in workers]
             # [w.close() for w in workers]
             # 运用0号worker进评估
-            eval_reward = evaluate_network(params.env_name, gnet, params.evaluate_epoch)
+            eval_reward = evaluate_network_normal(params.env_name, gnet, params.evaluate_epoch)
             evaluate_reward_list.append(eval_reward)
             step_list.append(i)
             # 使用评估结果 更新worker的置信度

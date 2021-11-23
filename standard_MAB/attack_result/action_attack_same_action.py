@@ -1,3 +1,4 @@
+import copy
 import os
 import sys
 
@@ -38,6 +39,10 @@ class Logger(object):
         self.log.close()
 
 
+attack_type = ['uniform_action', 'same_action']
+test_type = ['all', 'all_good', 'al', 'rand_choice']
+
+
 def gen_args():
     args = argparse.ArgumentParser()
     args = args.parse_args()
@@ -48,19 +53,22 @@ def gen_args():
     args.N_S = env.observation_space.shape[0]
     args.N_A = env.action_space.n
 
-    args.UPDATE_GLOBAL_ITER = 5#32
+    args.UPDATE_GLOBAL_ITER = 5  # 32
     args.GAMMA = 0.9
-    args.MAX_EP = 20000
+    args.MAX_EP = 25000
     args.MAX_STEP = 2000
     args.each_test_episodes = 100  # 每轮训练，异步跑的共同的episode
     args.ep_sleep_time = 0.5  # 每轮跑完以后休息的时间，用以负载均衡
 
     args.NUM_Actor = 10
     args.Good_Actor_num = 7
-    args.bad_worker_id = random.sample(range(1, 10), 3)  # [1, 3, 8]  # [2, 9, 5]
     args.evaluate_epoch = 5
 
-    args.base_path = './' + args.env_name+'/al_constant1/'
+    args.action_attack_type = 'same_action'
+    args.cur_test_type = 'al'
+    assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
+    args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type!='all_good' else []
+    args.base_path = './' + args.action_attack_type + '_' + args.cur_test_type
     args.save_path = make_training_save_path(args.base_path)
 
     return args
@@ -98,6 +106,8 @@ class Worker(mp.Process):
             real_ep_r = 0.
 
             ep_step = 0
+            constant_a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+            print('constant_a', constant_a)
             while True:
                 ep_step += 1
                 if ep_step > self.params.MAX_STEP:
@@ -105,7 +115,13 @@ class Worker(mp.Process):
                     break
                 # print(self.name, total_step)
                 if self.actor_id in self.params.bad_worker_id:
-                    a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+                    if self.params.action_attack_type == 'uniform_action':
+                        a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+                    elif self.params.action_attack_type == 'same_action':
+                        a = copy.deepcopy(constant_a)
+                    else:
+                        raise NotImplemented('not support action type {}'.format(self.params.action_attack_type))
+
                 else:
                     a = self.lnet.choose_action(v_wrap(s[None, :]))
                 s_, real_r, done, _ = self.env.step(a)
@@ -121,11 +137,9 @@ class Worker(mp.Process):
 
                 if total_step % self.params.UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     if self.actor_id in self.params.bad_worker_id:
-                        # 坏臂不更新自己的网络
-                        # push_constant_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                        #                    self.params.GAMMA)
-                        push_rand_grad(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
-                                           self.params.GAMMA)
+                        # bad bandit update is same with good bandit
+                        push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
+                                      self.params.GAMMA)
                     else:
                         # sync
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r,
@@ -133,6 +147,8 @@ class Worker(mp.Process):
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
+                        constant_a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
+                        print('constant_a', constant_a)
                         # 更新当前臂的奖励
                         self.my_credit.value += 0.01 * (real_ep_r - self.my_credit.value)
                         with self.g_ep_r.get_lock():
@@ -153,11 +169,11 @@ class Worker(mp.Process):
         self.res_queue.put(None)
 
 
-if __name__ == "__main__":
+def test_runner(params_func):
     analyse_data = {"bad_id": [], "bandit_credit": [], "sorted_id": []}
     for test in range(10):
         s_time = time.time()
-        params = gen_args()
+        params = params_func()
         if not os.path.exists(params.save_path):
             os.makedirs(params.save_path)
         save_config(params, params.save_path)
@@ -178,10 +194,9 @@ if __name__ == "__main__":
         random_choice_info = {True: 'random choice', False: 'Greedy choice'}
         evaluate_reward_list = []
         step_list = []
-        last_evaluate = None
         for i in range(int(params.MAX_EP / params.each_test_episodes)):
             # if random.random() >= (0.5 / (global_ep.value + 1e-10)):
-            if random.random() >= linear_decay(0.1, 1, global_ep.value, 15000):
+            if params.cur_test_type == 'al' and random.random() >= linear_decay(0.1, 1, global_ep.value, 15000):
                 # if random.random() >= 0.5:
                 is_random_choice = False
                 worker_credit = [ele.value for ele in global_credit]
@@ -212,7 +227,7 @@ if __name__ == "__main__":
             [w.join() for w in workers]
             # [w.close() for w in workers]
             # 运用0号worker进评估
-            eval_reward = evaluate_network(params.env_name, gnet, params.evaluate_epoch)
+            eval_reward = evaluate_network_normal(params.env_name, gnet, params.evaluate_epoch)
             evaluate_reward_list.append(eval_reward)
             step_list.append(i)
             # 使用评估结果 更新worker的置信度
@@ -261,3 +276,7 @@ if __name__ == "__main__":
             worksheet.write(i, 1, str(analyse_data["bandit_credit"][i]))
             worksheet.write(i, 2, str(analyse_data["sorted_id"][i]))
         workbook.save(os.path.join(params.save_path, 'summary.xls'))
+
+
+if __name__ == '__main__':
+    test_runner(gen_args)
