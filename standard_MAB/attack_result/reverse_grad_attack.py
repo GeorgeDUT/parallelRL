@@ -65,11 +65,13 @@ def gen_args():
     args.evaluate_epoch = 5
 
     args.reward_attack_type = 'reverse_grad'
-    args.cur_test_type = 'al'
+    args.cur_test_type = 'all'
     assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
     args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type!='all_good' else []
     args.base_path = './' + args.reward_attack_type + '_' + args.cur_test_type
     args.save_path = make_training_save_path(args.base_path)
+    if args.cur_test_type == 'all':
+        args.Good_Actor_num = 10
 
     return args
 

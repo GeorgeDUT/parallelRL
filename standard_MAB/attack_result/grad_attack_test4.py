@@ -4,7 +4,7 @@ from discrete_a3c import *
 def cur_args():
     args = gen_args()
     args.grad_attack_type = 'uniform'
-    args.grad_attack_params = [-1, 0]
+    args.grad_attack_params = [-2, 0]
     args.cur_test_type = 'all'
     assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
     args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type != 'all_good' else []

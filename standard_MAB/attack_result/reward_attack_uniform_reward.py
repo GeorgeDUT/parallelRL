@@ -65,7 +65,7 @@ def gen_args():
     args.evaluate_epoch = 5
 
     args.reward_attack_type = 'uniform_reward'
-    args.cur_test_type = 'al'
+    args.cur_test_type = 'rand_choice'
     assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
     args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type!='all_good' else []
     args.base_path = './' + args.reward_attack_type + '_' + args.cur_test_type
@@ -107,7 +107,7 @@ class Worker(mp.Process):
 
             ep_step = 0
             constant_r = random.randint(0, 200)
-            print('constant_r', constant_r)
+            # print('constant_r', constant_r)
             while True:
                 ep_step += 1
                 if ep_step > self.params.MAX_STEP:
@@ -147,7 +147,7 @@ class Worker(mp.Process):
 
                     if done:  # done and print information
                         constant_r = random.randint(0, 200)
-                        print('constant_r', constant_r)
+                        # print('constant_r', constant_r)
                         # 更新当前臂的奖励
                         self.my_credit.value += 0.01 * (real_ep_r - self.my_credit.value)
                         with self.g_ep_r.get_lock():

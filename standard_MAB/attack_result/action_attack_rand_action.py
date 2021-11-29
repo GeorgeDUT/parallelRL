@@ -65,11 +65,13 @@ def gen_args():
     args.evaluate_epoch = 5
 
     args.action_attack_type = 'uniform_action'
-    args.cur_test_type = 'al'
+    args.cur_test_type = 'rand_choice'
     assert args.cur_test_type in test_type, args.cur_test_type + ' not in ' + str(test_type)
     args.bad_worker_id = random.sample(range(1, 10), 3) if args.cur_test_type!='all_good' else []
     args.base_path = './' + args.action_attack_type + '_' + args.cur_test_type
     args.save_path = make_training_save_path(args.base_path)
+    if args.cur_test_type == 'all':
+        args.Good_Actor_num = 10
 
     return args
 
@@ -107,7 +109,7 @@ class Worker(mp.Process):
 
             ep_step = 0
             constant_a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
-            print('constant_a', constant_a)
+            # print('constant_a', constant_a)
             while True:
                 ep_step += 1
                 if ep_step > self.params.MAX_STEP:
@@ -148,7 +150,7 @@ class Worker(mp.Process):
 
                     if done:  # done and print information
                         constant_a = np.array(random.choice(list(range(self.params.N_A))), dtype=np.int)
-                        print('constant_a', constant_a)
+                        # print('constant_a', constant_a)
                         # 更新当前臂的奖励
                         self.my_credit.value += 0.01 * (real_ep_r - self.my_credit.value)
                         with self.g_ep_r.get_lock():

@@ -232,7 +232,6 @@ def test_runner(params_func):
             # 使用评估结果 更新worker的置信度
             # for id in topk_action_id:
             #     worker_credit[id] += 0.01 * (eval_reward - last_evaluate - worker_credit[id])
-            last_evaluate = eval_reward
             worker_credit = [ele.value for ele in global_credit]
             print('run_count:', i, 'eval_reward', eval_reward, 'choose_type:', random_choice_info[is_random_choice])
             print('choose arms:', topk_action_id, 'cur_worker_credit:', [round(ele, 4) for ele in worker_credit])
