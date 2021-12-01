@@ -78,11 +78,19 @@ def plot_fuse_pic():
     # line_name = ['uniform[{}]'.format(p) for p in params]
     # path_list.append('./al/gaussian[]_al/')
     # line_name.append('gaussian')
-    """ diff scene"""
-    figure_name = "diff_scens_uniform_al.pdf"
-    path_list = ['./HalfCHeetah-v2/uniform[-1,1]_al/', './LunarLander-v2/uniform[-1,1]_al/']
-    path_list = path_list[1:]
-    line_name = path_list
+    """ diff scenes HalfCHeetah-v2"""
+    # figure_name = "HalfCHeetah.pdf"
+    # path_list = ['./HalfCHeetah-v2/constant1_al/', './HalfCHeetah-v2/gaussian_al/', './HalfCHeetah-v2/gaussian_all/',
+    #              './HalfCHeetah-v2/gaussian_rand_choice/', './HalfCHeetah-v2/uniform[-1,1]_al/',
+    #              './HalfCHeetah-v2/uniform[-1,1]_all/', './HalfCHeetah-v2/uniform[-1,1]_rand_choice/']
+    # line_name = [p.split('/')[-2] for p in path_list]
+
+    """ diff scenes LunarLander-v2"""
+    figure_name = "LunarLander.pdf"
+    path_list = ['./LunarLander-v2/constant1_al/', './LunarLander-v2/gaussian_al/', './LunarLander-v2/gaussian_all/',
+                 './LunarLander-v2/gaussian_rand_choice/', './LunarLander-v2/uniform[-1,1]_al/',
+                 './LunarLander-v2/uniform[-1,1]_all/', './LunarLander-v2/uniform[-1,1]_rand_choice/']
+    line_name = [p.split('/')[-2] for p in path_list]
 
     colors = ["green", "red", "blue", "black", "pink", "orange", "purple", "brown", "yellow"]
     colors = colors[:len(path_list)]
