@@ -80,7 +80,7 @@ class Worker(mp.Process):
                     with global_ep.get_lock():
                         if global_ep.value >= MAX_EP:
                             break
-                    time.sleep(100)
+                    time.sleep(10)
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync

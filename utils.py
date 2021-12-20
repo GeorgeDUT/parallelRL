@@ -44,7 +44,7 @@ def push(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     opt.step()
 
 
-def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma,good = True):
     if done:
         v_s_ = 0.               # terminal
     else:
@@ -60,7 +60,10 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
         v_wrap(np.vstack(bs)),
         v_wrap(np.array(ba), dtype=np.int64) if ba[0].dtype == np.int64 else v_wrap(np.vstack(ba)),
         v_wrap(np.array(buffer_v_target)[:, None]))
-
+    if good:
+        loss = loss
+    else:
+        loss = loss
     # calculate local gradients and push local parameters to global
     opt.zero_grad()
     loss.backward()

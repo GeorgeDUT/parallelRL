@@ -1,5 +1,6 @@
 """
 this a3c is vanilla; (baseline)
+for discrete action.
 and there are bad actors.
 """
 
@@ -16,10 +17,10 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 20000
+MAX_EP = 4000
 
 Actor_NUM = 10
-bad_actor_id = [1, 3, 5, 8]
+bad_actor_id = []
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
