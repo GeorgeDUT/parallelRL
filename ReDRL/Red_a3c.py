@@ -87,11 +87,15 @@ class Worker(mp.Process):
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
                     # if actor is bad, they only push but not pull
-                    if self.actor_id in bad_worker_id:
+                    # if self.actor_id in bad_worker_id:
+                    if self.gca[self.actor_id] == 0:
                         # push(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
                         pass
                     else:
-                        push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                        if self.actor_id in bad_worker_id:
+                            push(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                        else:
+                            push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
