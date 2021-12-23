@@ -1,5 +1,5 @@
 """
-this a3c is vanilla; (baseline)
+this my-a3c is vanilla; (baseline)
 for discrete action.
 and there are bad actors.
 """
@@ -17,10 +17,10 @@ os.environ["OMP_NUM_THREADS"] = "1"
 
 UPDATE_GLOBAL_ITER = 5
 GAMMA = 0.9
-MAX_EP = 4000
+MAX_EP = 8000
 
-Actor_NUM = 10
-bad_actor_id = []
+Actor_NUM = 5
+bad_worker_id = [3]
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
@@ -70,12 +70,13 @@ class Net(nn.Module):
 class Worker(mp.Process):
     def __init__(self, gnet, opt, global_ep, global_ep_r, res_queue, name):
         super(Worker, self).__init__()
-        self.actor_id = name
+        self.worker_id = name
         self.name = 'w%02i' % name
         self.g_ep, self.g_ep_r, self.res_queue = global_ep, global_ep_r, res_queue
         self.gnet, self.opt = gnet, opt
         self.lnet = Net(N_S, N_A)  # local network
         self.env = gym.make('CartPole-v0').unwrapped
+        self.good = False if self.worker_id in bad_worker_id else True
 
     def run(self):
         total_step = 1
@@ -95,8 +96,8 @@ class Worker(mp.Process):
                 if done: real_r = -1
 
                 # bad actor return wrong reward
-                if self.actor_id in bad_actor_id:
-                    r = -real_r
+                if self.worker_id in bad_worker_id:
+                    r = real_r
                 else:
                     r = real_r
 
@@ -108,7 +109,7 @@ class Worker(mp.Process):
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
-                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                    push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA,self.good)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information
@@ -120,29 +121,52 @@ class Worker(mp.Process):
 
 
 if __name__ == "__main__":
-    gnet = Net(N_S, N_A)  # global network
-    gnet.share_memory()  # share the global parameters in multiprocessing
-    opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
-    global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
+    # gnet = Net(N_S, N_A)  # global network
+    # gnet.share_memory()  # share the global parameters in multiprocessing
+    # opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
+    # global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
+    #
+    # # parallel training
+    # # CPU_NUM = mp.cpu_count()
+    # # print(CPU_NUM)
+    # workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(Actor_NUM)]
+    # [w.start() for w in workers]
+    # res = []  # record episode reward to plot
+    # while True:
+    #     r = res_queue.get()
+    #     if r is not None:
+    #         res.append(r)
+    #     else:
+    #         break
+    # # [w.join() for w in workers]
+    # [w.terminate() for w in workers]
+    #
+    # # save model
+    # if sum(res[-11:-1])/10.0>300:
+    #     torch.save(gnet.state_dict(),'a3c-v-d')
+    # import matplotlib.pyplot as plt
+    #
+    # plt.plot(res)
+    # plt.ylabel('Moving average ep reward')
+    # plt.xlabel('Step')
+    # plt.show()
 
-    # parallel training
-    # CPU_NUM = mp.cpu_count()
-    # print(CPU_NUM)
-    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(Actor_NUM)]
-    [w.start() for w in workers]
-    res = []  # record episode reward to plot
+    # load model
+    gnet_new = Net(N_S, N_A)
+    gnet_new.load_state_dict(torch.load('a3c-v-d'))
+
+    env = gym.make('CartPole-v1')
     while True:
-        r = res_queue.get()
-        if r is not None:
-            res.append(r)
-        else:
-            break
-    # [w.join() for w in workers]
-    [w.terminate() for w in workers]
+        s = env.reset()
+        r = []
+        for t in range(1000):
+            env.render()
+            a = gnet_new.choose_action(v_wrap(s[None, :]))
+            s_, real_r, done, _ = env.step(a)
+            s = s_
+            r.append(real_r)
+            if done:
+                print('end',sum(r))
+                r = []
+                break
 
-    import matplotlib.pyplot as plt
-
-    plt.plot(res)
-    plt.ylabel('Moving average ep reward')
-    plt.xlabel('Step')
-    plt.show()

@@ -2,6 +2,7 @@
 Reinforcement Learning (A3C) using Pytroch + multiprocessing.
 for continuous action.
 and there are bad actors.
+attack: gradient attack
 """
 
 import torch
@@ -24,8 +25,8 @@ env = gym.make('Pendulum-v0')
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
 
-Actor_NUM = 8
-bad_worker_id = []
+Actor_NUM = 10
+bad_worker_id = [1,3,6,7]
 
 
 class Net(nn.Module):
@@ -102,7 +103,7 @@ class Worker(mp.Process):
                 if t == MAX_EP_STEP - 1:
                     done = True
                 if self.worker_id in bad_worker_id:
-                    wrong_r = 10
+                    wrong_r = r
                 else:
                     wrong_r = r
                 ep_r += r
@@ -110,7 +111,7 @@ class Worker(mp.Process):
                 buffer_a.append(a)
                 buffer_s.append(s)
                 buffer_r.append((r+8.1)/8.1)    # normalize
-                wrong_buffer_r.append(wrong_r)
+                wrong_buffer_r.append((wrong_r+8.1)/8.1)
 
                 if total_step % UPDATE_GLOBAL_ITER == 0 or done:  # update global and assign to local net
                     # sync
@@ -119,6 +120,7 @@ class Worker(mp.Process):
                     else:
                         push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA, self.good)
                     buffer_s, buffer_a, buffer_r = [], [], []
+                    wrong_buffer_r=[]
 
                     if done:  # done and print information
                         record(self.g_ep, self.g_ep_r, ep_r, self.res_queue, self.name)

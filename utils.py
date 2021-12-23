@@ -60,15 +60,14 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma,good = True):
         v_wrap(np.vstack(bs)),
         v_wrap(np.array(ba), dtype=np.int64) if ba[0].dtype == np.int64 else v_wrap(np.vstack(ba)),
         v_wrap(np.array(buffer_v_target)[:, None]))
-    if good:
-        loss = loss
-    else:
-        loss = loss
     # calculate local gradients and push local parameters to global
     opt.zero_grad()
     loss.backward()
     for lp, gp in zip(lnet.parameters(), gnet.parameters()):
-        gp._grad = lp.grad
+        if good:
+            gp._grad = lp.grad
+        else:
+            gp._grad=torch.ones_like(lp.grad)*0.01
     opt.step()
 
     # pull global parameters
