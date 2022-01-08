@@ -20,7 +20,7 @@ GAMMA = 0.9
 MAX_EP = 8000
 
 Actor_NUM = 5
-bad_worker_id = [3]
+bad_worker_id = []
 
 env = gym.make('CartPole-v0')
 N_S = env.observation_space.shape[0]
@@ -121,52 +121,53 @@ class Worker(mp.Process):
 
 
 if __name__ == "__main__":
-    # gnet = Net(N_S, N_A)  # global network
-    # gnet.share_memory()  # share the global parameters in multiprocessing
-    # opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
-    # global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
-    #
-    # # parallel training
-    # # CPU_NUM = mp.cpu_count()
-    # # print(CPU_NUM)
-    # workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(Actor_NUM)]
-    # [w.start() for w in workers]
-    # res = []  # record episode reward to plot
-    # while True:
-    #     r = res_queue.get()
-    #     if r is not None:
-    #         res.append(r)
-    #     else:
-    #         break
-    # # [w.join() for w in workers]
-    # [w.terminate() for w in workers]
-    #
-    # # save model
-    # if sum(res[-11:-1])/10.0>300:
-    #     torch.save(gnet.state_dict(),'a3c-v-d')
-    # import matplotlib.pyplot as plt
-    #
-    # plt.plot(res)
-    # plt.ylabel('Moving average ep reward')
-    # plt.xlabel('Step')
-    # plt.show()
+    gnet = Net(N_S, N_A)  # global network
+    gnet.share_memory()  # share the global parameters in multiprocessing
+    opt = SharedAdam(gnet.parameters(), lr=1e-4, betas=(0.92, 0.999))  # global optimizer
+    global_ep, global_ep_r, res_queue = mp.Value('i', 0), mp.Value('d', 0.), mp.Queue()
 
-    # load model
-    gnet_new = Net(N_S, N_A)
-    gnet_new.load_state_dict(torch.load('a3c-v-d'))
-
-    env = gym.make('CartPole-v1')
+    # parallel training
+    # CPU_NUM = mp.cpu_count()
+    # print(CPU_NUM)
+    workers = [Worker(gnet, opt, global_ep, global_ep_r, res_queue, i) for i in range(Actor_NUM)]
+    [w.start() for w in workers]
+    res = []  # record episode reward to plot
     while True:
-        s = env.reset()
-        r = []
-        for t in range(1000):
-            env.render()
-            a = gnet_new.choose_action(v_wrap(s[None, :]))
-            s_, real_r, done, _ = env.step(a)
-            s = s_
-            r.append(real_r)
-            if done:
-                print('end',sum(r))
-                r = []
-                break
+        r = res_queue.get()
+        if r is not None:
+            res.append(r)
+        else:
+            break
+    # [w.join() for w in workers]
+    [w.terminate() for w in workers]
+    #
+    """save model"""
+    if sum(res[-11:-1])/10.0>300:
+        torch.save(gnet.state_dict(),'a3c-v-2')
+    import matplotlib.pyplot as plt
+
+    plt.plot(res)
+    plt.ylabel('Moving average ep reward')
+    plt.xlabel('Step')
+    plt.show()
+
+    """load model"""
+    # gnet_new = Net(N_S, N_A)
+    # gnet_new.load_state_dict(torch.load('a3c-v-d'))
+
+    """show the environment"""
+    # env = gym.make('CartPole-v1')
+    # while True:
+    #     s = env.reset()
+    #     r = []
+    #     for t in range(1000):
+    #         env.render()
+    #         a = gnet_new.choose_action(v_wrap(s[None, :]))
+    #         s_, real_r, done, _ = env.step(a)
+    #         s = s_
+    #         r.append(real_r)
+    #         if done:
+    #             print('end',sum(r))
+    #             r = []
+    #             break
 

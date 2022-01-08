@@ -24,8 +24,8 @@ GAMMA = 0.9
 MAX_EP = 5000
 
 NUM_Actor = 10
-Good_Actor = 7
 bad_worker_id = [1,6,9]
+Good_Actor = NUM_Actor-len(bad_worker_id)
 
 env_name = 'CartPole-v0'
 env = gym.make(env_name)
@@ -44,6 +44,7 @@ class Worker(mp.Process):
         self.env = gym.make(env_name)
         self.gca, self.gc = global_Choose_actors, global_credit
         self.ar = average_reward
+        self.good = False if self.actor_id in bad_worker_id else True
 
         # bandit parameters:
         self.bandit_credit = self.gc[self.actor_id].value
@@ -65,9 +66,8 @@ class Worker(mp.Process):
 
                 if done: real_r = -1
 
-                # 有问题的进程，其奖励返回不准确
                 if self.actor_id in bad_worker_id:
-                    r = -3
+                    r = real_r
                 else:
                     r = real_r
 
@@ -95,9 +95,10 @@ class Worker(mp.Process):
                         pass
                     else:
                         if self.actor_id in bad_worker_id:
-                            push(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                            push(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA,self.good)
                         else:
-                            push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, GAMMA)
+                            push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a,
+                                          buffer_r, GAMMA,  self.good)
                     buffer_s, buffer_a, buffer_r = [], [], []
 
                     if done:  # done and print information

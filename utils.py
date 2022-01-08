@@ -19,7 +19,7 @@ def set_init(layers):
         nn.init.constant_(layer.bias, 0.)
 
 
-def push(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
+def push(opt, lnet, gnet, done, s_, bs, ba, br, gamma,good=True):
     if done:
         v_s_ = 0.               # terminal
     else:
@@ -40,7 +40,10 @@ def push(opt, lnet, gnet, done, s_, bs, ba, br, gamma):
     opt.zero_grad()
     loss.backward()
     for lp, gp in zip(lnet.parameters(), gnet.parameters()):
-        gp._grad = lp.grad
+        if good:
+            gp._grad = lp.grad
+        else:
+            torch.ones_like(lp.grad) * 1
     opt.step()
 
 
@@ -67,7 +70,7 @@ def push_and_pull(opt, lnet, gnet, done, s_, bs, ba, br, gamma,good = True):
         if good:
             gp._grad = lp.grad
         else:
-            gp._grad=torch.ones_like(lp.grad)*0.01
+            gp._grad=torch.ones_like(lp.grad)*1
     opt.step()
 
     # pull global parameters

@@ -21,12 +21,13 @@ GAMMA = 0.9
 MAX_EP = 5000
 MAX_EP_STEP = 200
 
+# loc gym.envs __init__
 env = gym.make('Pendulum-v0')
 N_S = env.observation_space.shape[0]
 N_A = env.action_space.shape[0]
 
-Actor_NUM = 10
-bad_worker_id = [1,3,6,7]
+Actor_NUM = 20
+bad_worker_id = [1]
 
 
 class Net(nn.Module):
